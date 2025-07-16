@@ -1,0 +1,61 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+.env
+.env*.local
+.DS_Store
+*.tgz
+*.log
+.eslintcache
+
+# TypeScript
+*.tsbuildinfo
+
+# Build outputs
+dist/
+build/
+out/
+
+# Vite
+.vite/
+
+# React specific
+# If you use Create React App without Vite, uncomment these:
+# build/
+# .env.local
+# .env.*.local
+
+# tRPC specific (if any generated client files are not committed)
+# For example, if you generate client types in a specific folder:
+# ./src/server/routers/generated/
+
+# Editor/IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Coverage reports
+coverage/
+
+# Misc
+.cache/
+.npm/
+
+# Backend specific (if different build output or logs for backend)
+# For example, if your backend output is in a 'backend-dist' folder:
+# backend-dist/
