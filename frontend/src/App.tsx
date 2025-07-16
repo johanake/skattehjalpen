@@ -1,29 +1,18 @@
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LandingPage } from './components/LandingPage';
 import { TaxWizard } from './components/TaxWizard';
-
-type AppState = 'landing' | 'wizard';
+import { UserAgreement } from './components/UserAgreement';
 
 function App() {
-  const [appState, setAppState] = useState<AppState>('landing');
-
-  const handleStartWizard = () => {
-    setAppState('wizard');
-  };
-
-  const handleBackToLanding = () => {
-    setAppState('landing');
-  };
-
-  if (appState === 'landing') {
-    return <LandingPage onStartWizard={handleStartWizard} />;
-  }
-
-  if (appState === 'wizard') {
-    return <TaxWizard onBackToLanding={handleBackToLanding} />;
-  }
-
-  return null;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/wizard" element={<TaxWizard />} />
+        <Route path="/user-agreement" element={<UserAgreement />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

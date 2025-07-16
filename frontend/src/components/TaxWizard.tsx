@@ -1,26 +1,22 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TaxDeclarationForm } from './TaxDeclarationForm';
-import { ReceiptUpload } from './ReceiptUpload';
-import { ReceiptList } from './ReceiptList';
 import { TaxAdviceDisplay } from './TaxAdviceDisplay';
 import { PaymentFlow } from './PaymentFlow';
 
-interface TaxWizardProps {
-  onBackToLanding: () => void;
-}
+export const TaxWizard: React.FC = () => {
+  const navigate = useNavigate();
 
-export const TaxWizard: React.FC<TaxWizardProps> = ({ onBackToLanding }) => {
-  const [currentStep, setCurrentStep] = useState<'declaration' | 'receipts' | 'payment' | 'advice'>('declaration');
+  const handleBackToLanding = () => {
+    navigate('/');
+  };
+  const [currentStep, setCurrentStep] = useState<'declaration' | 'payment' | 'advice'>('declaration');
   const [declarationId, setDeclarationId] = useState<string | null>(null);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
 
   const handleDeclarationSuccess = (id: string) => {
     setDeclarationId(id);
-    setCurrentStep('receipts');
-  };
-
-  const handleReceiptUpload = () => {
-    // Just refresh the receipt list - no need to change steps
+    setCurrentStep('payment');
   };
 
   const handlePaymentSuccess = () => {
@@ -30,7 +26,6 @@ export const TaxWizard: React.FC<TaxWizardProps> = ({ onBackToLanding }) => {
 
   const steps = [
     { id: 'declaration', name: 'Skattedeklaration', completed: !!declarationId },
-    { id: 'receipts', name: 'Ladda upp kvitton', completed: false },
     { id: 'payment', name: 'Betalning', completed: paymentCompleted },
     { id: 'advice', name: 'Skatterådgivning', completed: false },
   ];
@@ -43,7 +38,7 @@ export const TaxWizard: React.FC<TaxWizardProps> = ({ onBackToLanding }) => {
           <div className="flex items-center justify-between">
             <div>
               <button
-                onClick={onBackToLanding}
+                onClick={handleBackToLanding}
                 className="flex items-center text-gray-300 hover:text-green-400 mb-2 transition-colors"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,16 +108,6 @@ export const TaxWizard: React.FC<TaxWizardProps> = ({ onBackToLanding }) => {
               Deklaration
             </button>
             <button
-              onClick={() => setCurrentStep('receipts')}
-              className={`px-4 py-2 rounded ${
-                currentStep === 'receipts'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-              }`}
-            >
-              Kvitton
-            </button>
-            <button
               onClick={() => setCurrentStep('payment')}
               className={`px-4 py-2 rounded ${
                 currentStep === 'payment'
@@ -153,16 +138,6 @@ export const TaxWizard: React.FC<TaxWizardProps> = ({ onBackToLanding }) => {
             <TaxDeclarationForm onSuccess={handleDeclarationSuccess} />
           )}
 
-          {currentStep === 'receipts' && declarationId && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <ReceiptUpload 
-                declarationId={declarationId} 
-                onUploadSuccess={handleReceiptUpload} 
-              />
-              <ReceiptList declarationId={declarationId} />
-            </div>
-          )}
-
           {currentStep === 'payment' && (
             <PaymentFlow onPaymentSuccess={handlePaymentSuccess} />
           )}
@@ -171,18 +146,6 @@ export const TaxWizard: React.FC<TaxWizardProps> = ({ onBackToLanding }) => {
             <TaxAdviceDisplay declarationId={declarationId} />
           )}
         </div>
-
-        {/* Action Buttons */}
-        {currentStep === 'receipts' && declarationId && (
-          <div className="mt-8 text-center">
-            <button
-              onClick={() => setCurrentStep('payment')}
-              className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 font-medium"
-            >
-              Fortsätt till betalning
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
