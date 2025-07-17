@@ -1,11 +1,11 @@
-/* import { TRPCError } from '@trpc/server';
-import { z } from 'zod';
-import { stripeService } from '../services/stripeService';
-import { publicProcedure, router } from '../trpc';
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+import { stripeService } from "../services/stripeService";
+import { publicProcedure, router } from "../trpc";
 
 const createPaymentIntentSchema = z.object({
   amount: z.number().min(1),
-  currency: z.string().default('sek'),
+  currency: z.string().default("sek"),
 });
 
 const confirmPaymentSchema = z.object({
@@ -32,8 +32,8 @@ export const paymentRouter = router({
         };
       } catch (error) {
         throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to create payment intent',
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to create payment intent",
         });
       }
     }),
@@ -42,16 +42,18 @@ export const paymentRouter = router({
     .input(confirmPaymentSchema)
     .mutation(async ({ input }) => {
       try {
-        const paymentIntent = await stripeService.confirmPayment(input.paymentIntentId);
-        
+        const paymentIntent = await stripeService.confirmPayment(
+          input.paymentIntentId
+        );
+
         return {
           status: paymentIntent.status,
           paymentIntentId: paymentIntent.id,
         };
       } catch (error) {
         throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to confirm payment',
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to confirm payment",
         });
       }
     }),
@@ -60,8 +62,10 @@ export const paymentRouter = router({
     .input(getPaymentStatusSchema)
     .query(async ({ input }) => {
       try {
-        const paymentIntent = await stripeService.retrievePaymentIntent(input.paymentIntentId);
-        
+        const paymentIntent = await stripeService.retrievePaymentIntent(
+          input.paymentIntentId
+        );
+
         return {
           status: paymentIntent.status,
           paymentIntentId: paymentIntent.id,
@@ -70,9 +74,9 @@ export const paymentRouter = router({
         };
       } catch (error) {
         throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to retrieve payment status',
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to retrieve payment status",
         });
       }
     }),
-}); */
+});

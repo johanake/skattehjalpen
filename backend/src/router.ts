@@ -1,7 +1,7 @@
 import { router, publicProcedure } from "./trpc";
 import { userController } from "./controllers/userController";
 import { taxController } from "./controllers/taxController";
-//import { paymentRouter } from './controllers/paymentController';
+import { paymentRouter } from "./controllers/paymentController";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -51,7 +51,7 @@ export const appRouter = router({
   }),
 
   // Stripe payment endpoints
-  //payment: paymentRouter,
+  payment: paymentRouter,
 });
 
 export type AppRouter = typeof appRouter;
