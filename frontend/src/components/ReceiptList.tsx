@@ -1,5 +1,26 @@
 import { trpc } from '../utils/trpc';
 
+type Receipt = {
+  id: string;
+  declarationId: string;
+  fileName: string;
+  fileType: string;
+  fileSize: number;
+  category: 'work' | 'home' | 'travel' | 'education' | 'charity' | 'medical' | 'other';
+  amount?: number;
+  description?: string;
+  date?: Date;
+  uploadedAt: Date;
+  processedAt?: Date;
+  extractedData?: {
+    vendor?: string;
+    amount?: number;
+    date?: Date;
+    category?: string;
+    description?: string;
+  };
+};
+
 interface ReceiptListProps {
   declarationId: string;
 }
@@ -83,7 +104,7 @@ export const ReceiptList: React.FC<ReceiptListProps> = ({ declarationId }) => {
         </div>
       ) : (
         <div className="space-y-4">
-          {receipts.map((receipt) => (
+          {receipts.map((receipt: Receipt) => (
             <div key={receipt.id} className="border border-gray-600 rounded-lg p-4">
               <div className="flex justify-between items-start mb-2">
                 <div className="flex-1">
