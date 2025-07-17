@@ -1,6 +1,6 @@
 import { initTRPC } from '@trpc/server';
-import { createAuthMiddleware, requireAuth } from './middleware/auth';
-import type { AuthContext } from './types';
+import { createAuthMiddleware, requireAuth } from './middleware/auth.js';
+import type { AuthContext } from './types/index.js';
 
 const t = initTRPC.context<AuthContext>().create();
 

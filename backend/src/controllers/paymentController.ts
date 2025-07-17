@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { stripeService } from "../services/stripeService";
-import { publicProcedure, router } from "../trpc";
+import { stripeService } from "../services/stripeService.js";
+import { publicProcedure, router } from "../trpc.js";
 
 const createPaymentIntentSchema = z.object({
   amount: z.number().min(1),

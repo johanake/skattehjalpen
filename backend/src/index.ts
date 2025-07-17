@@ -1,12 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import { createExpressMiddleware } from '@trpc/server/adapters/express';
-import { appRouter } from './router';
-import { env } from './config/env';
-import { createAuthMiddleware } from './middleware/auth';
-import { upload } from './services/fileUploadService';
-import { FileUploadService } from './services/fileUploadService';
-import { TaxService } from './services/taxService';
+import { appRouter } from './router.js';
+import { env } from './config/env.js';
+import { createAuthMiddleware } from './middleware/auth.js';
+import { upload } from './services/fileUploadService.js';
+import { FileUploadService } from './services/fileUploadService.js';
+import { TaxService } from './services/taxService.js';
 
 const app = express();
 

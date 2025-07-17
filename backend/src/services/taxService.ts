@@ -1,5 +1,5 @@
-import type { TaxDeclaration, Receipt, TaxAdvice, PaymentSession } from '../types/tax';
-import type { CreateTaxDeclarationInput, CreatePaymentSessionInput } from '../validators/taxValidators';
+import type { TaxDeclaration, Receipt, TaxAdvice, PaymentSession } from '../types/tax.js';
+import type { CreateTaxDeclarationInput, CreatePaymentSessionInput } from '../validators/taxValidators.js';
 
 export class TaxService {
   private static declarations: TaxDeclaration[] = [];

@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { env } from "../config/env";
+import { env } from "../config/env.js";
 
 export class StripeService {
   private stripe: Stripe | null = null;

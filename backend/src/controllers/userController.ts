@@ -1,6 +1,6 @@
-import { userService } from '../services/userService';
-import { createUserSchema, getUserSchema } from '../validators/userValidators';
-import { publicProcedure, protectedProcedure } from '../trpc';
+import { userService } from '../services/userService.js';
+import { createUserSchema, getUserSchema } from '../validators/userValidators.js';
+import { publicProcedure, protectedProcedure } from '../trpc.js';
 
 export const userController = {
   getUsers: publicProcedure

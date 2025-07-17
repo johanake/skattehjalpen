@@ -1,12 +1,12 @@
-import { TaxService } from '../services/taxService';
+import { TaxService } from '../services/taxService.js';
 import {
   createTaxDeclarationSchema,
   createPaymentSessionSchema,
   getTaxDeclarationSchema,
   getReceiptsSchema,
   generateAdviceSchema,
-} from '../validators/taxValidators';
-import { publicProcedure } from '../trpc';
+} from '../validators/taxValidators.js';
+import { publicProcedure } from '../trpc.js';
 
 export const taxController = {
   // Tax Declaration endpoints

@@ -1,5 +1,5 @@
 import { TRPCError } from '@trpc/server';
-import type { AuthContext } from '../types';
+import type { AuthContext } from '../types/index.js';
 
 export const createAuthMiddleware = () => {
   return async (): Promise<AuthContext> => {

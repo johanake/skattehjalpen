@@ -1,7 +1,7 @@
-import { router, publicProcedure } from "./trpc";
-import { userController } from "./controllers/userController";
-import { taxController } from "./controllers/taxController";
-import { paymentRouter } from "./controllers/paymentController";
+import { router, publicProcedure } from "./trpc.js";
+import { userController } from "./controllers/userController.js";
+import { taxController } from "./controllers/taxController.js";
+import { paymentRouter } from "./controllers/paymentController.js";
 import { z } from "zod";
 
 export const appRouter = router({
