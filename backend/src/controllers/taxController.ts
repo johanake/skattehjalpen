@@ -1,8 +1,6 @@
 import { TaxService } from '../services/taxService';
-import { FileUploadService } from '../services/fileUploadService';
 import {
   createTaxDeclarationSchema,
-  uploadReceiptSchema,
   createPaymentSessionSchema,
   getTaxDeclarationSchema,
   getReceiptsSchema,
@@ -14,7 +12,7 @@ export const taxController = {
   // Tax Declaration endpoints
   createDeclaration: publicProcedure
     .input(createTaxDeclarationSchema)
-    .mutation(async ({ input, ctx }) => {
+    .mutation(async ({ input }) => {
       const userId = 'mock-user-id'; // In real app, get from auth context
       return await TaxService.createTaxDeclaration(userId, input);
     }),
@@ -26,7 +24,7 @@ export const taxController = {
     }),
 
   getUserDeclarations: publicProcedure
-    .query(async ({ ctx }) => {
+    .query(async () => {
       const userId = 'mock-user-id'; // In real app, get from auth context
       return await TaxService.getUserDeclarations(userId);
     }),
@@ -48,7 +46,7 @@ export const taxController = {
   // Payment endpoints
   createPaymentSession: publicProcedure
     .input(createPaymentSessionSchema)
-    .mutation(async ({ input, ctx }) => {
+    .mutation(async ({ input }) => {
       const userId = 'mock-user-id'; // In real app, get from auth context
       return await TaxService.createPaymentSession(userId, input);
     }),

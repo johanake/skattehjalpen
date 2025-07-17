@@ -1,11 +1,12 @@
-import { router, publicProcedure } from './trpc';
-import { userController } from './controllers/userController';
-import { taxController } from './controllers/taxController';
-import { z } from 'zod';
+import { router, publicProcedure } from "./trpc";
+import { userController } from "./controllers/userController";
+import { taxController } from "./controllers/taxController";
+//import { paymentRouter } from './controllers/paymentController';
+import { z } from "zod";
 
 export const appRouter = router({
   // Health check
-  health: publicProcedure.query(() => ({ status: 'ok' })),
+  health: publicProcedure.query(() => ({ status: "ok" })),
 
   // Legacy endpoints (for backward compatibility)
   hello: publicProcedure
@@ -16,13 +17,12 @@ export const appRouter = router({
       };
     }),
 
-  getUsers: publicProcedure
-    .query(() => {
-      return [
-        { id: 1, name: 'John Doe' },
-        { id: 2, name: 'Jane Smith' },
-      ];
-    }),
+  getUsers: publicProcedure.query(() => {
+    return [
+      { id: 1, name: "John Doe" },
+      { id: 2, name: "Jane Smith" },
+    ];
+  }),
 
   // Organized by feature
   user: router({
@@ -49,6 +49,9 @@ export const appRouter = router({
     completePayment: taxController.completePayment,
     getPayment: taxController.getPayment,
   }),
+
+  // Stripe payment endpoints
+  //payment: paymentRouter,
 });
 
 export type AppRouter = typeof appRouter;

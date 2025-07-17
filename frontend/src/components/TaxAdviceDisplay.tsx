@@ -8,7 +8,7 @@ export const TaxAdviceDisplay: React.FC<TaxAdviceDisplayProps> = ({ declarationI
   const generateAdvice = trpc.tax.generateAdvice.useMutation();
   const { data: advice, isLoading, error } = generateAdvice.data 
     ? { data: generateAdvice.data, isLoading: false, error: null }
-    : { data: null, isLoading: generateAdvice.isLoading, error: generateAdvice.error };
+    : { data: null, isLoading: generateAdvice.isPending, error: generateAdvice.error };
 
   const handleGenerateAdvice = () => {
     generateAdvice.mutate({ declarationId });

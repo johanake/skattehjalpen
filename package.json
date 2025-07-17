@@ -17,7 +17,9 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@rollup/rollup-win32-x64-msvc": "^4.45.1",
     "@trpc/server": "^11.4.3"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.45.1"
   }
 }

@@ -11,16 +11,16 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (_req, _file, cb) => {
     cb(null, UPLOAD_DIR);
   },
-  filename: (req, file, cb) => {
+  filename: (_req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
   }
 });
 
-const fileFilter = (req: any, file: Express.Multer.File, cb: any) => {
+const fileFilter = (_req: any, file: Express.Multer.File, cb: any) => {
   // Accept images and PDFs
   if (file.mimetype.startsWith('image/') || file.mimetype === 'application/pdf') {
     cb(null, true);
@@ -55,7 +55,7 @@ export class FileUploadService {
     };
   }
 
-  private static async extractDataFromFile(file: Express.Multer.File, category: string): Promise<any> {
+  private static async extractDataFromFile(_file: Express.Multer.File, category: string): Promise<any> {
     // Mock data extraction - in real app, you'd use OCR service
     const mockData: Record<string, any> = {
       work: {
