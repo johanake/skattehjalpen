@@ -9,7 +9,17 @@
       "Bash(rm:*)",
       "Bash(npm uninstall:*)",
       "Bash(timeout 10 npm run dev)",
-      "Bash(npx vite:*)"
+      "Bash(npx vite:*)",
+      "Bash(timeout 5 npm start:*)",
+      "Bash(grep:*)",
+      "Bash(node:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm info:*)",
+      "Bash(npm update:*)",
+      "Bash(timeout 5 npm run dev)",
+      "Bash(npx concurrently:*)",
+      "Bash(NODE_OPTIONS=\"--trace-warnings\" npm run dev)"
     ],
     "deny": []
   }

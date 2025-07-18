@@ -6,8 +6,8 @@ export class StripeService {
   private isMockMode: boolean;
 
   constructor() {
-    this.isMockMode = !env.STRIPE_SECRET_KEY;
-    
+    this.isMockMode = true;
+
     if (!this.isMockMode) {
       this.stripe = new Stripe(env.STRIPE_SECRET_KEY!, {
         apiVersion: "2025-06-30.basil",
@@ -20,7 +20,9 @@ export class StripeService {
     currency: string = "sek"
   ): Promise<Stripe.PaymentIntent> {
     if (this.isMockMode) {
-      console.log(`[MOCK] Creating payment intent for ${amount} ${currency.toUpperCase()}`);
+      console.log(
+        `[MOCK] Creating payment intent for ${amount} ${currency.toUpperCase()}`
+      );
       return {
         id: `pi_mock_${Date.now()}`,
         object: "payment_intent",
@@ -126,7 +128,9 @@ export class StripeService {
     signature: string
   ): Promise<Stripe.Event> {
     if (this.isMockMode) {
-      console.log(`[MOCK] Constructing webhook event with signature: ${signature}`);
+      console.log(
+        `[MOCK] Constructing webhook event with signature: ${signature}`
+      );
       return {
         id: `evt_mock_${Date.now()}`,
         type: "payment_intent.succeeded",

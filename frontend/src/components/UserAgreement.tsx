@@ -1,52 +1,21 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const UserAgreement: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleBackToLanding = () => {
-    navigate('/');
-  };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black">
-      {/* Header */}
-      <header className="bg-gray-800 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <button
-                onClick={handleBackToLanding}
-                className="flex items-center text-gray-300 hover:text-green-400 transition-colors mr-4"
-              >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-                Tillbaka
-              </button>
-              <div className="flex items-center justify-center w-10 h-10 bg-green-600 rounded-full mr-3">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h1 className="text-2xl font-bold text-white">Skattehjälpen</h1>
-            </div>
-          </div>
-        </div>
-      </header>
-
+    <div className="min-h-screen bg-gradient-to-br from-bg-white to-bg-secondary">
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-gray-800 rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-white mb-8">📄 Användarvillkor för Skattehjälpen</h1>
-          <p className="text-gray-400 mb-8">Senast uppdaterad: 16 juli 2025</p>
+        <div className="bg-bg-white rounded-lg shadow-lg p-8 border border-border-light">
+          <h1 className="text-3xl font-bold text-text-primary mb-8">📄 Användarvillkor för Skattehjälpen</h1>
+          <p className="text-text-muted mb-8">Senast uppdaterad: 16 juli 2025</p>
           
-          <div className="prose prose-lg text-gray-300 max-w-none">
+          <div className="prose prose-lg text-text-secondary max-w-none">
             <p className="mb-8 text-lg">
               Välkommen till Skattehjälpen ("tjänsten"). Dessa användarvillkor reglerar din användning av vår AI-baserade plattform som ger vägledande information om inkomstdeklaration för privatpersoner i Sverige. Genom att använda tjänsten samtycker du till dessa villkor.
             </p>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">1. Tjänstens syfte och begränsning</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">1. Tjänstens syfte och begränsning</h2>
               <p className="mb-4">
                 Tjänsten tillhandahåller automatgenererad vägledning kring skattefrågor baserat på offentligt tillgänglig information, såsom Skatteverkets regler och exempel. Den är inte en ersättning för professionell skatterådgivning från revisor, jurist eller Skatteverket.
               </p>
@@ -62,7 +31,7 @@ export const UserAgreement: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">2. Ansvarsfriskrivning</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">2. Ansvarsfriskrivning</h2>
               <p className="mb-4">
                 Vi strävar efter att ge korrekt och aktuell information, men:
               </p>
@@ -74,7 +43,7 @@ export const UserAgreement: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">3. Användarens ansvar</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">3. Användarens ansvar</h2>
               <p className="mb-4">
                 Du ansvarar själv för att:
               </p>
@@ -86,7 +55,7 @@ export const UserAgreement: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">4. Personuppgifter och dataskydd (GDPR)</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">4. Personuppgifter och dataskydd (GDPR)</h2>
               <p className="mb-4">
                 Om tjänsten samlar in personuppgifter gäller följande:
               </p>
@@ -102,14 +71,14 @@ export const UserAgreement: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">5. Immateriella rättigheter</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">5. Immateriella rättigheter</h2>
               <p className="mb-4">
                 Allt innehåll i tjänsten, inklusive texter, kod och AI-modeller, tillhör Skattehjälpen AB och får inte kopieras, distribueras eller återanvändas utan skriftligt tillstånd.
               </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">6. Betalning och återbetalning</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">6. Betalning och återbetalning</h2>
               <p className="mb-4">
                 Alla tjänster betalas i förväg. Vi erbjuder:
               </p>
@@ -121,21 +90,21 @@ export const UserAgreement: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">7. Ändringar av villkor</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">7. Ändringar av villkor</h2>
               <p className="mb-4">
                 Vi förbehåller oss rätten att när som helst uppdatera dessa användarvillkor. Vid väsentliga ändringar kommer vi att informera användare via tjänsten eller e-post om du har ett konto.
               </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">8. Tillämplig lag och tvistlösning</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">8. Tillämplig lag och tvistlösning</h2>
               <p className="mb-4">
                 Dessa villkor regleras enligt svensk lag. Tvister som uppstår i samband med användningen av tjänsten ska i första hand lösas genom förhandling. Om det inte går kan tvisten prövas i svensk domstol, med Stockholm tingsrätt som första instans.
               </p>
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-400 mb-4">9. Kontakt</h2>
+              <h2 className="text-2xl font-semibold text-accent mb-4">9. Kontakt</h2>
               <p className="mb-4">
                 Om du har frågor om dessa villkor eller tjänsten, kontakta oss på:
               </p>
@@ -146,17 +115,17 @@ export const UserAgreement: React.FC = () => {
             </section>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-gray-600">
+          <div className="mt-12 pt-8 border-t border-border-default">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={handleBackToLanding}
-                className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
+                className="bg-accent text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-light transition-colors"
               >
                 Jag godkänner villkoren
               </button>
               <button
                 onClick={handleBackToLanding}
-                className="text-green-400 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-700 transition-colors border border-green-400"
+                className="text-accent px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary-light transition-colors border border-accent"
               >
                 Tillbaka till startsidan
               </button>

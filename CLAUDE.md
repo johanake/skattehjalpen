@@ -43,7 +43,8 @@ Skattehjalpen is a Swedish tax assistance application with a monorepo structure 
 ### Frontend Structure
 - **Components**: React components for tax wizard, receipt upload, payment flow
 - **tRPC Integration**: Type-safe API client with React Query
-- **Styling**: TailwindCSS with PostCSS
+- **Styling**: TailwindCSS with PostCSS and centralized color configuration
+- **Color System**: Centralized color configuration in `src/config/colors.ts` with semantic color classes
 
 ### Key Features
 - File upload handling for tax receipts
@@ -66,3 +67,30 @@ Skattehjalpen is a Swedish tax assistance application with a monorepo structure 
 
 ## Type Safety
 The project uses TypeScript throughout with strict configuration and tRPC for end-to-end type safety between frontend and backend.
+
+### TypeScript Guidelines:
+- **NEVER use `any` type** - Always provide proper type definitions
+- Use strict TypeScript configuration
+- Leverage tRPC for type-safe API communication
+- Define interfaces and types for all data structures
+
+## Color System (Frontend)
+The frontend uses a centralized color configuration system located in `src/config/colors.ts`:
+
+### Color Usage Options:
+1. **Existing TailwindCSS classes**: `bg-green-600`, `text-gray-200`, `border-gray-600` (maintained for backward compatibility)
+2. **Semantic classes**: `bg-primary-600`, `text-secondary`, `border-default` (new semantic approach)
+3. **Programmatic access**: Import colors from `src/config/colors.ts` for dynamic styling
+
+### Color Categories:
+- **Primary**: Blue colors for trust and professionalism (#1E3A8A, #3B82F6, #F1F5F9)
+- **Accent**: Green colors for economic success and security (#16A34A, #A7F3D0)
+- **Neutral**: Gray colors for text and backgrounds (#1F2937, #F9FAFB, #E5E7EB)
+- **Danger**: Red colors for negative analysis or errors (#DC2626, #FECACA)
+- **Semantic**: Success (green), warning (amber), error (red)
+- **Background**: Primary (light), secondary, dark, white variants
+- **Text**: Primary (dark), secondary, muted, inverse (white), accent (blue)
+- **Border**: Default, light, accent, error
+
+### To Change Colors:
+Edit `/frontend/src/config/colors.ts` to instantly update the entire color scheme across the application.

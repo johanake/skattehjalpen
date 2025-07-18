@@ -1,15 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { TaxDeclarationForm } from './TaxDeclarationForm';
 import { TaxAdviceDisplay } from './TaxAdviceDisplay';
 import { PaymentFlow } from './PaymentFlow';
 
 export const TaxWizard: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleBackToLanding = () => {
-    navigate('/');
-  };
   const [currentStep, setCurrentStep] = useState<'declaration' | 'payment' | 'advice'>('declaration');
   const [declarationId, setDeclarationId] = useState<string | null>(null);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
@@ -31,35 +25,7 @@ export const TaxWizard: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900">
-      {/* Header */}
-      <div className="bg-gray-800 shadow-lg">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <button
-                onClick={handleBackToLanding}
-                className="flex items-center text-gray-300 hover:text-green-400 mb-2 transition-colors"
-              >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Tillbaka till startsida
-              </button>
-              <h1 className="text-3xl font-bold text-white">
-                Skattehjälpen
-              </h1>
-              <p className="text-gray-300 mt-2">
-                AI-driven skatterådgivning för svenska skattebetalare
-              </p>
-            </div>
-            <div className="text-right">
-              <div className="text-sm text-gray-400">Steg {steps.findIndex(s => s.id === currentStep) + 1} av {steps.length}</div>
-              <div className="text-lg font-semibold text-white">{steps.find(s => s.id === currentStep)?.name}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-bg-white">
 
       {/* Progress Steps */}
       <div className="max-w-6xl mx-auto px-4 py-6">
@@ -69,25 +35,25 @@ export const TaxWizard: React.FC = () => {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
                   step.completed
-                    ? 'bg-green-600 text-white'
+                    ? 'bg-accent text-white'
                     : currentStep === step.id
-                    ? 'bg-green-600 text-white'
-                    : 'bg-gray-600 text-gray-300'
+                    ? 'bg-accent text-white'
+                    : 'bg-bg-secondary text-text-secondary border border-border-default'
                 }`}
               >
                 {step.completed ? '✓' : index + 1}
               </div>
               <div className="ml-3">
                 <p className={`text-sm font-medium ${
-                  step.completed ? 'text-green-400' : 
-                  currentStep === step.id ? 'text-green-400' : 'text-gray-400'
+                  step.completed ? 'text-accent' : 
+                  currentStep === step.id ? 'text-accent' : 'text-text-muted'
                 }`}>
                   {step.name}
                 </p>
               </div>
               {index < steps.length - 1 && (
                 <div className={`w-12 h-0.5 ml-4 ${
-                  step.completed ? 'bg-green-600' : 'bg-gray-600'
+                  step.completed ? 'bg-accent' : 'bg-border-default'
                 }`} />
               )}
             </div>
@@ -99,20 +65,20 @@ export const TaxWizard: React.FC = () => {
           <div className="flex space-x-4 mb-6">
             <button
               onClick={() => setCurrentStep('declaration')}
-              className={`px-4 py-2 rounded ${
+              className={`px-4 py-2 rounded transition-colors ${
                 currentStep === 'declaration'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  ? 'bg-accent text-white'
+                  : 'bg-bg-secondary text-text-secondary hover:bg-primary-light border border-border-default'
               }`}
             >
               Deklaration
             </button>
             <button
               onClick={() => setCurrentStep('payment')}
-              className={`px-4 py-2 rounded ${
+              className={`px-4 py-2 rounded transition-colors ${
                 currentStep === 'payment'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  ? 'bg-accent text-white'
+                  : 'bg-bg-secondary text-text-secondary hover:bg-primary-light border border-border-default'
               }`}
             >
               Betalning
@@ -120,10 +86,10 @@ export const TaxWizard: React.FC = () => {
             {paymentCompleted && (
               <button
                 onClick={() => setCurrentStep('advice')}
-                className={`px-4 py-2 rounded ${
+                className={`px-4 py-2 rounded transition-colors ${
                   currentStep === 'advice'
-                    ? 'bg-green-600 text-white'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    ? 'bg-accent text-white'
+                    : 'bg-bg-secondary text-text-secondary hover:bg-primary-light border border-border-default'
                 }`}
               >
                 Skatterådgivning

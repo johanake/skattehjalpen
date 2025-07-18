@@ -2,27 +2,87 @@ export interface TaxDeclaration {
   id: string;
   userId: string;
   year: number;
-  income: {
-    salary?: number;
-    freelance?: number;
-    investment?: number;
-    other?: number;
-  };
-  currentDeductions: {
-    workRelated?: number;
-    homeOffice?: number;
-    travel?: number;
-    education?: number;
-    charitable?: number;
-    other?: number;
-  };
   personalInfo: {
     name: string;
     personalNumber: string;
-    address: string;
-    maritalStatus: 'single' | 'married' | 'divorced' | 'widowed';
-    hasChildren: boolean;
-    childrenCount?: number;
+    maritalStatus: 'single' | 'married' | 'cohabiting' | 'divorced' | 'widowed';
+    childrenCount?: string;
+    municipality?: string;
+    livedAbroad?: boolean;
+  };
+  employment: {
+    hasEmployment: boolean;
+    employerCount?: string;
+    hasSelfEmployment: boolean;
+    hasPension: boolean;
+    hasUnemploymentBenefit: boolean;
+  };
+  commute: {
+    hasCommute: boolean;
+    distance?: string;
+    transportMethod?: string;
+    savesTwoHours: boolean;
+    hasParkingCosts: boolean;
+    parkingCostPerMonth?: string;
+  };
+  workEquipment: {
+    computer?: string;
+    mobilePhone?: string;
+    internet?: string;
+    protectiveGear?: string;
+    tools?: string;
+    uniform?: string;
+    selfFunded: boolean;
+  };
+  housing: {
+    propertyType?: string;
+    hasMortgage: boolean;
+    mortgageInterest?: string;
+    soldProperty: boolean;
+    propertyGainLoss?: string;
+    hadSellingCosts: boolean;
+    hasDoubleResidence: boolean;
+    secondResidenceCost?: string;
+    travelCostBetweenResidences?: string;
+  };
+  rotRut: {
+    hasRotWork: boolean;
+    rotWorkType?: string;
+    rotAmount?: string;
+    hasRutWork: boolean;
+    rutWorkType?: string;
+    rutAmount?: string;
+  };
+  donations: {
+    hasCharitableDonations: boolean;
+    donationAmount?: string;
+    donationRecipient?: string;
+    hasUnionMembership: boolean;
+    unionFee?: string;
+    hasUnemploymentInsurance: boolean;
+    unemploymentInsuranceFee?: string;
+  };
+  education: {
+    hasStartedEducation: boolean;
+    hasPaidForEducation: boolean;
+    isJobRelevant: boolean;
+  };
+  rental: {
+    hasRentalIncome: boolean;
+    rentalIncome?: string;
+    hasRentalCosts: boolean;
+    rentalCosts?: string;
+  };
+  greenTech: {
+    hasSolarPanels: boolean;
+    solarPanelsCost?: string;
+    hasChargingStation: boolean;
+    chargingStationCost?: string;
+    hasBatteryStorage: boolean;
+    batteryStorageCost?: string;
+  };
+  other: {
+    description?: string;
   };
   status: 'draft' | 'submitted' | 'processing' | 'completed';
   createdAt: Date;

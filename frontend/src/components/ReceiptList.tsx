@@ -33,11 +33,11 @@ export const ReceiptList: React.FC<ReceiptListProps> = ({ declarationId }) => {
 
   if (isLoading) {
     return (
-      <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
-        <h3 className="text-lg font-semibold mb-4 text-white">Uploaded Receipts</h3>
+      <div className="bg-bg-white p-6 rounded-lg shadow-lg border border-border-light">
+        <h3 className="text-lg font-semibold mb-4 text-text-primary">Uploaded Receipts</h3>
         <div className="text-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
-          <p className="mt-2 text-gray-300">Loading receipts...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent mx-auto"></div>
+          <p className="mt-2 text-text-secondary">Loading receipts...</p>
         </div>
       </div>
     );
@@ -45,13 +45,13 @@ export const ReceiptList: React.FC<ReceiptListProps> = ({ declarationId }) => {
 
   if (error) {
     return (
-      <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
-        <h3 className="text-lg font-semibold mb-4 text-white">Uploaded Receipts</h3>
+      <div className="bg-bg-white p-6 rounded-lg shadow-lg border border-border-light">
+        <h3 className="text-lg font-semibold mb-4 text-text-primary">Uploaded Receipts</h3>
         <div className="text-center py-8">
-          <p className="text-red-400">Error loading receipts: {error.message}</p>
+          <p className="text-danger">Error loading receipts: {error.message}</p>
           <button
             onClick={() => refetch()}
-            className="mt-2 text-green-400 hover:text-green-300"
+            className="mt-2 text-accent hover:text-accent-light transition-colors"
           >
             Try again
           </button>
@@ -62,13 +62,13 @@ export const ReceiptList: React.FC<ReceiptListProps> = ({ declarationId }) => {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      work: 'bg-blue-900 text-blue-200',
-      home: 'bg-green-900 text-green-200',
-      travel: 'bg-purple-900 text-purple-200',
-      education: 'bg-yellow-900 text-yellow-200',
-      charity: 'bg-pink-900 text-pink-200',
-      medical: 'bg-red-900 text-red-200',
-      other: 'bg-gray-700 text-gray-200',
+      work: 'bg-primary-light text-primary',
+      home: 'bg-accent-light text-accent',
+      travel: 'bg-purple-100 text-purple-700',
+      education: 'bg-yellow-100 text-yellow-700',
+      charity: 'bg-pink-100 text-pink-700',
+      medical: 'bg-danger-light text-danger',
+      other: 'bg-bg-secondary text-text-secondary',
     };
     return colors[category] || colors.other;
   };
@@ -87,29 +87,29 @@ export const ReceiptList: React.FC<ReceiptListProps> = ({ declarationId }) => {
   };
 
   return (
-    <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
-      <h3 className="text-lg font-semibold mb-4 text-white">
+    <div className="bg-bg-white p-6 rounded-lg shadow-lg border border-border-light">
+      <h3 className="text-lg font-semibold mb-4 text-text-primary">
         Uppladdade kvitton ({receipts?.length || 0})
       </h3>
       
       {!receipts || receipts.length === 0 ? (
         <div className="text-center py-8">
-          <div className="text-gray-400 mb-4">
+          <div className="text-text-muted mb-4">
             <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
-          <p className="text-gray-300">Inga kvitton uppladdade ännu</p>
-          <p className="text-sm text-gray-400 mt-1">Ladda upp dina kvitton för att få bättre skatterådgivning</p>
+          <p className="text-text-secondary">Inga kvitton uppladdade ännu</p>
+          <p className="text-sm text-text-muted mt-1">Ladda upp dina kvitton för att få bättre skatterådgivning</p>
         </div>
       ) : (
         <div className="space-y-4">
           {receipts.map((receipt: Receipt) => (
-            <div key={receipt.id} className="border border-gray-600 rounded-lg p-4">
+            <div key={receipt.id} className="border border-border-default rounded-lg p-4">
               <div className="flex justify-between items-start mb-2">
                 <div className="flex-1">
-                  <h4 className="font-medium text-white">{receipt.fileName}</h4>
-                  <p className="text-sm text-gray-300">{receipt.description || 'Ingen beskrivning'}</p>
+                  <h4 className="font-medium text-text-primary">{receipt.fileName}</h4>
+                  <p className="text-sm text-text-secondary">{receipt.description || 'Ingen beskrivning'}</p>
                 </div>
                 <span className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(receipt.category)}`}>
                   {getCategoryDisplayName(receipt.category)}
@@ -118,39 +118,39 @@ export const ReceiptList: React.FC<ReceiptListProps> = ({ declarationId }) => {
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                 <div>
-                  <p className="text-gray-400">Belopp</p>
-                  <p className="font-medium text-white">
+                  <p className="text-text-muted">Belopp</p>
+                  <p className="font-medium text-text-primary">
                     {receipt.amount ? `${receipt.amount.toLocaleString()} kr` : 'Saknas'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-gray-400">Datum</p>
-                  <p className="font-medium text-white">
+                  <p className="text-text-muted">Datum</p>
+                  <p className="font-medium text-text-primary">
                     {receipt.date ? new Date(receipt.date).toLocaleDateString('sv-SE') : 'Saknas'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-gray-400">Filstorlek</p>
-                  <p className="font-medium text-white">{(receipt.fileSize / 1024 / 1024).toFixed(1)} MB</p>
+                  <p className="text-text-muted">Filstorlek</p>
+                  <p className="font-medium text-text-primary">{(receipt.fileSize / 1024 / 1024).toFixed(1)} MB</p>
                 </div>
                 <div>
-                  <p className="text-gray-400">Uppladdad</p>
-                  <p className="font-medium text-white">{new Date(receipt.uploadedAt).toLocaleDateString('sv-SE')}</p>
+                  <p className="text-text-muted">Uppladdad</p>
+                  <p className="font-medium text-text-primary">{new Date(receipt.uploadedAt).toLocaleDateString('sv-SE')}</p>
                 </div>
               </div>
               
               {receipt.extractedData && (
-                <div className="mt-3 p-3 bg-gray-800 rounded">
-                  <p className="text-sm font-medium text-white mb-1">Extraherad data:</p>
-                  <div className="text-sm text-gray-300 space-y-1">
+                <div className="mt-3 p-3 bg-bg-secondary rounded">
+                  <p className="text-sm font-medium text-text-primary mb-1">Extraherad data:</p>
+                  <div className="text-sm text-text-secondary space-y-1">
                     {receipt.extractedData.vendor && (
-                      <p><span className="font-medium text-white">Leverantör:</span> {receipt.extractedData.vendor}</p>
+                      <p><span className="font-medium text-text-primary">Leverantör:</span> {receipt.extractedData.vendor}</p>
                     )}
                     {receipt.extractedData.amount && (
-                      <p><span className="font-medium text-white">Belopp:</span> {receipt.extractedData.amount} kr</p>
+                      <p><span className="font-medium text-text-primary">Belopp:</span> {receipt.extractedData.amount} kr</p>
                     )}
                     {receipt.extractedData.date && (
-                      <p><span className="font-medium text-white">Datum:</span> {new Date(receipt.extractedData.date).toLocaleDateString('sv-SE')}</p>
+                      <p><span className="font-medium text-text-primary">Datum:</span> {new Date(receipt.extractedData.date).toLocaleDateString('sv-SE')}</p>
                     )}
                   </div>
                 </div>
