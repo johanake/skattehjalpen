@@ -36,7 +36,9 @@ export class LLMService {
       );
     }
 
-    const genAI = new GoogleGenerativeAI("");
+    const genAI = new GoogleGenerativeAI(
+      "AIzaSyDVeLSifFsg3d6Bnypq23pMIdJ1dE_bTD8"
+    );
 
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
