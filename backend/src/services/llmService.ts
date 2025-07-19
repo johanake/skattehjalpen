@@ -2,6 +2,7 @@ import { Agent, run } from "@openai/agents";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import { readFileSync } from "fs";
 import { join } from "path";
+import { env } from "../config/env";
 
 export class LLMService {
   async askOpenAi(question: string) {
@@ -36,9 +37,7 @@ export class LLMService {
       );
     }
 
-    const genAI = new GoogleGenerativeAI(
-      "AIzaSyDVeLSifFsg3d6Bnypq23pMIdJ1dE_bTD8"
-    );
+    const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
 
     const model = genAI.getGenerativeModel({
       model: "gemini-2.5-flash",
