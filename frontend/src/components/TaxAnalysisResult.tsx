@@ -1,137 +1,69 @@
 import React from "react";
 
-interface DeductionItem {
-  category: string;
-  description: string;
-  amount: number;
-  deductionPoint: string;
-  requirements: string[];
-  eligibilityCheck: "eligible" | "partial" | "not_eligible";
-}
-
-interface DeductionResult {
-  totalPotentialSavings: number;
-  totalDeductionAmount: number;
-  taxYear: number;
-  deductions: DeductionItem[];
-  summary: {
-    workRelated: number;
-    capitalGains: number;
-    greenTech: number;
-    rotRut: number;
-    other: number;
+interface TaxAnalysisResultProps {
+  advice: {
+    totalPotentialSavings: number;
+    suggestedDeductions: Array<{
+      category: string;
+      currentAmount: number;
+      suggestedAmount: number;
+      potentialSavings: number;
+      confidence: 'high' | 'medium' | 'low';
+      explanation: string;
+      requiredDocuments: string[];
+    }>;
+    riskAssessment: {
+      level: 'low' | 'medium' | 'high';
+      factors: string[];
+    };
+    recommendations: string[];
+    generatedAt: Date;
   };
 }
 
-// Mock data for demonstration
-const mockDeductionResult: DeductionResult = {
-  totalPotentialSavings: 18750,
-  totalDeductionAmount: 62500,
-  taxYear: 2024,
-  deductions: [
-    {
-      category: "Tjänsteresor",
-      description: "Resekostnader och traktamente för 15 dagar tjänsteresor",
-      amount: 8500,
-      deductionPoint: "2.2 - Tjänsteresor",
-      requirements: [
-        "Kvitton på resekostnader",
-        "Reseräkning från arbetsgivaren",
-      ],
-      eligibilityCheck: "eligible",
-    },
-    {
-      category: "Arbetsutrustning",
-      description: "Dator och mobiltelefon köpt för arbete",
-      amount: 15000,
-      deductionPoint: "2.4 - Övriga utgifter för ditt arbete",
-      requirements: [
-        "Belopp över 5 000 kr-spärren",
-        "Arbetsgivaren tillhandahåller inte utrustning",
-      ],
-      eligibilityCheck: "eligible",
-    },
-    {
-      category: "Hemkontor",
-      description: "Merkostnader för uppvärmning och el för arbetsrum",
-      amount: 4000,
-      deductionPoint: "2.4 - Övriga utgifter för ditt arbete",
-      requirements: [
-        "Rummet används endast för arbete",
-        "Arbetsgivaren tillhandahåller ingen arbetsplats",
-      ],
-      eligibilityCheck: "partial",
-    },
-    {
-      category: "Resor till arbetet",
-      description: "Pendling med egen bil, 45 km enkel väg",
-      amount: 12000,
-      deductionPoint: "2.1 - Resor till och från arbetet",
-      requirements: [
-        "Avstånd >5 km",
-        "Sparar >2 timmar per dag",
-        "Endast belopp över 11 000 kr",
-      ],
-      eligibilityCheck: "eligible",
-    },
-    {
-      category: "ROT-arbete",
-      description: "Takrenoveringsarbete utfört av certifierat företag",
-      amount: 20000,
-      deductionPoint: "4.1 - ROT-avdrag (förtryckt)",
-      requirements: [
-        "Arbete utfört av F-skatteregistrerat företag",
-        "Betalning via företaget",
-      ],
-      eligibilityCheck: "eligible",
-    },
-    {
-      category: "Grön teknik",
-      description: "Installation av solceller och laddbox för elbil",
-      amount: 3000,
-      deductionPoint: "Skattereduktion för grön teknik",
-      requirements: [
-        "Installation av godkänt företag",
-        "Betalning efter 1 januari 2021",
-      ],
-      eligibilityCheck: "eligible",
-    },
-  ],
-  summary: {
-    workRelated: 39500,
-    capitalGains: 0,
-    greenTech: 3000,
-    rotRut: 20000,
-    other: 0,
-  },
-};
+export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({ advice }) => {
+  // Add safety check for advice prop
+  if (!advice) {
+    return (
+      <div className="max-w-6xl mx-auto p-6 bg-bg-white">
+        <div className="bg-danger-light border border-danger rounded-lg p-4">
+          <p className="text-danger">Error: No advice data available</p>
+        </div>
+      </div>
+    );
+  }
 
-export const TaxAnalysisResult: React.FC = () => {
-  const getEligibilityColor = (status: string) => {
-    switch (status) {
-      case "eligible":
+  const getConfidenceColor = (confidence: 'high' | 'medium' | 'low') => {
+    switch (confidence) {
+      case "high":
         return "text-accent bg-accent-light border-accent";
-      case "partial":
+      case "medium":
         return "text-yellow-600 bg-yellow-50 border-yellow-300";
-      case "not_eligible":
+      case "low":
         return "text-red-600 bg-red-50 border-red-300";
       default:
         return "text-text-secondary bg-bg-secondary border-border-default";
     }
   };
 
-  const getEligibilityText = (status: string) => {
-    switch (status) {
-      case "eligible":
-        return "Berättigad";
-      case "partial":
-        return "Delvis berättigad";
-      case "not_eligible":
-        return "Ej berättigad";
+  const getConfidenceText = (confidence: 'high' | 'medium' | 'low') => {
+    switch (confidence) {
+      case "high":
+        return "Hög tillförlitlighet";
+      case "medium":
+        return "Medel tillförlitlighet";
+      case "low":
+        return "Låg tillförlitlighet";
       default:
         return "Okänd";
     }
   };
+
+  const totalDeductionAmount = advice.suggestedDeductions?.reduce((sum, deduction) => 
+    sum + deduction.suggestedAmount, 0
+  ) || 0;
+
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-bg-white">
@@ -141,7 +73,7 @@ export const TaxAnalysisResult: React.FC = () => {
           📊 Analys av skatteavdragsmöjligheter
         </h1>
         <p className="text-text-secondary">
-          Baserat på din inkomstdeklaration för {mockDeductionResult.taxYear}
+          Baserat på din inkomstdeklaration för {currentYear}
         </p>
       </div>
 
@@ -149,7 +81,7 @@ export const TaxAnalysisResult: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-accent-light border border-accent rounded-lg p-6 text-center">
           <div className="text-3xl font-bold text-accent mb-2">
-            {mockDeductionResult.totalPotentialSavings.toLocaleString("sv-SE")}{" "}
+            {(advice.totalPotentialSavings || 0).toLocaleString("sv-SE")}{" "}
             kr
           </div>
           <div className="text-text-primary">Potentiell skattebesparning</div>
@@ -157,7 +89,7 @@ export const TaxAnalysisResult: React.FC = () => {
 
         <div className="bg-primary-light border border-primary rounded-lg p-6 text-center">
           <div className="text-3xl font-bold text-text-inverse mb-2">
-            {mockDeductionResult.totalDeductionAmount.toLocaleString("sv-SE")}{" "}
+            {totalDeductionAmount.toLocaleString("sv-SE")}{" "}
             kr
           </div>
           <div className="text-text-inverse">Totalt avdragsbelopp</div>
@@ -165,44 +97,20 @@ export const TaxAnalysisResult: React.FC = () => {
 
         <div className="bg-bg-secondary border border-border-default rounded-lg p-6 text-center">
           <div className="text-3xl font-bold text-text-primary mb-2">
-            {mockDeductionResult.deductions.length}
+            {advice.suggestedDeductions?.length || 0}
           </div>
           <div className="text-text-primary">Avdragsmöjligheter</div>
         </div>
       </div>
 
-      {/* Category Breakdown */}
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold text-text-primary mb-4">
-          💰 Uppdelning per kategori
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Object.entries(mockDeductionResult.summary).map(
-            ([key, value]) =>
-              value > 0 && (
-                <div
-                  key={key}
-                  className="bg-bg-secondary rounded-lg p-4 border border-border-light"
-                >
-                  <div className="font-semibold text-text-primary capitalize">
-                    {key.replace(/([A-Z])/g, " $1").trim()}
-                  </div>
-                  <div className="text-lg font-bold text-accent">
-                    {value.toLocaleString("sv-SE")} kr
-                  </div>
-                </div>
-              )
-          )}
-        </div>
-      </div>
-
       {/* Detailed Deductions */}
-      <div>
+      <div className="mb-8">
         <h2 className="text-xl font-semibold text-text-primary mb-4">
           📋 Detaljerad genomgång av avdrag
         </h2>
+        {advice.suggestedDeductions?.length > 0 ? (
         <div className="space-y-6">
-          {mockDeductionResult.deductions.map((deduction, index) => (
+          {advice.suggestedDeductions.map((deduction, index) => (
             <div
               key={index}
               className="bg-bg-white border border-border-light rounded-lg p-6 shadow-sm"
@@ -213,50 +121,120 @@ export const TaxAnalysisResult: React.FC = () => {
                     {deduction.category}
                   </h3>
                   <p className="text-text-secondary mt-1">
-                    {deduction.description}
+                    {deduction.explanation}
                   </p>
                 </div>
                 <div className="text-right">
                   <div className="text-xl font-bold text-accent">
-                    {deduction.amount.toLocaleString("sv-SE")} kr
+                    {deduction.potentialSavings.toLocaleString("sv-SE")} kr
                   </div>
+                  <div className="text-sm text-text-muted">Potentiell besparing</div>
                   <div
-                    className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getEligibilityColor(
-                      deduction.eligibilityCheck
+                    className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border mt-2 ${getConfidenceColor(
+                      deduction.confidence
                     )}`}
                   >
-                    {getEligibilityText(deduction.eligibilityCheck)}
+                    {getConfidenceText(deduction.confidence)}
                   </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div>
                   <h4 className="font-medium text-text-primary mb-2">
-                    📍 Deklarationspunkt
+                    💰 Nuvarande avdrag
                   </h4>
-                  <p className="text-text-secondary bg-bg-secondary px-3 py-2 rounded">
-                    {deduction.deductionPoint}
+                  <p className="text-lg font-semibold text-text-secondary">
+                    {deduction.currentAmount.toLocaleString("sv-SE")} kr
                   </p>
                 </div>
-
                 <div>
                   <h4 className="font-medium text-text-primary mb-2">
-                    ✅ Krav som måste uppfyllas
+                    📈 Föreslaget avdrag
+                  </h4>
+                  <p className="text-lg font-semibold text-accent">
+                    {deduction.suggestedAmount.toLocaleString("sv-SE")} kr
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-text-primary mb-2">
+                    💸 Potentiell besparing
+                  </h4>
+                  <p className="text-lg font-semibold text-accent">
+                    {deduction.potentialSavings.toLocaleString("sv-SE")} kr
+                  </p>
+                </div>
+              </div>
+
+              {deduction.requiredDocuments.length > 0 && (
+                <div>
+                  <h4 className="font-medium text-text-primary mb-2">
+                    ✅ Krävda dokument
                   </h4>
                   <ul className="text-text-secondary space-y-1">
-                    {deduction.requirements.map((req, reqIndex) => (
-                      <li key={reqIndex} className="flex items-start">
+                    {deduction.requiredDocuments.map((doc, docIndex) => (
+                      <li key={docIndex} className="flex items-start">
                         <span className="text-accent mr-2">•</span>
-                        {req}
+                        {doc}
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
+              )}
             </div>
           ))}
         </div>
+        ) : (
+          <div className="bg-bg-secondary border border-border-light rounded-lg p-6 text-center">
+            <p className="text-text-secondary">Inga specifika avdragsmöjligheter identifierades baserat på din deklaration.</p>
+            <p className="text-text-muted text-sm mt-2">Detta betyder inte att du inte har några avdrag - kontrollera Skatteverkets standardavdrag.</p>
+          </div>
+        )}
+      </div>
+
+      {/* Risk Assessment */}
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold text-text-primary mb-4">
+          ⚠️ Riskbedömning
+        </h2>
+        <div className={`border rounded-lg p-4 ${
+          advice.riskAssessment?.level === 'low' ? 'border-accent bg-accent-light' :
+          advice.riskAssessment?.level === 'medium' ? 'border-yellow-300 bg-yellow-50' :
+          'border-red-300 bg-red-50'
+        }`}>
+          <div className="flex items-center mb-2">
+            <span className={`px-3 py-1 rounded text-sm font-medium ${
+              advice.riskAssessment?.level === 'low' ? 'bg-accent text-white' :
+              advice.riskAssessment?.level === 'medium' ? 'bg-yellow-600 text-white' :
+              'bg-red-600 text-white'
+            }`}>
+              {advice.riskAssessment?.level === 'low' ? 'LÅG RISK' : 
+               advice.riskAssessment?.level === 'medium' ? 'MEDEL RISK' : 'HÖG RISK'}
+            </span>
+          </div>
+          {advice.riskAssessment?.factors?.length > 0 && (
+            <ul className="text-sm list-disc list-inside text-text-secondary">
+              {advice.riskAssessment.factors.map((factor, index) => (
+                <li key={index}>{factor}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+
+      {/* Recommendations */}
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold text-text-primary mb-4">
+          💡 Rekommendationer
+        </h2>
+        <ul className="space-y-2">
+          {advice.recommendations?.map((recommendation, index) => (
+            <li key={index} className="flex items-start">
+              <span className="text-accent mr-2">•</span>
+              <span className="text-text-secondary">{recommendation}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Action Items */}
@@ -282,6 +260,10 @@ export const TaxAnalysisResult: React.FC = () => {
             Kontrollera att alla krav är uppfyllda innan du lämnar in
           </li>
         </ul>
+
+        <div className="mt-4 text-sm text-text-inverse opacity-75">
+          Analys genererad den {new Date(advice.generatedAt).toLocaleDateString('sv-SE')}
+        </div>
       </div>
     </div>
   );

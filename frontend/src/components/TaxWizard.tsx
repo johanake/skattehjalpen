@@ -1,27 +1,21 @@
 import { useState } from 'react';
 import { TaxDeclarationForm } from './TaxDeclarationForm';
 import { TaxAdviceDisplay } from './TaxAdviceDisplay';
-import { PaymentFlow } from './PaymentFlow';
 
 export const TaxWizard: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<'declaration' | 'payment' | 'advice'>('declaration');
+  const [currentStep, setCurrentStep] = useState<'declaration' | 'advice'>('declaration');
   const [declarationId, setDeclarationId] = useState<string | null>(null);
-  const [paymentCompleted, setPaymentCompleted] = useState(false);
+  const [analysisCompleted, setAnalysisCompleted] = useState(false);
 
   const handleDeclarationSuccess = (id: string) => {
     setDeclarationId(id);
-    setCurrentStep('payment');
-  };
-
-  const handlePaymentSuccess = () => {
-    setPaymentCompleted(true);
+    setAnalysisCompleted(true);
     setCurrentStep('advice');
   };
 
   const steps = [
     { id: 'declaration', name: 'Skattedeklaration', completed: !!declarationId },
-    { id: 'payment', name: 'Betalning', completed: paymentCompleted },
-    { id: 'advice', name: 'Skatterådgivning', completed: false },
+    { id: 'advice', name: 'Skatterådgivning', completed: analysisCompleted },
   ];
 
   return (
@@ -73,17 +67,7 @@ export const TaxWizard: React.FC = () => {
             >
               Deklaration
             </button>
-            <button
-              onClick={() => setCurrentStep('payment')}
-              className={`px-4 py-2 rounded transition-colors ${
-                currentStep === 'payment'
-                  ? 'bg-accent text-white'
-                  : 'bg-bg-secondary text-text-secondary hover:bg-primary-light border border-border-default'
-              }`}
-            >
-              Betalning
-            </button>
-            {paymentCompleted && (
+            {analysisCompleted && (
               <button
                 onClick={() => setCurrentStep('advice')}
                 className={`px-4 py-2 rounded transition-colors ${
@@ -104,11 +88,7 @@ export const TaxWizard: React.FC = () => {
             <TaxDeclarationForm onSuccess={handleDeclarationSuccess} />
           )}
 
-          {currentStep === 'payment' && (
-            <PaymentFlow onPaymentSuccess={handlePaymentSuccess} />
-          )}
-
-          {currentStep === 'advice' && declarationId && paymentCompleted && (
+          {currentStep === 'advice' && declarationId && analysisCompleted && (
             <TaxAdviceDisplay declarationId={declarationId} />
           )}
         </div>

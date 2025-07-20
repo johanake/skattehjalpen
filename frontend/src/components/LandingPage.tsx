@@ -208,7 +208,7 @@ export const LandingPage: React.FC = () => {
                 <div className="text-4xl font-bold text-text-inverse mb-4">
                   199 kr
                 </div>
-                <ul className="text-left text-text-muted space-y-3 mb-6">
+                <ul className="text-left text-text-inverse space-y-3 mb-6">
                   <li>✓ Omfattande AI-baserad skatteanalys</li>
                   <li>✓ Automatisk identifiering av avdrag</li>
                   <li>✓ Detaljerade avdragsrekommendationer</li>

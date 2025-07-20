@@ -1,10 +1,299 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { trpc } from "../utils/trpc";
 import type { CreateTaxDeclarationInput } from "../../../backend/src/validators/taxValidators";
 
 interface TaxDeclarationFormProps {
   onSuccess: (declarationId: string) => void;
 }
+
+const swedishMunicipalities = [
+  "Botkyrka",
+  "Danderyd",
+  "Ekerö",
+  "Haninge",
+  "Huddinge",
+  "Järfälla",
+  "Lidingö",
+  "Nacka",
+  "Norrtälje",
+  "Nykvarn",
+  "Nynäshamn",
+  "Salem",
+  "Sigtuna",
+  "Sollentuna",
+  "Solna",
+  "Stockholm",
+  "Sundbyberg",
+  "Södertälje",
+  "Tyresö",
+  "Täby",
+  "Upplands-Bro",
+  "Upplands Väsby",
+  "Vallentuna",
+  "Vaxholm",
+  "Värmdö",
+  "Österåker",
+  "Enköping",
+  "Håbo",
+  "Knivsta",
+  "Tierp",
+  "Uppsala",
+  "Älvkarleby",
+  "Östhammar",
+  "Heby",
+  "Eskilstuna",
+  "Flen",
+  "Gnesta",
+  "Katrineholm",
+  "Nyköping",
+  "Oxelösund",
+  "Strängnäs",
+  "Trosa",
+  "Vingåker",
+  "Boxholm",
+  "Finspång",
+  "Kinda",
+  "Linköping",
+  "Mjölby",
+  "Motala",
+  "Norrköping",
+  "Söderköping",
+  "Vadstena",
+  "Valdemarsvik",
+  "Ydre",
+  "Åtvidaberg",
+  "Ödeshög",
+  "Aneby",
+  "Eksjö",
+  "Gislaved",
+  "Gnosjö",
+  "Habo",
+  "Jönköping",
+  "Mullsjö",
+  "Nässjö",
+  "Sävsjö",
+  "Tranås",
+  "Vaggeryd",
+  "Vetlanda",
+  "Värnamo",
+  "Alvesta",
+  "Lessebo",
+  "Ljungby",
+  "Markaryd",
+  "Tingsryd",
+  "Uppvidinge",
+  "Växjö",
+  "Älmhult",
+  "Borgholm",
+  "Emmaboda",
+  "Hultsfred",
+  "Högsby",
+  "Kalmar",
+  "Mönsterås",
+  "Mörbylånga",
+  "Nybro",
+  "Oskarshamn",
+  "Torsås",
+  "Vimmerby",
+  "Västervik",
+  "Gotland",
+  "Karlshamn",
+  "Karlskrona",
+  "Olofström",
+  "Ronneby",
+  "Sölvesborg",
+  "Bjuv",
+  "Bromölla",
+  "Burlöv",
+  "Båstad",
+  "Eslöv",
+  "Helsingborg",
+  "Hässleholm",
+  "Höganäs",
+  "Hörby",
+  "Höör",
+  "Klippan",
+  "Kristianstad",
+  "Kävlinge",
+  "Landskrona",
+  "Lomma",
+  "Lund",
+  "Malmö",
+  "Osby",
+  "Perstorp",
+  "Simrishamn",
+  "Sjöbo",
+  "Skurup",
+  "Staffanstorp",
+  "Svalöv",
+  "Svedala",
+  "Tomelilla",
+  "Trelleborg",
+  "Vellinge",
+  "Ystad",
+  "Ängelholm",
+  "Örkelljunga",
+  "Östra Göinge",
+  "Falkenberg",
+  "Halmstad",
+  "Hylte",
+  "Kungsbacka",
+  "Laholm",
+  "Varberg",
+  "Ale",
+  "Alingsås",
+  "Bengtsfors",
+  "Bollebygd",
+  "Borås",
+  "Dals-Ed",
+  "Essunga",
+  "Falköping",
+  "Färgelanda",
+  "Grästorp",
+  "Gullspång",
+  "Göteborg",
+  "Götene",
+  "Herrljunga",
+  "Hjo",
+  "Härryda",
+  "Karlsborg",
+  "Kungälv",
+  "Lerum",
+  "Lidköping",
+  "Lysekil",
+  "Mariestad",
+  "Mark",
+  "Mellerud",
+  "Munkedal",
+  "Mölndal",
+  "Orust",
+  "Partille",
+  "Skara",
+  "Skövde",
+  "Sotenäs",
+  "Stenungsund",
+  "Strömstad",
+  "Svenljunga",
+  "Tanum",
+  "Tibro",
+  "Tidaholm",
+  "Tjörn",
+  "Tranemo",
+  "Trollhättan",
+  "Töreboda",
+  "Uddevalla",
+  "Ulricehamn",
+  "Vara",
+  "Vänersborg",
+  "Åmål",
+  "Älvängen",
+  "Älvsborg",
+  "Öckerö",
+  "Arvika",
+  "Eda",
+  "Filipstad",
+  "Forshaga",
+  "Grums",
+  "Hagfors",
+  "Hammarö",
+  "Karlstad",
+  "Kil",
+  "Kristinehamn",
+  "Munkfors",
+  "Storfors",
+  "Sunne",
+  "Säffle",
+  "Torsby",
+  "Askersund",
+  "Degerfors",
+  "Hallsberg",
+  "Hällefors",
+  "Karlskoga",
+  "Kumla",
+  "Laxå",
+  "Lekeberg",
+  "Lindesberg",
+  "Nora",
+  "Örebro",
+  "Arboga",
+  "Fagersta",
+  "Hallstahammar",
+  "Kungsör",
+  "Köping",
+  "Norberg",
+  "Sala",
+  "Skinnskatteberg",
+  "Surahammar",
+  "Västerås",
+  "Avesta",
+  "Borlänge",
+  "Falun",
+  "Gagnef",
+  "Hedemora",
+  "Leksand",
+  "Ludvika",
+  "Malung-Sälen",
+  "Mora",
+  "Orsa",
+  "Rättvik",
+  "Smedjebacken",
+  "Säter",
+  "Vansbro",
+  "Älvdalen",
+  "Bollnäs",
+  "Gävle",
+  "Hofors",
+  "Hudiksvall",
+  "Ljusdal",
+  "Nordanstig",
+  "Ockelbo",
+  "Ovanåker",
+  "Sandviken",
+  "Söderhamn",
+  "Härnösand",
+  "Kramfors",
+  "Sollefteå",
+  "Sundsvall",
+  "Timrå",
+  "Ånge",
+  "Örnsköldsvik",
+  "Berg",
+  "Bräcke",
+  "Härjedalen",
+  "Krokom",
+  "Ragunda",
+  "Strömsund",
+  "Åre",
+  "Östersund",
+  "Bjurholm",
+  "Dorotea",
+  "Lycksele",
+  "Malå",
+  "Nordmaling",
+  "Norsjö",
+  "Robertsfors",
+  "Skellefteå",
+  "Sorsele",
+  "Storuman",
+  "Umeå",
+  "Vilhelmina",
+  "Vännäs",
+  "Åsele",
+  "Arjeplog",
+  "Arvidsjaur",
+  "Boden",
+  "Gällivare",
+  "Haparanda",
+  "Jokkmokk",
+  "Kalix",
+  "Kiruna",
+  "Luleå",
+  "Pajala",
+  "Piteå",
+  "Älvsbyn",
+  "Överkalix",
+  "Övertorneå",
+];
 
 export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
   onSuccess,
@@ -179,11 +468,33 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
     },
   });
 
+  // Searchable dropdown state for municipality
+  const [municipalitySearch, setMunicipalitySearch] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Filter municipalities based on search
+  const filteredMunicipalities = swedishMunicipalities.filter(municipality =>
+    municipality.toLowerCase().includes(municipalitySearch.toLowerCase())
+  );
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const createDeclaration = trpc.tax.createDeclaration.useMutation({
     onSuccess: (data) => {
       onSuccess(data.id);
-      // Navigate to analysis page after successful submission
-      window.location.href = '/skatt/inkomstdeklaration/analys';
     },
   });
 
@@ -303,18 +614,39 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
             <label className="block text-sm font-medium text-text-secondary mb-1">
               Kommun du är folkbokförd i
             </label>
-            <input
-              type="text"
-              value={formData.personalInfo.municipality}
-              onChange={(e) =>
-                handleSectionChange(
-                  "personalInfo",
-                  "municipality",
-                  e.target.value
-                )
-              }
-              className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
-            />
+            <div className="relative" ref={dropdownRef}>
+              <input
+                type="text"
+                value={municipalitySearch || formData.personalInfo.municipality}
+                onChange={(e) => {
+                  setMunicipalitySearch(e.target.value);
+                  setIsDropdownOpen(true);
+                  if (!e.target.value) {
+                    handleSectionChange("personalInfo", "municipality", "");
+                  }
+                }}
+                onFocus={() => setIsDropdownOpen(true)}
+                placeholder="Sök kommun..."
+                className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+              />
+              {isDropdownOpen && filteredMunicipalities.length > 0 && (
+                <div className="absolute z-10 w-full mt-1 bg-bg-white border border-border-default rounded-md shadow-lg max-h-60 overflow-auto">
+                  {filteredMunicipalities.map((municipality) => (
+                    <div
+                      key={municipality}
+                      onClick={() => {
+                        handleSectionChange("personalInfo", "municipality", municipality);
+                        setMunicipalitySearch("");
+                        setIsDropdownOpen(false);
+                      }}
+                      className="px-3 py-2 hover:bg-bg-secondary cursor-pointer text-text-primary"
+                    >
+                      {municipality}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
           <div className="md:col-span-2">
             <label className="flex items-center space-x-2">

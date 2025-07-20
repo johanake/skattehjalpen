@@ -15,13 +15,14 @@ export class TaxService {
   private static receipts: Receipt[] = [];
   private static advices: TaxAdvice[] = [];
   private static payments: PaymentSession[] = [];
+  private static llmResults: Map<string, any> = new Map(); // Store LLM results by declaration ID
 
   // Tax Declaration methods
   static async createTaxDeclaration(
     userId: string,
     data: CreateTaxDeclarationInput
   ): Promise<TaxDeclaration> {
-    console.log("hello");
+    console.log("Creating tax declaration and running LLM analysis");
 
     const declaration: TaxDeclaration = {
       id: Math.random().toString(36).substring(7),
@@ -32,13 +33,24 @@ export class TaxService {
       updatedAt: new Date(),
     };
 
+    // Store the declaration first
+    this.declarations.push(declaration);
+
+    // Run LLM analysis and store the results
     const llmService = new LLMService();
     const llmAdvice = await llmService.analyseTaxDeclaration(
       JSON.stringify(declaration),
       2025
     );
 
-    this.declarations.push(declaration);
+    console.log("LLM analysis completed:", llmAdvice);
+    
+    // Store LLM results for later use
+    this.llmResults.set(declaration.id, llmAdvice);
+
+    // Update the declaration status to completed
+    declaration.status = "completed";
+    declaration.updatedAt = new Date();
 
     return declaration;
   }
@@ -88,10 +100,51 @@ export class TaxService {
       throw new Error("Tax declaration not found");
     }
 
-    // Mock advice generation logic
-    const advice = this.calculateTaxAdvice(declaration, receipts);
+    // Check if we have LLM results stored for this declaration
+    const llmResults = this.llmResults.get(declarationId);
+    
+    let advice: TaxAdvice;
+    
+    if (llmResults) {
+      // Convert LLM results to TaxAdvice format
+      advice = this.convertLLMResultsToTaxAdvice(declarationId, llmResults);
+    } else {
+      // Fall back to calculated advice
+      advice = this.calculateTaxAdvice(declaration, receipts);
+    }
+    
     this.advices.push(advice);
     return advice;
+  }
+
+  private static convertLLMResultsToTaxAdvice(declarationId: string, llmResults: any): TaxAdvice {
+    const suggestedDeductions = llmResults.deductions?.map((deduction: any) => ({
+      category: deduction.title || 'Okänt avdrag',
+      currentAmount: 0, // LLM doesn't provide current amount
+      suggestedAmount: parseFloat(deduction.amount?.replace(/[^0-9.-]+/g, '') || '0'),
+      potentialSavings: parseFloat(deduction.amount?.replace(/[^0-9.-]+/g, '') || '0') * 0.32, // Estimate 32% tax rate
+      confidence: 'medium' as const, // Default confidence from LLM
+      explanation: deduction.motivation || deduction.calculation || 'Ingen förklaring tillgänglig',
+      requiredDocuments: [deduction.where || 'Se Skatteverkets anvisningar'],
+      relatedReceipts: []
+    })) || [];
+
+    return {
+      id: Math.random().toString(36).substring(7),
+      declarationId,
+      suggestedDeductions,
+      totalPotentialSavings: llmResults.totalDeductions || suggestedDeductions.reduce((sum: number, d: any) => sum + d.potentialSavings, 0),
+      riskAssessment: {
+        level: 'low' as const,
+        factors: []
+      },
+      recommendations: [
+        'Spara alla kvitton och dokument',
+        'Kontrollera Skatteverkets senaste regler',
+        'Överväg att konsultera en skattespecialist för komplexa fall'
+      ],
+      generatedAt: new Date()
+    };
   }
 
   private static calculateTaxAdvice(
