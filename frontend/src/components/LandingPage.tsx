@@ -14,17 +14,21 @@ export const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br bg-primary">
       {/* Hero Section */}
-      <section className="pt-20 pb-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        className="pt-20 pb-32 bg-cover bg-center bg-no-repeat relative"
+        style={{ backgroundImage: "url(/hero-picture.jpg)" }}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h2 className="text-5xl font-bold text-text-inverse mb-6">
               AI-driven skatterådgivning för{" "}
               <span className="text-accent">svenska</span> skattebetalare
             </h2>
             <p className="text-xl text-text-inverse mb-8 max-w-3xl mx-auto">
-              Ladda upp din skattedeklaration och kvitton så hjälper vår AI dig
-              att hitta dolda avdrag och maximera din skatteåterbäring enligt
-              Skatteverkets regler.
+              Din personliga AI-assistent för deklarationen. Fyll i vårt smarta
+              frågeformulär på 10 minuter och få hjälp att hitta dolda avdrag
+              och maximera din skatteåterbäring.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
@@ -33,7 +37,7 @@ export const LandingPage: React.FC = () => {
               >
                 Kom igång nu
               </button>
-              <button className="text-accent px-8 py-4 rounded-lg text-lg font-semibold hover:bg-bg-secondary transition-colors border border-accent">
+              <button className="text-accent px-8 py-4 rounded-lg text-lg font-semibold hover:bg-bg-accent-light transition-colors border border-accent">
                 Se demo
               </button>
             </div>
@@ -122,11 +126,11 @@ export const LandingPage: React.FC = () => {
                 </svg>
               </div>
               <h4 className="text-xl font-semibold text-text-primary mb-4">
-                Skatteverket-godkänt
+                Säker data
               </h4>
               <p className="text-text-secondary">
-                Alla våra rekommendationer följer Skatteverkets riktlinjer och
-                är säkra att använda i din deklaration.
+                Vi tar datasäkerhet på allvar. All information krypteras och
+                lagras i EU, samt följer GDPR.
               </p>
             </div>
           </div>
@@ -140,10 +144,10 @@ export const LandingPage: React.FC = () => {
             <h3 className="text-3xl font-bold text-white mb-4">
               Så här fungerar det
             </h3>
-            <p className="text-xl text-text-muted">Enkel process i tre steg</p>
+            <p className="text-xl text-text-muted">Enkel process i fyra steg</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full text-white font-bold text-lg mb-4">
                 1
@@ -162,6 +166,19 @@ export const LandingPage: React.FC = () => {
                 2
               </div>
               <h4 className="text-lg font-semibold text-white mb-2">
+                Förhandsvisning
+              </h4>
+              <p className="text-text-muted text-sm">
+                Vi ger dig en förhandsvisning på vad du kan spara, INNAN du går
+                vidare till betalning
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full text-white font-bold text-lg mb-4">
+                3
+              </div>
+              <h4 className="text-lg font-semibold text-white mb-2">
                 Betala för analysen
               </h4>
               <p className="text-text-muted text-sm">
@@ -171,7 +188,7 @@ export const LandingPage: React.FC = () => {
 
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full text-white font-bold text-lg mb-4">
-                3
+                4
               </div>
               <h4 className="text-lg font-semibold text-white mb-2">
                 Få rådgivning
@@ -195,27 +212,53 @@ export const LandingPage: React.FC = () => {
           </div>
 
           <div className="flex justify-center">
-            <div className="border-2 border-border-default rounded-lg p-8 relative bg-primary max-w-md">
+            <div className="relative bg-white rounded-2xl p-8 max-w-md shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <span className="bg-green-600 text-white px-4 py-1 rounded-full text-sm">
+                <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
                   Rekommenderas
                 </span>
               </div>
-              <div className="text-center">
-                <h4 className="text-2xl font-semibold text-white mb-2">
+              <div className="text-center pt-4">
+                <h4 className="text-3xl font-bold text-gray-800 mb-3">
                   Skatteanalys
                 </h4>
-                <div className="text-4xl font-bold text-text-inverse mb-4">
+                <div className="text-5xl font-extrabold text-primary mb-2">
                   199 kr
                 </div>
-                <ul className="text-left text-text-inverse space-y-3 mb-6">
-                  <li>✓ Omfattande AI-baserad skatteanalys</li>
-                  <li>✓ Automatisk identifiering av avdrag</li>
-                  <li>✓ Detaljerade avdragsrekommendationer</li>
-                  <li>✓ Riskbedömning och säkerhetsanalys</li>
-                  <li>✓ Prioriterad support</li>
-                  <li>✓ Detaljerad PDF-rapport</li>
-                  <li>✓ Uppföljning och rådgivning</li>
+                <p className="text-text-primary mb-8 text-sm">
+                  Engångsbetalning
+                </p>
+                <ul className="text-left text-gray-700 space-y-4 mb-8">
+                  <li className="flex items-start">
+                    <span className="text-green-500 font-bold mr-3 text-lg">
+                      ✓
+                    </span>
+                    <span>Omfattande AI-baserad skatteanalys</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 font-bold mr-3 text-lg">
+                      ✓
+                    </span>
+                    <span>Automatisk identifiering av avdrag</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 font-bold mr-3 text-lg">
+                      ✓
+                    </span>
+                    <span>Detaljerade avdragsrekommendationer</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 font-bold mr-3 text-lg">
+                      ✓
+                    </span>
+                    <span>Mappade svar till inkomstdeklarationen</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 font-bold mr-3 text-lg">
+                      ✓
+                    </span>
+                    <span>Prioriterad support</span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -256,7 +299,7 @@ export const LandingPage: React.FC = () => {
                 <h5 className="text-lg font-semibold">Skattehjälpen</h5>
               </div>
               <p className="text-text-muted">
-                AI-driven skatterådgivning för svenska skattebetalare
+                AI-driven skatteanalys för svenska skattebetalare
               </p>
             </div>
 

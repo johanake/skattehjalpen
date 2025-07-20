@@ -9,7 +9,7 @@ export const colors = {
   // Accent colors - Green for economic success and security
   accent: {
     DEFAULT: "#16A34A", // Grön – ekonomisk framgång, trygghet
-    light: "#A7F3D0", // Ljusgrön för highlights
+    light: "#38a169", // Ljusgrön för highlights
   },
 
   // Neutral colors - Grays for text and backgrounds

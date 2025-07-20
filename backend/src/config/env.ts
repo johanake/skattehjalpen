@@ -10,7 +10,9 @@ const envSchema = z.object({
   JWT_SECRET: z.string().optional(),
   CORS_ORIGINS: z
     .string()
-    .default("http://localhost:5173,https://skattehjalpen-frontend.vercel.app")
+    .default(
+      "http://localhost:5173,https://skattehjalpen-frontend.vercel.app,https://skattehjalpen.se"
+    )
     .transform((origins) => origins.split(",")),
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_PUBLISHABLE_KEY: z.string().optional(),

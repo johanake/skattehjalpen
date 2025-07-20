@@ -19,7 +19,8 @@
       "Bash(npm update:*)",
       "Bash(timeout 5 npm run dev)",
       "Bash(npx concurrently:*)",
-      "Bash(NODE_OPTIONS=\"--trace-warnings\" npm run dev)"
+      "Bash(NODE_OPTIONS=\"--trace-warnings\" npm run dev)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

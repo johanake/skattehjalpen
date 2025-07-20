@@ -55,7 +55,7 @@ const Header: React.FC = () => {
                 />
               </svg>
             </div>
-            <h1 className="text-2xl font-bold text-text-accent">
+            <h1 className="text-2xl font-bold text-text-primary">
               Skattehjälpen
             </h1>
           </div>
@@ -65,7 +65,7 @@ const Header: React.FC = () => {
             <nav className="hidden md:flex space-x-8">
               <a
                 href="#features"
-                className="text-text-primary hover:text-text-muted transition-colors"
+                className="text-text-primary hover:text-text-secondary transition-colors"
               >
                 Funktioner
               </a>
@@ -80,12 +80,6 @@ const Header: React.FC = () => {
                 className="text-text-primary hover:text-text-muted transition-colors"
               >
                 Om oss
-              </a>
-              <a
-                href="/skatt/inkomstdeklaration/analys"
-                className="text-text-primary hover:text-text-muted transition-colors"
-              >
-                Demo Analys
               </a>
             </nav>
           )}
