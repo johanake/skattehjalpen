@@ -2,7 +2,7 @@ import { Agent, run } from "@openai/agents";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { env } from "../config/env";
+import { env } from "../config/env.js";
 
 export class LLMService {
   async askOpenAi(question: string) {
