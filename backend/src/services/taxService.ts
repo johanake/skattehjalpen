@@ -1,3 +1,8 @@
+import mongoose from 'mongoose';
+import { TaxDeclaration as TaxDeclarationModel, ITaxDeclaration } from '../models/TaxDeclaration.js';
+import { Receipt as ReceiptModel, IReceipt } from '../models/Receipt.js';
+import { TaxAdvice as TaxAdviceModel, ITaxAdvice } from '../models/TaxAdvice.js';
+import { PaymentSession as PaymentSessionModel, IPaymentSession } from '../models/PaymentSession.js';
 import type {
   TaxDeclaration,
   Receipt,
@@ -11,12 +16,6 @@ import type {
 import { LLMService } from "./llmService.js";
 
 export class TaxService {
-  private static declarations: TaxDeclaration[] = [];
-  private static receipts: Receipt[] = [];
-  private static advices: TaxAdvice[] = [];
-  private static payments: PaymentSession[] = [];
-  private static llmResults: Map<string, any> = new Map(); // Store LLM results by declaration ID
-
   // Tax Declaration methods
   static async createTaxDeclaration(
     userId: string,
@@ -24,19 +23,16 @@ export class TaxService {
   ): Promise<TaxDeclaration> {
     console.log("Creating tax declaration and running LLM analysis");
 
-    const declaration: TaxDeclaration = {
-      id: Math.random().toString(36).substring(7),
-      userId,
+    // Create the declaration in MongoDB
+    const declaration = new TaxDeclarationModel({
+      userId: new mongoose.Types.ObjectId(userId),
       ...data,
       status: "draft",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
+    });
 
-    // Store the declaration first
-    this.declarations.push(declaration);
+    await declaration.save();
 
-    // Run LLM analysis and store the results
+    // Run LLM analysis
     const llmService = new LLMService();
     const llmAdvice = await llmService.analyseTaxDeclaration(
       JSON.stringify(declaration),
@@ -45,22 +41,32 @@ export class TaxService {
 
     console.log("LLM analysis completed:", llmAdvice);
     
-    // Store LLM results for later use
-    this.llmResults.set(declaration.id, llmAdvice);
+    // Create and store tax advice
+    const advice = new TaxAdviceModel({
+      declarationId: declaration._id,
+      ...this.convertLLMResultsToTaxAdviceData(llmAdvice),
+    });
+
+    await advice.save();
 
     // Update the declaration status to completed
     declaration.status = "completed";
-    declaration.updatedAt = new Date();
+    await declaration.save();
 
-    return declaration;
+    // Convert to interface format for return
+    return this.formatDeclaration(declaration);
   }
 
   static async getTaxDeclaration(id: string): Promise<TaxDeclaration | null> {
-    return this.declarations.find((d) => d.id === id) || null;
+    const declaration = await TaxDeclarationModel.findById(id).populate('userId');
+    return declaration ? this.formatDeclaration(declaration) : null;
   }
 
   static async getUserDeclarations(userId: string): Promise<TaxDeclaration[]> {
-    return this.declarations.filter((d) => d.userId === userId);
+    const declarations = await TaxDeclarationModel
+      .find({ userId: new mongoose.Types.ObjectId(userId) })
+      .sort({ createdAt: -1 });
+    return declarations.map(d => this.formatDeclaration(d));
   }
 
   // Receipt methods
@@ -68,9 +74,8 @@ export class TaxService {
     declarationId: string,
     receiptData: Partial<Receipt>
   ): Promise<Receipt> {
-    const receipt: Receipt = {
-      id: Math.random().toString(36).substring(7),
-      declarationId,
+    const receipt = new ReceiptModel({
+      declarationId: new mongoose.Types.ObjectId(declarationId),
       fileName: receiptData.fileName || "",
       fileType: receiptData.fileType || "",
       fileSize: receiptData.fileSize || 0,
@@ -81,14 +86,17 @@ export class TaxService {
       uploadedAt: new Date(),
       processedAt: new Date(),
       extractedData: receiptData.extractedData,
-    };
+    });
 
-    this.receipts.push(receipt);
-    return receipt;
+    await receipt.save();
+    return this.formatReceipt(receipt);
   }
 
   static async getReceipts(declarationId: string): Promise<Receipt[]> {
-    return this.receipts.filter((r) => r.declarationId === declarationId);
+    const receipts = await ReceiptModel
+      .find({ declarationId: new mongoose.Types.ObjectId(declarationId) })
+      .sort({ uploadedAt: -1 });
+    return receipts.map(r => this.formatReceipt(r));
   }
 
   // Tax Advice methods
@@ -100,24 +108,31 @@ export class TaxService {
       throw new Error("Tax declaration not found");
     }
 
-    // Check if we have LLM results stored for this declaration
-    const llmResults = this.llmResults.get(declarationId);
-    
-    let advice: TaxAdvice;
-    
-    if (llmResults) {
-      // Convert LLM results to TaxAdvice format
-      advice = this.convertLLMResultsToTaxAdvice(declarationId, llmResults);
-    } else {
-      // Fall back to calculated advice
-      advice = this.calculateTaxAdvice(declaration, receipts);
+    // Check if advice already exists
+    let advice = await TaxAdviceModel.findOne({ 
+      declarationId: new mongoose.Types.ObjectId(declarationId) 
+    });
+
+    if (advice) {
+      return this.formatTaxAdvice(advice);
     }
+
+    // Generate new advice
+    const adviceData = this.calculateTaxAdvice(declaration, receipts);
     
-    this.advices.push(advice);
-    return advice;
+    advice = new TaxAdviceModel({
+      declarationId: new mongoose.Types.ObjectId(declarationId),
+      suggestedDeductions: adviceData.suggestedDeductions,
+      totalPotentialSavings: adviceData.totalPotentialSavings,
+      riskAssessment: adviceData.riskAssessment,
+      recommendations: adviceData.recommendations,
+    });
+
+    await advice.save();
+    return this.formatTaxAdvice(advice);
   }
 
-  private static convertLLMResultsToTaxAdvice(declarationId: string, llmResults: any): TaxAdvice {
+  private static convertLLMResultsToTaxAdviceData(llmResults: any) {
     const suggestedDeductions = llmResults.deductions?.map((deduction: any) => ({
       category: deduction.title || 'Okänt avdrag',
       currentAmount: 0, // LLM doesn't provide current amount
@@ -130,8 +145,6 @@ export class TaxService {
     })) || [];
 
     return {
-      id: Math.random().toString(36).substring(7),
-      declarationId,
       suggestedDeductions,
       totalPotentialSavings: llmResults.totalDeductions || suggestedDeductions.reduce((sum: number, d: any) => sum + d.potentialSavings, 0),
       riskAssessment: {
@@ -142,8 +155,7 @@ export class TaxService {
         'Spara alla kvitton och dokument',
         'Kontrollera Skatteverkets senaste regler',
         'Överväg att konsultera en skattespecialist för komplexa fall'
-      ],
-      generatedAt: new Date()
+      ]
     };
   }
 
@@ -483,30 +495,99 @@ export class TaxService {
     userId: string,
     data: CreatePaymentSessionInput
   ): Promise<PaymentSession> {
-    const payment: PaymentSession = {
-      id: Math.random().toString(36).substring(7),
-      userId,
+    const payment = new PaymentSessionModel({
+      userId: new mongoose.Types.ObjectId(userId),
       ...data,
       status: "pending",
-      createdAt: new Date(),
-    };
+    });
 
-    this.payments.push(payment);
-    return payment;
+    await payment.save();
+    return this.formatPaymentSession(payment);
   }
 
   static async completePayment(paymentId: string): Promise<PaymentSession> {
-    const payment = this.payments.find((p) => p.id === paymentId);
+    const payment = await PaymentSessionModel.findById(paymentId);
     if (!payment) {
       throw new Error("Payment not found");
     }
 
     payment.status = "completed";
     payment.completedAt = new Date();
-    return payment;
+    await payment.save();
+    
+    return this.formatPaymentSession(payment);
   }
 
   static async getPayment(id: string): Promise<PaymentSession | null> {
-    return this.payments.find((p) => p.id === id) || null;
+    const payment = await PaymentSessionModel.findById(id);
+    return payment ? this.formatPaymentSession(payment) : null;
+  }
+
+  // Helper formatting methods
+  private static formatDeclaration(doc: ITaxDeclaration): TaxDeclaration {
+    return {
+      id: (doc._id as any).toString(),
+      userId: doc.userId.toString(),
+      year: doc.year,
+      personalInfo: doc.personalInfo,
+      employment: doc.employment,
+      commute: doc.commute,
+      workEquipment: doc.workEquipment,
+      housing: doc.housing,
+      rotRut: doc.rotRut,
+      donations: doc.donations,
+      education: doc.education,
+      rental: doc.rental,
+      greenTech: doc.greenTech,
+      other: doc.other,
+      status: doc.status,
+      createdAt: doc.createdAt,
+      updatedAt: doc.updatedAt,
+    };
+  }
+
+  private static formatReceipt(doc: IReceipt): Receipt {
+    return {
+      id: (doc._id as any).toString(),
+      declarationId: doc.declarationId.toString(),
+      fileName: doc.fileName,
+      fileType: doc.fileType,
+      fileSize: doc.fileSize,
+      category: doc.category,
+      amount: doc.amount,
+      description: doc.description,
+      date: doc.date,
+      uploadedAt: doc.uploadedAt,
+      processedAt: doc.processedAt,
+      extractedData: doc.extractedData,
+    };
+  }
+
+  private static formatTaxAdvice(doc: ITaxAdvice): TaxAdvice {
+    return {
+      id: (doc._id as any).toString(),
+      declarationId: doc.declarationId.toString(),
+      suggestedDeductions: doc.suggestedDeductions.map(d => ({
+        ...d,
+        relatedReceipts: d.relatedReceipts.map(id => id.toString()),
+      })),
+      totalPotentialSavings: doc.totalPotentialSavings,
+      riskAssessment: doc.riskAssessment,
+      recommendations: doc.recommendations,
+      generatedAt: doc.generatedAt,
+    };
+  }
+
+  private static formatPaymentSession(doc: IPaymentSession): PaymentSession {
+    return {
+      id: (doc._id as any).toString(),
+      userId: doc.userId.toString(),
+      amount: doc.amount,
+      currency: doc.currency,
+      status: doc.status,
+      paymentMethod: doc.paymentMethod,
+      createdAt: doc.createdAt,
+      completedAt: doc.completedAt,
+    };
   }
 }

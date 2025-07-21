@@ -1,8 +1,7 @@
 import { z } from 'zod';
 
 export const createUserSchema = z.object({
-  email: z.string().email(),
-  name: z.string().min(1).max(100),
+  username: z.string().email('Username must be a valid email address').max(255),
 });
 
 export const getUserSchema = z.object({
@@ -11,8 +10,7 @@ export const getUserSchema = z.object({
 
 export const updateUserSchema = z.object({
   id: z.string(),
-  email: z.string().email().optional(),
-  name: z.string().min(1).max(100).optional(),
+  username: z.string().email('Username must be a valid email address').max(255).optional(),
 });
 
 export type CreateUserInput = z.infer<typeof createUserSchema>;

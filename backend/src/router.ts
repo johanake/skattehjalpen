@@ -1,12 +1,34 @@
-import { router, publicProcedure } from "./trpc.js";
+import { router, publicProcedure, protectedProcedure } from "./trpc.js";
 import { userController } from "./controllers/userController.js";
 import { taxController } from "./controllers/taxController.js";
 import { paymentRouter } from "./controllers/paymentController.js";
+import { AuthController } from "./controllers/authController.js";
+import { registerSchema, loginSchema } from "./validators/authValidators.js";
 import { z } from "zod";
 
 export const appRouter = router({
   // Health check
   health: publicProcedure.query(() => ({ status: "ok" })),
+
+  // Authentication endpoints
+  auth: router({
+    register: publicProcedure
+      .input(registerSchema)
+      .mutation(({ input }) => {
+        return AuthController.register(input);
+      }),
+    
+    login: publicProcedure
+      .input(loginSchema)
+      .mutation(({ input }) => {
+        return AuthController.login(input);
+      }),
+
+    me: protectedProcedure
+      .query(({ ctx }) => {
+        return AuthController.getCurrentUser(ctx.user!.id);
+      }),
+  }),
 
   // Legacy endpoints (for backward compatibility)
   hello: publicProcedure

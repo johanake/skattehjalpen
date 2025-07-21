@@ -56,6 +56,9 @@ coverage/
 .cache/
 .npm/
 
+# Docker
+docker-compose.override.yml
+
 # Backend specific (if different build output or logs for backend)
 # For example, if your backend output is in a 'backend-dist' folder:
 # backend-dist/

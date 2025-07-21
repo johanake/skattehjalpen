@@ -4,6 +4,7 @@ import { TaxWizard } from "./components/TaxWizard";
 import { UserAgreement } from "./components/UserAgreement";
 import { TaxAnalysisResult } from "./components/TaxAnalysisResult";
 import { StripeProvider } from "./components/StripeProvider";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
 
 function App() {
@@ -39,9 +40,11 @@ function App() {
         <Route
           path="/skatt/inkomstdeklaration/analys"
           element={
-            <Layout>
-              <TaxAnalysisResult />
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <TaxAnalysisResult />
+              </Layout>
+            </ProtectedRoute>
           }
         />
       </Routes>

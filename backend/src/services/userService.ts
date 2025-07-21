@@ -6,15 +6,13 @@ export class UserService {
     return [
       {
         id: '1',
-        email: 'john@example.com',
-        name: 'John Doe',
+        username: 'john@example.com',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: '2',
-        email: 'jane@example.com',
-        name: 'Jane Smith',
+        username: 'jane@example.com',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
