@@ -112,7 +112,7 @@ export class TaxService {
     // Check if advice already exists
     let advice = await TaxAdviceModel.findOne({ 
       declarationId: new mongoose.Types.ObjectId(declarationId) 
-    });
+    }).lean();
 
     if (advice) {
       return this.formatTaxAdvice(advice);
@@ -569,7 +569,8 @@ export class TaxService {
   static async getUserTaxAdviceHistory(userId: string): Promise<TaxAdvice[]> {
     const adviceList = await TaxAdviceModel
       .find({ userId: new mongoose.Types.ObjectId(userId) })
-      .sort({ generatedAt: -1 });
+      .sort({ generatedAt: -1 })
+      .lean();
     return adviceList.map(advice => this.formatTaxAdvice(advice));
   }
 
@@ -577,7 +578,7 @@ export class TaxService {
     const advice = await TaxAdviceModel.findOne({ 
       _id: new mongoose.Types.ObjectId(adviceId),
       userId: new mongoose.Types.ObjectId(userId)
-    });
+    }).lean();
     return advice ? this.formatTaxAdvice(advice) : null;
   }
 

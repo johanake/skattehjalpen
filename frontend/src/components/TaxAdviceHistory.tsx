@@ -207,13 +207,13 @@ export const TaxAdviceHistory: React.FC = () => {
                           key={index}
                           className="flex justify-between items-center p-3 bg-bg-secondary rounded-lg"
                         >
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-2">
-                              <h4 className="font-medium text-text-primary">
+                          <div className="flex-1 min-w-0 pr-4">
+                            <div className="flex items-center space-x-2 mb-1">
+                              <h4 className="font-medium text-text-primary truncate">
                                 {deduction.category || "Okänt avdrag"}
                               </h4>
                               <span
-                                className={`px-2 py-1 rounded-full text-xs font-medium border ${getConfidenceColor(
+                                className={`px-2 py-1 rounded-full text-xs font-medium border flex-shrink-0 ${getConfidenceColor(
                                   deduction.confidence
                                 )}`}
                               >
@@ -224,12 +224,16 @@ export const TaxAdviceHistory: React.FC = () => {
                                   : "Låg"}
                               </span>
                             </div>
-                            <p className="text-sm text-text-secondary mt-1 truncate">
+                            <p className="text-sm text-text-secondary break-words overflow-hidden" style={{
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical' as const
+                            }}>
                               {deduction.explanation ||
                                 "Ingen förklaring tillgänglig"}
                             </p>
                           </div>
-                          <div className="text-right ml-4">
+                          <div className="text-right flex-shrink-0">
                             <div className="text-lg font-bold text-accent">
                               {(deduction.potentialSavings || 0).toLocaleString(
                                 "sv-SE"
