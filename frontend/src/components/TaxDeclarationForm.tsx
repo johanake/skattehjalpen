@@ -176,7 +176,6 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
     },
   });
 
-
   const createDeclaration = trpc.tax.createDeclaration.useMutation({
     onSuccess: (data) => {
       onSuccess(data.id);
@@ -835,7 +834,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Haft tjänsteresor under året (deklarationspunkt 2.2)
+                Haft tjänsteresor under året
               </span>
             </label>
             {formData.businessTravel.hasBusinessTravel && (
@@ -965,8 +964,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Tillfälligt arbete &gt;50 km från hemorten (deklarationspunkt
-                2.3)
+                Tillfälligt arbete &gt;50 km från hemorten
               </span>
             </label>
             {formData.temporaryWork.hasTemporaryWork && (
@@ -1076,7 +1074,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Har arbetsrum hemma (deklarationspunkt 2.4)
+                Har arbetsrum hemma
               </span>
             </label>
             {formData.homeOffice.hasHomeOffice && (
@@ -1585,7 +1583,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Kapitalförluster (deklarationspunkt 8.2)
+                Kapitalförluster
               </span>
             </label>
             {formData.capitalTransactions.hasCapitalLosses && (
@@ -1668,7 +1666,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Ränteavdrag för investeringslån (deklarationspunkt 8.1)
+                Ränteavdrag för investeringslån
               </span>
             </label>
             {formData.capitalTransactions.hasInvestmentInterest && (
@@ -1730,7 +1728,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Privat pensionssparande (deklarationspunkt 3.1)
+                Privat pensionssparande
               </span>
             </label>
             {formData.pensionContributions.hasPensionContributions && (
@@ -1880,7 +1878,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Kostnader för arbetssökande (deklarationspunkt 2.4)
+                Kostnader för arbetssökande
               </span>
             </label>
             {formData.jobSearchCosts.hasJobSearchCosts && (

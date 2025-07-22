@@ -107,12 +107,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               required
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200"
               placeholder="Ange ditt lösenord"
-              minLength={6}
+              minLength={10}
             />
           </div>
           {mode === "register" && (
-            <p className="mt-1 text-xs text-gray-500">
-              Minst 6 tecken för säkerhet
+            <p className="mt-1 text-xs text-text-primary">
+              Minst 10 tecken för ett säkert lösenord
             </p>
           )}
         </div>
