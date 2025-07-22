@@ -25,7 +25,7 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
         },
       }
     );
-  }, [declarationId]);
+  }, [declarationId, generateAdvice]);
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("sv-SE", {
@@ -75,7 +75,9 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
             <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🎉</span>
             </div>
-            <h2 className="text-3xl font-bold text-primary mb-2">Fantastisk!</h2>
+            <h2 className="text-3xl font-bold text-primary mb-2">
+              Fantastisk!
+            </h2>
             <p className="text-lg text-text-secondary">
               Vi hittade möjliga besparingar för dig
             </p>
@@ -85,7 +87,9 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
             <div className="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">📋</span>
             </div>
-            <h2 className="text-3xl font-bold text-primary mb-2">Analys klar!</h2>
+            <h2 className="text-3xl font-bold text-primary mb-2">
+              Analys klar!
+            </h2>
             <p className="text-lg text-text-secondary">
               Vi har granskat din deklaration noggrant
             </p>
