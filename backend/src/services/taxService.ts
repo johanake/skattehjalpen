@@ -148,7 +148,7 @@ export class TaxService {
 
     return {
       suggestedDeductions,
-      totalPotentialSavings: (llmResults.totalDeductions ? llmResults.totalDeductions * 0.32 : 0) || suggestedDeductions.reduce((sum: number, d: any) => sum + d.potentialSavings, 0),
+      totalPotentialSavings: llmResults.totalDeductions || suggestedDeductions.reduce((sum: number, d: any) => sum + d.potentialSavings, 0),
       riskAssessment: {
         level: 'low' as const,
         factors: []
