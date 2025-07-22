@@ -2521,9 +2521,17 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       <button
         type="submit"
-        className="w-full bg-accent text-text-inverse py-3 px-6 rounded-lg hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+        disabled={createDeclaration.isPending}
+        className="w-full bg-accent text-text-inverse py-3 px-6 rounded-lg hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors flex items-center justify-center gap-2"
       >
-        Skapa skattedeklaration
+        {createDeclaration.isPending ? (
+          <>
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+            <span>Skapar din deklaration...</span>
+          </>
+        ) : (
+          "Skapa skattedeklaration"
+        )}
       </button>
 
       {createDeclaration.error && (
