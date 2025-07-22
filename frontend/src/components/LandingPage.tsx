@@ -141,62 +141,72 @@ export const LandingPage: React.FC = () => {
       <section className="py-20 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-white mb-4">
+            <h3 className="text-3xl font-bold text-text-inverse mb-4">
               Så här fungerar det
             </h3>
-            <p className="text-xl text-text-muted">Enkel process i fyra steg</p>
+            <p className="text-xl text-text-inverse">
+              Enkel process i fyra steg
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full text-white font-bold text-lg mb-4">
-                1
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
+                  1
+                </div>
+                <h4 className="text-xl font-semibold text-gray-800 mb-3">
+                  Fyll i deklaration
+                </h4>
+                <p className="text-text-secondary">
+                  Ange dina inkomster och nuvarande avdrag så analyserar vår AI
+                  automatiskt
+                </p>
               </div>
-              <h4 className="text-lg font-semibold text-white mb-2">
-                Fyll i deklaration
-              </h4>
-              <p className="text-text-muted text-sm">
-                Ange dina inkomster och nuvarande avdrag så analyserar vår AI
-                automatiskt
-              </p>
             </div>
 
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full text-white font-bold text-lg mb-4">
-                2
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
+                  2
+                </div>
+                <h4 className="text-xl font-semibold text-gray-800 mb-3">
+                  Förhandsvisning
+                </h4>
+                <p className="text-text-secondary">
+                  Vi ger dig en förhandsvisning på vad du kan spara, INNAN du
+                  går vidare till betalning
+                </p>
               </div>
-              <h4 className="text-lg font-semibold text-white mb-2">
-                Förhandsvisning
-              </h4>
-              <p className="text-text-muted text-sm">
-                Vi ger dig en förhandsvisning på vad du kan spara, INNAN du går
-                vidare till betalning
-              </p>
             </div>
 
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full text-white font-bold text-lg mb-4">
-                3
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
+                  3
+                </div>
+                <h4 className="text-xl font-semibold text-gray-800 mb-3">
+                  Betala för analysen
+                </h4>
+                <p className="text-text-secondary">
+                  Säker betalning för din personliga skatteanalys
+                </p>
               </div>
-              <h4 className="text-lg font-semibold text-white mb-2">
-                Betala för analysen
-              </h4>
-              <p className="text-text-muted text-sm">
-                Säker betalning för din personliga skatteanalys
-              </p>
             </div>
 
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-600 rounded-full text-white font-bold text-lg mb-4">
-                4
+            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
+                  4
+                </div>
+                <h4 className="text-xl font-semibold text-gray-800 mb-3">
+                  Få rådgivning
+                </h4>
+                <p className="text-text-secondary">
+                  Detaljerad rapport med avdragsförslag och
+                  optimeringsrekommendationer
+                </p>
               </div>
-              <h4 className="text-lg font-semibold text-white mb-2">
-                Få rådgivning
-              </h4>
-              <p className="text-text-muted text-sm">
-                Detaljerad rapport med avdragsförslag och
-                optimeringsrekommendationer
-              </p>
             </div>
           </div>
         </div>
@@ -222,8 +232,13 @@ export const LandingPage: React.FC = () => {
                 <h4 className="text-3xl font-bold text-gray-800 mb-3">
                   Skatteanalys
                 </h4>
-                <div className="text-5xl font-extrabold text-primary mb-2">
-                  199 kr
+                <div className="mb-2">
+                  <div className="text-2xl text-red-500 line-through mb-1">
+                    249 kr
+                  </div>
+                  <div className="text-5xl font-extrabold text-primary">
+                    199 kr
+                  </div>
                 </div>
                 <p className="text-text-primary mb-8 text-sm">
                   Engångsbetalning
@@ -251,13 +266,7 @@ export const LandingPage: React.FC = () => {
                     <span className="text-green-500 font-bold mr-3 text-lg">
                       ✓
                     </span>
-                    <span>Mappade svar till inkomstdeklarationen</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 font-bold mr-3 text-lg">
-                      ✓
-                    </span>
-                    <span>Prioriterad support</span>
+                    <span>Visar var du fyller i avdraget i deklarationen</span>
                   </li>
                 </ul>
               </div>
@@ -275,8 +284,47 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Om oss Section */}
+      <section className="py-20 bg-primary">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <div className="flex flex-col md:flex-row items-center gap-8">
+                <div className="flex-shrink-0">
+                  <div className="w-32 h-32 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
+                    <span className="text-4xl font-bold text-white">JH</span>
+                  </div>
+                </div>
+
+                <div className="flex-1 text-center md:text-left">
+                  <h4 className="text-2xl font-bold text-text-primary mb-4">
+                    Om oss
+                  </h4>
+                  <p className="text-text-secondary mb-4 leading-relaxed">
+                    Vi vill göra skattedeklarationer enklare för alla svenskar.
+                    Som många andra har vi märkt att det kan vara svårt att
+                    hitta alla avdrag man har rätt till.
+                  </p>
+                  <p className="text-text-secondary mb-4 leading-relaxed">
+                    Vår idé var att använda teknik för att hjälpa fler människor
+                    att få tillbaka mer pengar från skatten. Vi byggde
+                    Skattehjälpen för att göra kunskap om skatt och avdrag mer
+                    tillgängligt och prisvärt än traditionell skatterådgivning.
+                  </p>
+                  <p className="text-text-secondary leading-relaxed">
+                    Med hjälp av AI och automation kan vi erbjuda personlig
+                    skatteanalys till en låg kostnad, så att alla ska kunna dra
+                    nytta av de avdrag de har rätt till.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-primary text-white py-12">
+      <footer className="bg-bg-secondary text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -296,58 +344,36 @@ export const LandingPage: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h5 className="text-lg font-semibold">Skattehjälpen</h5>
+                <h5 className="text-lg text-text-primary font-semibold">
+                  Skattehjälpen
+                </h5>
               </div>
-              <p className="text-text-muted">
+              <p className="text-text-secondary">
                 AI-driven skatteanalys för svenska skattebetalare
               </p>
             </div>
 
             <div>
-              <h6 className="font-semibold mb-4 text-text-inverse">Tjänster</h6>
-              <ul className="space-y-2 text-text-muted">
+              <h6 className="font-semibold mb-4 text-text-primary">Tjänster</h6>
+              <ul className="space-y-2 text-text-secondary">
                 <li>
                   <a
                     href="#"
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-text-secondary transition-colors"
                   >
-                    Skattedeklaration
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-green-400 transition-colors"
-                  >
-                    AI-baserad analys
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-green-400 transition-colors"
-                  >
-                    Avdragsoptimering
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-green-400 transition-colors"
-                  >
-                    Riskbedömning
+                    Analys av inkomstdeklaration
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h6 className="font-semibold mb-4 text-text-inverse">Support</h6>
-              <ul className="space-y-2 text-text-muted">
+              <h6 className="font-semibold mb-4 text-text-primary">Support</h6>
+              <ul className="space-y-2 text-text-secondary">
                 <li>
                   <a
                     href="#"
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-text-primary transition-colors"
                   >
                     Hjälpcenter
                   </a>
@@ -355,7 +381,7 @@ export const LandingPage: React.FC = () => {
                 <li>
                   <a
                     href="#"
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-text-primary transition-colors"
                   >
                     Vanliga frågor
                   </a>
@@ -363,29 +389,21 @@ export const LandingPage: React.FC = () => {
                 <li>
                   <a
                     href="#"
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-text-primary transition-colors"
                   >
                     Kontakt
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-green-400 transition-colors"
-                  >
-                    Status
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h6 className="font-semibold mb-4 text-text-inverse">Företag</h6>
-              <ul className="space-y-2 text-text-muted">
+              <h6 className="font-semibold mb-4 text-text-primary">Företag</h6>
+              <ul className="space-y-2 text-text-secondary">
                 <li>
                   <a
                     href="#"
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-text-primary transition-colors"
                   >
                     Om oss
                   </a>
@@ -393,15 +411,7 @@ export const LandingPage: React.FC = () => {
                 <li>
                   <a
                     href="#"
-                    className="hover:text-green-400 transition-colors"
-                  >
-                    Karriär
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-text-primary transition-colors"
                   >
                     Integritetspolicy
                   </a>
@@ -409,7 +419,7 @@ export const LandingPage: React.FC = () => {
                 <li>
                   <button
                     onClick={handleShowUserAgreement}
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-text-primary transition-colors"
                   >
                     Användarvillkor
                   </button>
@@ -418,7 +428,7 @@ export const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-text-muted">
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-text-primary">
             <p>&copy; 2024 Skattehjälpen. Alla rättigheter förbehållna.</p>
           </div>
         </div>

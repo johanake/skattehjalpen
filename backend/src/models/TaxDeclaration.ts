@@ -5,10 +5,7 @@ export interface ITaxDeclaration extends Document {
   year: number;
   personalInfo: {
     name: string;
-    personalNumber: string;
     maritalStatus: 'single' | 'married' | 'cohabiting' | 'divorced' | 'widowed';
-    childrenCount?: string;
-    municipality?: string;
     livedAbroad?: boolean;
   };
   employment: {
@@ -104,14 +101,11 @@ const taxDeclarationSchema = new Schema<ITaxDeclaration>(
     },
     personalInfo: {
       name: { type: String, required: true },
-      personalNumber: { type: String, required: true },
       maritalStatus: {
         type: String,
         enum: ['single', 'married', 'cohabiting', 'divorced', 'widowed'],
         required: true,
       },
-      childrenCount: String,
-      municipality: String,
       livedAbroad: Boolean,
     },
     employment: {

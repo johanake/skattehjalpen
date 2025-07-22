@@ -30,7 +30,8 @@
       "Bash(curl:*)",
       "Bash(GEMINI_API_KEY=\"test-key\" npm run dev)",
       "Bash(echo:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": []
   }

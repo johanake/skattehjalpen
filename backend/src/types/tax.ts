@@ -4,10 +4,7 @@ export interface TaxDeclaration {
   year: number;
   personalInfo: {
     name: string;
-    personalNumber: string;
     maritalStatus: 'single' | 'married' | 'cohabiting' | 'divorced' | 'widowed';
-    childrenCount?: string;
-    municipality?: string;
     livedAbroad?: boolean;
   };
   employment: {

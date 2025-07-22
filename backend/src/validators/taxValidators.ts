@@ -4,10 +4,7 @@ export const createTaxDeclarationSchema = z.object({
   year: z.number().min(2020).max(new Date().getFullYear()),
   personalInfo: z.object({
     name: z.string().min(1).max(100),
-    personalNumber: z.string().min(10).max(15),
     maritalStatus: z.enum(['single', 'married', 'cohabiting', 'divorced', 'widowed']),
-    childrenCount: z.string().optional(),
-    municipality: z.string().optional(),
     livedAbroad: z.boolean().optional(),
   }),
   employment: z.object({
