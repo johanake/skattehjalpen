@@ -39,7 +39,7 @@ export class LLMService {
         "/skatteverket_summary.md", // Absolute root path
         join(__dirname, "..", "..", "skatteverket_summary.md"), // Relative to built file
       ];
-      
+
       for (const path of possiblePaths) {
         try {
           skatteverketContext = readFileSync(path, "utf-8");
@@ -49,9 +49,11 @@ export class LLMService {
           // Continue to next path
         }
       }
-      
+
       if (!skatteverketContext) {
-        console.warn("Could not find skatteverket_summary.md in any expected location");
+        console.warn(
+          "Could not find skatteverket_summary.md in any expected location"
+        );
       }
     } catch (error) {
       console.warn(
@@ -79,6 +81,7 @@ export class LLMService {
                   motivation: { type: SchemaType.STRING },
                   calculation: { type: SchemaType.STRING },
                   where: { type: SchemaType.STRING },
+                  potentialSaving: { type: SchemaType.STRING },
                 },
                 required: [
                   "title",
@@ -86,6 +89,7 @@ export class LLMService {
                   "motivation",
                   "calculation",
                   "where",
+                  "potentialSaving",
                 ],
               },
             },
@@ -107,8 +111,8 @@ export class LLMService {
       "Skatteverket dom ska göra avdragen. Var tydlig men kort i dina svar. Ditt mål är att hitta så många avdrag som möjligt " +
       "till användaren, men endast de som är lagligt korrekta enligt Skatteverkets regler ovan. " +
       "Returnera ditt svar som ett JSON-objekt med en 'deductions' array som innehåller DeductionEntry objekt. " +
-      "Varje DeductionEntry ska ha: title (string), amount (string), motivation (string), calculation (string), where (string). " +
-      "Ett exempel på motivation kan vara: Givet att du har anlitat en hantverkare för 30000kr får du göra ett avdrag på 15000kr" +
+      "Varje DeductionEntry ska ha: title (string), amount (string), potentialSaving (string), motivation (string), calculation (string), where (string). " +
+      "Ett exempel på motivation kan vara: Du har ett bolån och betalt 100'000 kronor. Amount bör då vara 100'000kr och potentialSaving bör vara 30'000 kronor då avdraget gäller på 30% av beloppen man betalt i ränta." +
       "Här är ett formulär användaren har svarat på, i JSON-format som du ska analysera: " +
       taxDeclarationJson;
 
@@ -144,14 +148,15 @@ export class LLMService {
   }
 }
 
-interface DeductionResult {
+export interface DeductionResult {
   deductions: DeductionEntry[];
   totalDeductions: number;
 }
 
-interface DeductionEntry {
+export interface DeductionEntry {
   title: string;
   amount: string;
+  potentialSaving: string;
   motivation: string;
   calculation: string;
   where: string;

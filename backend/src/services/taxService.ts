@@ -1,8 +1,17 @@
-import mongoose from 'mongoose';
-import { TaxDeclaration as TaxDeclarationModel, ITaxDeclaration } from '../models/TaxDeclaration.js';
-import { Receipt as ReceiptModel, IReceipt } from '../models/Receipt.js';
-import { TaxAdvice as TaxAdviceModel, ITaxAdvice } from '../models/TaxAdvice.js';
-import { PaymentSession as PaymentSessionModel, IPaymentSession } from '../models/PaymentSession.js';
+import mongoose from "mongoose";
+import {
+  TaxDeclaration as TaxDeclarationModel,
+  ITaxDeclaration,
+} from "../models/TaxDeclaration.js";
+import { Receipt as ReceiptModel, IReceipt } from "../models/Receipt.js";
+import {
+  TaxAdvice as TaxAdviceModel,
+  ITaxAdvice,
+} from "../models/TaxAdvice.js";
+import {
+  PaymentSession as PaymentSessionModel,
+  IPaymentSession,
+} from "../models/PaymentSession.js";
 import type {
   TaxDeclaration,
   Receipt,
@@ -13,7 +22,7 @@ import type {
   CreateTaxDeclarationInput,
   CreatePaymentSessionInput,
 } from "../validators/taxValidators.js";
-import { LLMService } from "./llmService.js";
+import { DeductionResult, LLMService } from "./llmService.js";
 
 export class TaxService {
   // Tax Declaration methods
@@ -40,7 +49,7 @@ export class TaxService {
     );
 
     console.log("LLM analysis completed:", llmAdvice);
-    
+
     // Create and store tax advice
     const advice = new TaxAdviceModel({
       declarationId: declaration._id,
@@ -64,10 +73,10 @@ export class TaxService {
   }
 
   static async getUserDeclarations(userId: string): Promise<TaxDeclaration[]> {
-    const declarations = await TaxDeclarationModel
-      .find({ userId: new mongoose.Types.ObjectId(userId) })
-      .sort({ createdAt: -1 });
-    return declarations.map(d => this.formatDeclaration(d));
+    const declarations = await TaxDeclarationModel.find({
+      userId: new mongoose.Types.ObjectId(userId),
+    }).sort({ createdAt: -1 });
+    return declarations.map((d) => this.formatDeclaration(d));
   }
 
   // Receipt methods
@@ -94,14 +103,17 @@ export class TaxService {
   }
 
   static async getReceipts(declarationId: string): Promise<Receipt[]> {
-    const receipts = await ReceiptModel
-      .find({ declarationId: new mongoose.Types.ObjectId(declarationId) })
-      .sort({ uploadedAt: -1 });
-    return receipts.map(r => this.formatReceipt(r));
+    const receipts = await ReceiptModel.find({
+      declarationId: new mongoose.Types.ObjectId(declarationId),
+    }).sort({ uploadedAt: -1 });
+    return receipts.map((r) => this.formatReceipt(r));
   }
 
   // Tax Advice methods
-  static async generateAdvice(declarationId: string, userId?: string | null): Promise<TaxAdvice> {
+  static async generateAdvice(
+    declarationId: string,
+    userId?: string | null
+  ): Promise<TaxAdvice> {
     const declaration = await this.getTaxDeclaration(declarationId);
     const receipts = await this.getReceipts(declarationId);
 
@@ -110,8 +122,8 @@ export class TaxService {
     }
 
     // Check if advice already exists
-    let existingAdvice = await TaxAdviceModel.findOne({ 
-      declarationId: new mongoose.Types.ObjectId(declarationId) 
+    let existingAdvice = await TaxAdviceModel.findOne({
+      declarationId: new mongoose.Types.ObjectId(declarationId),
     }).lean();
 
     if (existingAdvice) {
@@ -120,10 +132,14 @@ export class TaxService {
 
     // Generate new advice
     const adviceData = this.calculateTaxAdvice(declaration, receipts);
-    
+
     const advice = new TaxAdviceModel({
       declarationId: new mongoose.Types.ObjectId(declarationId),
-      userId: userId ? new mongoose.Types.ObjectId(userId) : (declaration.userId ? new mongoose.Types.ObjectId(declaration.userId) : null),
+      userId: userId
+        ? new mongoose.Types.ObjectId(userId)
+        : declaration.userId
+        ? new mongoose.Types.ObjectId(declaration.userId)
+        : null,
       suggestedDeductions: adviceData.suggestedDeductions,
       totalPotentialSavings: adviceData.totalPotentialSavings,
       riskAssessment: adviceData.riskAssessment,
@@ -134,30 +150,42 @@ export class TaxService {
     return this.formatTaxAdvice(savedAdvice);
   }
 
-  private static convertLLMResultsToTaxAdviceData(llmResults: any) {
-    const suggestedDeductions = llmResults.deductions?.map((deduction: any) => ({
-      category: deduction.title || 'Okänt avdrag',
-      currentAmount: 0, // LLM doesn't provide current amount
-      suggestedAmount: parseFloat(deduction.amount?.replace(/[^0-9.-]+/g, '') || '0'),
-      potentialSavings: parseFloat(deduction.amount?.replace(/[^0-9.-]+/g, '') || '0') * 0.32, // Estimate 32% tax rate
-      confidence: 'medium' as const, // Default confidence from LLM
-      explanation: deduction.motivation || deduction.calculation || 'Ingen förklaring tillgänglig',
-      requiredDocuments: [deduction.where || 'Se Skatteverkets anvisningar'],
-      relatedReceipts: []
-    })) || [];
+  private static convertLLMResultsToTaxAdviceData(llmResults: DeductionResult) {
+    const suggestedDeductions =
+      llmResults.deductions?.map((deduction: any) => ({
+        category: deduction.title || "Okänt avdrag",
+        currentAmount: 0, // LLM doesn't provide current amount
+        suggestedAmount: parseFloat(
+          deduction.amount?.replace(/[^0-9.-]+/g, "") || "0"
+        ),
+        potentialSavings:
+          parseFloat(deduction.amount?.replace(/[^0-9.-]+/g, "") || "0") * 0.32, // Estimate 32% tax rate
+        confidence: "medium" as const, // Default confidence from LLM
+        explanation:
+          deduction.motivation ||
+          deduction.calculation ||
+          "Ingen förklaring tillgänglig",
+        requiredDocuments: [deduction.where || "Se Skatteverkets anvisningar"],
+        relatedReceipts: [],
+      })) || [];
 
     return {
       suggestedDeductions,
-      totalPotentialSavings: llmResults.totalDeductions || suggestedDeductions.reduce((sum: number, d: any) => sum + d.potentialSavings, 0),
+      totalPotentialSavings:
+        llmResults.totalDeductions ||
+        suggestedDeductions.reduce(
+          (sum: number, d: any) => sum + d.potentialSavings,
+          0
+        ),
       riskAssessment: {
-        level: 'low' as const,
-        factors: []
+        level: "low" as const,
+        factors: [],
       },
       recommendations: [
-        'Spara alla kvitton och dokument',
-        'Kontrollera Skatteverkets senaste regler',
-        'Överväg att konsultera en skattespecialist för komplexa fall'
-      ]
+        "Spara alla kvitton och dokument",
+        "Kontrollera Skatteverkets senaste regler",
+        "Överväg att konsultera en skattespecialist för komplexa fall",
+      ],
     };
   }
 
@@ -517,7 +545,7 @@ export class TaxService {
     payment.status = "completed";
     payment.completedAt = new Date();
     await payment.save();
-    
+
     return this.formatPaymentSession(payment);
   }
 
@@ -567,17 +595,21 @@ export class TaxService {
   }
 
   static async getUserTaxAdviceHistory(userId: string): Promise<TaxAdvice[]> {
-    const adviceList = await TaxAdviceModel
-      .find({ userId: new mongoose.Types.ObjectId(userId) })
+    const adviceList = await TaxAdviceModel.find({
+      userId: new mongoose.Types.ObjectId(userId),
+    })
       .sort({ generatedAt: -1 })
       .lean();
-    return adviceList.map(advice => this.formatTaxAdvice(advice));
+    return adviceList.map((advice) => this.formatTaxAdvice(advice));
   }
 
-  static async getTaxAdviceById(adviceId: string, userId: string): Promise<TaxAdvice | null> {
-    const advice = await TaxAdviceModel.findOne({ 
+  static async getTaxAdviceById(
+    adviceId: string,
+    userId: string
+  ): Promise<TaxAdvice | null> {
+    const advice = await TaxAdviceModel.findOne({
       _id: new mongoose.Types.ObjectId(adviceId),
-      userId: new mongoose.Types.ObjectId(userId)
+      userId: new mongoose.Types.ObjectId(userId),
     }).lean();
     return advice ? this.formatTaxAdvice(advice) : null;
   }
@@ -587,9 +619,9 @@ export class TaxService {
       id: (doc._id as any).toString(),
       declarationId: doc.declarationId.toString(),
       userId: doc.userId ? doc.userId.toString() : null,
-      suggestedDeductions: doc.suggestedDeductions.map(d => ({
+      suggestedDeductions: doc.suggestedDeductions.map((d) => ({
         ...d,
-        relatedReceipts: d.relatedReceipts.map(id => id.toString()),
+        relatedReceipts: d.relatedReceipts.map((id) => id.toString()),
       })),
       totalPotentialSavings: doc.totalPotentialSavings,
       riskAssessment: doc.riskAssessment,
