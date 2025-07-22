@@ -285,7 +285,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Om oss Section */}
-      <section className="py-20 bg-primary">
+      <section id="about" className="py-20 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl p-8 shadow-lg">
