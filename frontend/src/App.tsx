@@ -6,11 +6,13 @@ import { TaxAnalysisResult } from "./components/TaxAnalysisResult";
 import { TaxAdviceHistory } from "./components/TaxAdviceHistory";
 import { StripeProvider } from "./components/StripeProvider";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ScrollToTop } from "./components/ScrollToTop";
 import Layout from "./components/Layout";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route
           path="/"

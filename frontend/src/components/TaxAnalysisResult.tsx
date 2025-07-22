@@ -264,7 +264,7 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                 {(deduction.requiredDocuments?.length || 0) > 0 && (
                   <div>
                     <h4 className="font-medium text-text-primary mb-2">
-                      ✅ Krävda dokument
+                      ✅ Sektion i din inkomstdeklaration
                     </h4>
                     <ul className="text-text-secondary space-y-1">
                       {deduction.requiredDocuments?.map((doc, docIndex) => (

@@ -171,7 +171,7 @@ export const LandingPage: React.FC = () => {
                   2
                 </div>
                 <h4 className="text-xl font-semibold text-gray-800 mb-3">
-                  Förhandsvisning
+                  Se resultatet
                 </h4>
                 <p className="text-text-secondary">
                   Vi ger dig en förhandsvisning på vad du kan spara, INNAN du

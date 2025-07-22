@@ -60,42 +60,81 @@ export const TaxWizard: React.FC = () => {
     <div className="min-h-screen bg-bg-white">
       {/* Progress Steps */}
       <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="flex items-center justify-between mb-8">
-          {steps.map((step, index) => (
-            <div key={step.id} className="flex items-center">
+        <div className="mb-8">
+          {/* Desktop Timeline */}
+          <div className="hidden lg:flex items-center justify-between">
+            {steps.map((step, index) => (
+              <div key={step.id} className="flex items-center">
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
+                    step.completed
+                      ? "bg-accent text-white"
+                      : currentStep === step.id
+                      ? "bg-accent text-white"
+                      : "bg-bg-secondary text-text-secondary border border-border-default"
+                  }`}
+                >
+                  {step.completed ? "✓" : index + 1}
+                </div>
+                <div className="ml-3">
+                  <p
+                    className={`text-sm font-medium ${
+                      step.completed
+                        ? "text-accent"
+                        : currentStep === step.id
+                        ? "text-accent"
+                        : "text-text-secondary"
+                    }`}
+                  >
+                    {step.name}
+                  </p>
+                </div>
+                {index < steps.length - 1 && (
+                  <div
+                    className={`w-12 h-0.5 ml-4 ${
+                      step.completed ? "bg-accent" : "bg-border-default"
+                    }`}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Timeline */}
+          <div className="lg:hidden">
+            <div className="flex items-center justify-center mb-4">
+              <div className="flex space-x-2">
+                {steps.map((step, index) => (
+                  <div
+                    key={step.id}
+                    className={`w-3 h-3 rounded-full ${
+                      step.completed
+                        ? "bg-accent"
+                        : currentStep === step.id
+                        ? "bg-accent"
+                        : "bg-border-default"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="text-center">
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
-                  step.completed
+                className={`w-12 h-12 mx-auto rounded-full flex items-center justify-center text-lg font-medium mb-3 ${
+                  steps.find(s => s.id === currentStep)?.completed
                     ? "bg-accent text-white"
-                    : currentStep === step.id
+                    : currentStep
                     ? "bg-accent text-white"
                     : "bg-bg-secondary text-text-secondary border border-border-default"
                 }`}
               >
-                {step.completed ? "✓" : index + 1}
+                {steps.find(s => s.id === currentStep)?.completed ? "✓" : steps.findIndex(s => s.id === currentStep) + 1}
               </div>
-              <div className="ml-3">
-                <p
-                  className={`text-sm font-medium ${
-                    step.completed
-                      ? "text-accent"
-                      : currentStep === step.id
-                      ? "text-accent"
-                      : "text-text-secondary"
-                  }`}
-                >
-                  {step.name}
-                </p>
-              </div>
-              {index < steps.length - 1 && (
-                <div
-                  className={`w-12 h-0.5 ml-4 ${
-                    step.completed ? "bg-accent" : "bg-border-default"
-                  }`}
-                />
-              )}
+              <p className="text-lg font-medium text-accent">
+                {steps.find(s => s.id === currentStep)?.name}
+              </p>
             </div>
-          ))}
+          </div>
         </div>
 
         {/* Navigation */}

@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fix for sticky header covering anchor links */
+section[id] {
+  scroll-margin-top: 120px;
+}
