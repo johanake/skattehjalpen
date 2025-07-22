@@ -44,7 +44,7 @@ export class TaxService {
     // Create and store tax advice
     const advice = new TaxAdviceModel({
       declarationId: declaration._id,
-      userId: new mongoose.Types.ObjectId(userId),
+      userId: userId ? new mongoose.Types.ObjectId(userId) : null,
       ...this.convertLLMResultsToTaxAdviceData(llmAdvice),
     });
 
@@ -110,18 +110,18 @@ export class TaxService {
     }
 
     // Check if advice already exists
-    let advice = await TaxAdviceModel.findOne({ 
+    let existingAdvice = await TaxAdviceModel.findOne({ 
       declarationId: new mongoose.Types.ObjectId(declarationId) 
     }).lean();
 
-    if (advice) {
-      return this.formatTaxAdvice(advice);
+    if (existingAdvice) {
+      return this.formatTaxAdvice(existingAdvice);
     }
 
     // Generate new advice
     const adviceData = this.calculateTaxAdvice(declaration, receipts);
     
-    advice = new TaxAdviceModel({
+    const advice = new TaxAdviceModel({
       declarationId: new mongoose.Types.ObjectId(declarationId),
       userId: userId ? new mongoose.Types.ObjectId(userId) : (declaration.userId ? new mongoose.Types.ObjectId(declaration.userId) : null),
       suggestedDeductions: adviceData.suggestedDeductions,
@@ -130,8 +130,8 @@ export class TaxService {
       recommendations: adviceData.recommendations,
     });
 
-    await advice.save();
-    return this.formatTaxAdvice(advice);
+    const savedAdvice = await advice.save();
+    return this.formatTaxAdvice(savedAdvice);
   }
 
   private static convertLLMResultsToTaxAdviceData(llmResults: any) {
