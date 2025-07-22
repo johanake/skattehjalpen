@@ -1,14 +1,24 @@
 import { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { trpc } from '../utils/trpc';
+import { useAuth } from '../contexts/AuthContext';
 
 interface PaymentFlowProps {
-  onPaymentSuccess: () => void;
+  declarationId: string;
+  onSuccess: () => void;
+  requireRegistration?: boolean;
 }
 
-export const PaymentFlow: React.FC<PaymentFlowProps> = ({ onPaymentSuccess }) => {
+export const PaymentFlow: React.FC<PaymentFlowProps> = ({ 
+  declarationId, 
+  onSuccess, 
+  requireRegistration = false 
+}) => {
+  const { user, login, register } = useAuth();
   const [processing, setProcessing] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [registrationData, setRegistrationData] = useState({ email: '', password: '' });
+  const [showMockPayment, setShowMockPayment] = useState(false);
   
   const stripe = useStripe();
   const elements = useElements();
@@ -29,13 +39,55 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({ onPaymentSuccess }) =>
     ],
   };
 
-  const handlePayment = async () => {
+  const handleMockPayment = async () => {
+    setProcessing(true);
+    setPaymentError(null);
+    
+    try {
+      // Handle registration if needed
+      if (requireRegistration && !user) {
+        if (!registrationData.email || !registrationData.password) {
+          setPaymentError('Vänligen fyll i email och lösenord för att registrera dig.');
+          setProcessing(false);
+          return;
+        }
+        
+        await register(registrationData.email, registrationData.password);
+        
+      }
+      
+      // Mock payment delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Mock successful payment
+      onSuccess();
+    } catch (error: any) {
+      console.error('Mock payment/registration failed:', error);
+      setPaymentError(error.message || 'Registrering eller betalning misslyckades. Försök igen.');
+    } finally {
+      setProcessing(false);
+    }
+  };
+
+  const handleRealPayment = async () => {
     if (!stripe || !elements) return;
     
     setProcessing(true);
     setPaymentError(null);
     
     try {
+      // Handle registration first if needed
+      if (requireRegistration && !user) {
+        if (!registrationData.email || !registrationData.password) {
+          setPaymentError('Vänligen fyll i email och lösenord för att registrera dig.');
+          setProcessing(false);
+          return;
+        }
+        
+        await register(registrationData.email, registrationData.password);
+        
+      }
+      
       // Create payment intent
       const { clientSecret } = await createPaymentIntent.mutateAsync({
         amount: plan.price,
@@ -62,11 +114,11 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({ onPaymentSuccess }) =>
       if (error) {
         setPaymentError(error.message || 'Payment failed');
       } else {
-        onPaymentSuccess();
+        onSuccess();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Payment failed:', error);
-      setPaymentError('Payment failed. Please try again.');
+      setPaymentError(error.message || 'Betalning eller registrering misslyckades. Försök igen.');
     } finally {
       setProcessing(false);
     }
@@ -86,7 +138,9 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({ onPaymentSuccess }) =>
 
   return (
     <div className="bg-bg-white p-6 rounded-lg shadow-lg border border-border-light">
-      <h3 className="text-lg font-semibold mb-4 text-text-primary">Betalning</h3>
+      <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        {requireRegistration && !user ? 'Registrering & Betalning' : 'Betalning'}
+      </h3>
       
       {/* Plan Summary */}
       <div className="border border-accent rounded-lg p-4 mb-6 bg-accent-light">
@@ -106,23 +160,87 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({ onPaymentSuccess }) =>
         </div>
       </div>
 
-      {/* Payment Form */}
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-text-secondary mb-2">
-            Kortinformation
-          </label>
-          <div className="bg-bg-white p-3 rounded-lg border border-border-default">
-            <CardElement options={cardElementOptions} />
+      {/* Registration Form (if needed) */}
+      {requireRegistration && !user && (
+        <div className="bg-primary-light p-4 rounded-lg mb-6">
+          <h4 className="font-medium text-primary mb-3">Skapa konto för att fortsätta</h4>
+          <div className="space-y-3">
+            <div>
+              <label className="block text-sm font-medium text-text-secondary mb-1">
+                E-postadress
+              </label>
+              <input
+                type="email"
+                value={registrationData.email}
+                onChange={(e) => setRegistrationData(prev => ({ ...prev, email: e.target.value }))}
+                className="w-full p-3 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                placeholder="din@email.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-text-secondary mb-1">
+                Lösenord
+              </label>
+              <input
+                type="password"
+                value={registrationData.password}
+                onChange={(e) => setRegistrationData(prev => ({ ...prev, password: e.target.value }))}
+                className="w-full p-3 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                placeholder="Välj ett säkert lösenord"
+              />
+            </div>
           </div>
         </div>
+      )}
+
+      {/* Payment Method Selection */}
+      <div className="mb-6">
+        <h4 className="font-medium text-primary mb-3">Välj betalningsmetod</h4>
+        <div className="space-y-2">
+          <button
+            onClick={() => setShowMockPayment(true)}
+            className={`w-full p-4 border rounded-lg text-left transition-colors ${
+              showMockPayment ? 'border-accent bg-accent-light' : 'border-border-default hover:border-accent'
+            }`}
+          >
+            <div className="font-medium">Mock Payment (För utveckling)</div>
+            <div className="text-sm text-text-muted">Simulerad betalning utan riktigt kort</div>
+          </button>
+          <button
+            onClick={() => setShowMockPayment(false)}
+            className={`w-full p-4 border rounded-lg text-left transition-colors ${
+              !showMockPayment ? 'border-accent bg-accent-light' : 'border-border-default hover:border-accent'
+            }`}
+          >
+            <div className="font-medium">Stripe Payment</div>
+            <div className="text-sm text-text-muted">Riktig betalning med kreditkort</div>
+          </button>
+        </div>
+      </div>
+
+      {/* Payment Form */}
+      <div className="space-y-4">
+        {!showMockPayment && (
+          <div>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Kortinformation
+            </label>
+            <div className="bg-bg-white p-3 rounded-lg border border-border-default">
+              <CardElement options={cardElementOptions} />
+            </div>
+          </div>
+        )}
 
         <button
-          onClick={handlePayment}
-          disabled={processing || !stripe || !elements}
+          onClick={showMockPayment ? handleMockPayment : handleRealPayment}
+          disabled={processing || (!showMockPayment && (!stripe || !elements))}
           className="w-full bg-accent text-white py-3 px-6 rounded-lg hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
         >
-          {processing ? 'Bearbetar betalning...' : `Betala ${plan.price} kr`}
+          {processing ? (
+            requireRegistration && !user ? 'Registrerar och bearbetar...' : 'Bearbetar betalning...'
+          ) : (
+            showMockPayment ? `Mock Betala ${plan.price} kr` : `Betala ${plan.price} kr`
+          )}
         </button>
 
         {paymentError && (

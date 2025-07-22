@@ -28,13 +28,17 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
 }) => {
   const { id: adviceId } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  
+
   // Fetch advice by ID if no prop advice is provided and we have an ID
-  const { data: fetchedAdvice, isLoading, error } = trpc.tax.getTaxAdviceById.useQuery(
+  const {
+    data: fetchedAdvice,
+    isLoading,
+    error,
+  } = trpc.tax.getTaxAdviceById.useQuery(
     { id: adviceId! },
-    { 
+    {
       enabled: !propAdvice && !!adviceId,
-      retry: 1
+      retry: 1,
     }
   );
 
@@ -67,7 +71,9 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
     return (
       <div className="max-w-6xl mx-auto p-6 bg-bg-white">
         <div className="bg-danger-light border border-danger rounded-lg p-4">
-          <p className="text-danger">Error loading tax advice: {error.message}</p>
+          <p className="text-danger">
+            Error loading tax advice: {error.message}
+          </p>
         </div>
       </div>
     );
@@ -123,7 +129,7 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
       {adviceId && (
         <nav className="mb-6">
           <button
-            onClick={() => navigate('/mina-analyser')}
+            onClick={() => navigate("/mina-analyser")}
             className="inline-flex items-center text-primary hover:text-primary-600 transition-colors"
           >
             <svg
@@ -143,27 +149,28 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
           </button>
         </nav>
       )}
-      
+
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-text-primary mb-2">
           📊 Analys av skatteavdragsmöjligheter
         </h1>
         <p className="text-text-secondary">
-          {adviceId 
-            ? `Analys från ${new Date(advice!.generatedAt).toLocaleDateString('sv-SE')}`
-            : `Baserat på din inkomstdeklaration för ${currentYear}`
-          }
+          {adviceId
+            ? `Analys från ${new Date(advice!.generatedAt).toLocaleDateString(
+                "sv-SE"
+              )}`
+            : `Baserat på din inkomstdeklaration för ${currentYear}`}
         </p>
       </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-accent-light border border-accent rounded-lg p-6 text-center">
-          <div className="text-3xl font-bold text-accent mb-2">
+          <div className="text-3xl font-bold text-text-inverse mb-2">
             {(advice.totalPotentialSavings || 0).toLocaleString("sv-SE")} kr
           </div>
-          <div className="text-text-primary">Potentiell skattebesparning</div>
+          <div className="text-text-inverse">Potentiell skattebesparning</div>
         </div>
 
         <div className="bg-primary-light border border-primary rounded-lg p-6 text-center">
@@ -196,15 +203,18 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="text-lg font-semibold text-text-primary">
-                      {deduction.category || 'Okänt avdrag'}
+                      {deduction.category || "Okänt avdrag"}
                     </h3>
                     <p className="text-text-secondary mt-1">
-                      {deduction.explanation || 'Ingen förklaring tillgänglig'}
+                      {deduction.explanation || "Ingen förklaring tillgänglig"}
                     </p>
                   </div>
                   <div className="text-right">
                     <div className="text-xl font-bold text-accent">
-                      {(deduction.potentialSavings || 0).toLocaleString("sv-SE")} kr
+                      {(deduction.potentialSavings || 0).toLocaleString(
+                        "sv-SE"
+                      )}{" "}
+                      kr
                     </div>
                     <div className="text-sm text-text-muted">
                       Potentiell besparing
@@ -225,7 +235,8 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                       💰 Nuvarande avdrag
                     </h4>
                     <p className="text-lg font-semibold text-text-secondary">
-                      {(deduction.currentAmount || 0).toLocaleString("sv-SE")} kr
+                      {(deduction.currentAmount || 0).toLocaleString("sv-SE")}{" "}
+                      kr
                     </p>
                   </div>
                   <div>
@@ -233,7 +244,8 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                       📈 Föreslaget avdrag
                     </h4>
                     <p className="text-lg font-semibold text-accent">
-                      {(deduction.suggestedAmount || 0).toLocaleString("sv-SE")} kr
+                      {(deduction.suggestedAmount || 0).toLocaleString("sv-SE")}{" "}
+                      kr
                     </p>
                   </div>
                   <div>
@@ -241,7 +253,10 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                       💸 Potentiell besparing
                     </h4>
                     <p className="text-lg font-semibold text-accent">
-                      {(deduction.potentialSavings || 0).toLocaleString("sv-SE")} kr
+                      {(deduction.potentialSavings || 0).toLocaleString(
+                        "sv-SE"
+                      )}{" "}
+                      kr
                     </p>
                   </div>
                 </div>

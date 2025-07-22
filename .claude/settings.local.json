@@ -24,7 +24,9 @@
       "Bash(npm run lint)",
       "Bash(npm run lint:*)",
       "Bash(timeout 10s npm run dev)",
-      "Bash(true)"
+      "Bash(true)",
+      "Bash(GEMINI_API_KEY=\"test-key-for-development\" npm run dev:backend)",
+      "Bash(docker-compose up:*)"
     ],
     "deny": []
   }
