@@ -1,8 +1,12 @@
 import { Agent, run } from "@openai/agents";
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import { readFileSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import { env } from "../config/env.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export class LLMService {
   async askOpenAi(question: string) {
@@ -30,10 +34,10 @@ export class LLMService {
     try {
       // Try multiple possible paths for the Skatteverket summary file
       const possiblePaths = [
-        join(process.cwd(), "..", "skatteverket_summary.md"), // Original path
-        join(process.cwd(), "skatteverket_summary.md"), // Root of current directory
-        "/skatteverket_summary.md", // Absolute root path (Railway)
-        join(__dirname, "..", "..", "..", "skatteverket_summary.md"), // Relative to built file
+        join(process.cwd(), "skatteverket_summary.md"), // Backend directory (Railway production)
+        join(process.cwd(), "..", "skatteverket_summary.md"), // Root directory (local dev)
+        "/skatteverket_summary.md", // Absolute root path
+        join(__dirname, "..", "..", "skatteverket_summary.md"), // Relative to built file
       ];
       
       for (const path of possiblePaths) {
