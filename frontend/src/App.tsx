@@ -3,6 +3,7 @@ import { LandingPage } from "./components/LandingPage";
 import { TaxWizard } from "./components/TaxWizard";
 import { UserAgreement } from "./components/UserAgreement";
 import { TaxAnalysisResult } from "./components/TaxAnalysisResult";
+import { TaxAdviceHistory } from "./components/TaxAdviceHistory";
 import { StripeProvider } from "./components/StripeProvider";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
@@ -39,6 +40,26 @@ function App() {
         />
         <Route
           path="/skatt/inkomstdeklaration/analys"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <TaxAnalysisResult />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/mina-analyser"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <TaxAdviceHistory />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/mina-analyser/:id"
           element={
             <ProtectedRoute>
               <Layout>

@@ -16,14 +16,16 @@ const Header: React.FC = () => {
   const isWizardPage = location.pathname === "/skatt/inkomstdeklaration";
   const isUserAgreement = location.pathname === "/user-agreement";
   const isAnalysisPage =
-    location.pathname === "/skatt/inkomstdeklaration/analys";
+    location.pathname === "/skatt/inkomstdeklaration/analys" || 
+    location.pathname.startsWith("/mina-analyser/");
+  const isHistoryPage = location.pathname === "/mina-analyser";
 
   return (
     <header className="bg-primary-bg shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            {(isWizardPage || isUserAgreement || isAnalysisPage) && (
+            {(isWizardPage || isUserAgreement || isAnalysisPage || isHistoryPage) && (
               <button
                 onClick={handleBackClick}
                 className="mr-4 p-2 rounded-full hover:bg-bg-secondary transition-colors"
@@ -86,6 +88,32 @@ const Header: React.FC = () => {
                 >
                   Om oss
                 </a>
+              </nav>
+            )}
+
+            {/* Navigation for authenticated users */}
+            {isAuthenticated && (
+              <nav className="hidden md:flex space-x-4 lg:space-x-6 mr-4">
+                <button
+                  onClick={() => navigate('/skatt/inkomstdeklaration')}
+                  className={`text-sm lg:text-base transition-colors ${
+                    isWizardPage
+                      ? 'text-primary-600 font-medium'
+                      : 'text-gray-700 hover:text-gray-900'
+                  }`}
+                >
+                  Ny analys
+                </button>
+                <button
+                  onClick={() => navigate('/mina-analyser')}
+                  className={`text-sm lg:text-base transition-colors ${
+                    isHistoryPage
+                      ? 'text-primary-600 font-medium'
+                      : 'text-gray-700 hover:text-gray-900'
+                  }`}
+                >
+                  Mina analyser
+                </button>
               </nav>
             )}
 

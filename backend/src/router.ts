@@ -65,6 +65,8 @@ export const appRouter = router({
 
     // Tax advice
     generateAdvice: taxController.generateAdvice,
+    getUserTaxAdviceHistory: taxController.getUserTaxAdviceHistory,
+    getTaxAdviceById: taxController.getTaxAdviceById,
 
     // Payment processing
     createPaymentSession: taxController.createPaymentSession,

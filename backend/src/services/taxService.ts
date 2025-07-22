@@ -44,6 +44,7 @@ export class TaxService {
     // Create and store tax advice
     const advice = new TaxAdviceModel({
       declarationId: declaration._id,
+      userId: new mongoose.Types.ObjectId(userId),
       ...this.convertLLMResultsToTaxAdviceData(llmAdvice),
     });
 
@@ -58,7 +59,7 @@ export class TaxService {
   }
 
   static async getTaxDeclaration(id: string): Promise<TaxDeclaration | null> {
-    const declaration = await TaxDeclarationModel.findById(id).populate('userId');
+    const declaration = await TaxDeclarationModel.findById(id);
     return declaration ? this.formatDeclaration(declaration) : null;
   }
 
@@ -100,7 +101,7 @@ export class TaxService {
   }
 
   // Tax Advice methods
-  static async generateAdvice(declarationId: string): Promise<TaxAdvice> {
+  static async generateAdvice(declarationId: string, userId?: string): Promise<TaxAdvice> {
     const declaration = await this.getTaxDeclaration(declarationId);
     const receipts = await this.getReceipts(declarationId);
 
@@ -122,6 +123,7 @@ export class TaxService {
     
     advice = new TaxAdviceModel({
       declarationId: new mongoose.Types.ObjectId(declarationId),
+      userId: userId ? new mongoose.Types.ObjectId(userId) : new mongoose.Types.ObjectId(declaration.userId),
       suggestedDeductions: adviceData.suggestedDeductions,
       totalPotentialSavings: adviceData.totalPotentialSavings,
       riskAssessment: adviceData.riskAssessment,
@@ -473,6 +475,7 @@ export class TaxService {
     return {
       id: Math.random().toString(36).substring(7),
       declarationId: declaration.id,
+      userId: declaration.userId,
       suggestedDeductions,
       totalPotentialSavings,
       riskAssessment: {
@@ -563,10 +566,26 @@ export class TaxService {
     };
   }
 
+  static async getUserTaxAdviceHistory(userId: string): Promise<TaxAdvice[]> {
+    const adviceList = await TaxAdviceModel
+      .find({ userId: new mongoose.Types.ObjectId(userId) })
+      .sort({ generatedAt: -1 });
+    return adviceList.map(advice => this.formatTaxAdvice(advice));
+  }
+
+  static async getTaxAdviceById(adviceId: string, userId: string): Promise<TaxAdvice | null> {
+    const advice = await TaxAdviceModel.findOne({ 
+      _id: new mongoose.Types.ObjectId(adviceId),
+      userId: new mongoose.Types.ObjectId(userId)
+    });
+    return advice ? this.formatTaxAdvice(advice) : null;
+  }
+
   private static formatTaxAdvice(doc: ITaxAdvice): TaxAdvice {
     return {
       id: (doc._id as any).toString(),
       declarationId: doc.declarationId.toString(),
+      userId: doc.userId.toString(),
       suggestedDeductions: doc.suggestedDeductions.map(d => ({
         ...d,
         relatedReceipts: d.relatedReceipts.map(id => id.toString()),

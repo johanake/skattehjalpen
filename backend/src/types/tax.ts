@@ -113,6 +113,7 @@ export interface Receipt {
 export interface TaxAdvice {
   id: string;
   declarationId: string;
+  userId: string;
   suggestedDeductions: {
     category: string;
     currentAmount: number;

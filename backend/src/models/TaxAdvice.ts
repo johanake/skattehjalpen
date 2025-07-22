@@ -2,6 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITaxAdvice extends Document {
   declarationId: mongoose.Types.ObjectId;
+  userId: mongoose.Types.ObjectId;
   suggestedDeductions: {
     category: string;
     currentAmount: number;
@@ -28,6 +29,11 @@ const taxAdviceSchema = new Schema<ITaxAdvice>(
       ref: 'TaxDeclaration',
       required: true,
       unique: true, // One advice per declaration
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
     },
     suggestedDeductions: [{
       category: {
@@ -96,6 +102,7 @@ const taxAdviceSchema = new Schema<ITaxAdvice>(
 
 // Indexes for better performance
 taxAdviceSchema.index({ declarationId: 1 });
+taxAdviceSchema.index({ userId: 1 });
 taxAdviceSchema.index({ generatedAt: -1 });
 
 export const TaxAdvice = mongoose.model<ITaxAdvice>('TaxAdvice', taxAdviceSchema);

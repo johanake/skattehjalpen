@@ -53,7 +53,22 @@ export const taxController = {
       if (!declaration || declaration.userId !== ctx.user!.id) {
         throw new Error('Unauthorized access to tax advice');
       }
-      return await TaxService.generateAdvice(input.declarationId);
+      return await TaxService.generateAdvice(input.declarationId, ctx.user!.id);
+    }),
+
+  getUserTaxAdviceHistory: protectedProcedure
+    .query(async ({ ctx }) => {
+      return await TaxService.getUserTaxAdviceHistory(ctx.user!.id);
+    }),
+
+  getTaxAdviceById: protectedProcedure
+    .input(getTaxDeclarationSchema) // Reuse schema for advice ID
+    .query(async ({ input, ctx }) => {
+      const advice = await TaxService.getTaxAdviceById(input.id, ctx.user!.id);
+      if (!advice) {
+        throw new Error('Tax advice not found or unauthorized access');
+      }
+      return advice;
     }),
 
   // Payment endpoints
