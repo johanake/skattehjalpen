@@ -28,8 +28,27 @@ export class LLMService {
     // Load Skatteverket deduction rules
     let skatteverketContext = "";
     try {
-      const summaryPath = join(process.cwd(), "..", "skatteverket_summary.md");
-      skatteverketContext = readFileSync(summaryPath, "utf-8");
+      // Try multiple possible paths for the Skatteverket summary file
+      const possiblePaths = [
+        join(process.cwd(), "..", "skatteverket_summary.md"), // Original path
+        join(process.cwd(), "skatteverket_summary.md"), // Root of current directory
+        "/skatteverket_summary.md", // Absolute root path (Railway)
+        join(__dirname, "..", "..", "..", "skatteverket_summary.md"), // Relative to built file
+      ];
+      
+      for (const path of possiblePaths) {
+        try {
+          skatteverketContext = readFileSync(path, "utf-8");
+          console.log(`Successfully loaded Skatteverket context from: ${path}`);
+          break;
+        } catch {
+          // Continue to next path
+        }
+      }
+      
+      if (!skatteverketContext) {
+        console.warn("Could not find skatteverket_summary.md in any expected location");
+      }
     } catch (error) {
       console.warn(
         "Could not load Skatteverket summary, proceeding without context:",
