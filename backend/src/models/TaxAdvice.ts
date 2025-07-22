@@ -101,6 +101,17 @@ const taxAdviceSchema = new Schema<ITaxAdvice>(
   }
 );
 
+// Pre-save hook to automatically calculate totalPotentialSavings from individual deductions
+taxAdviceSchema.pre('save', function (next) {
+  if (this.suggestedDeductions && this.suggestedDeductions.length > 0) {
+    this.totalPotentialSavings = this.suggestedDeductions.reduce(
+      (sum, deduction) => sum + (deduction.potentialSavings || 0),
+      0
+    );
+  }
+  next();
+});
+
 // Indexes for better performance
 taxAdviceSchema.index({ declarationId: 1 });
 taxAdviceSchema.index({ userId: 1 });

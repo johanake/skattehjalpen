@@ -133,6 +133,12 @@ export class TaxService {
     // Generate new advice
     const adviceData = this.calculateTaxAdvice(declaration, receipts);
 
+    // Ensure totalPotentialSavings is calculated from deduction entries
+    const calculatedTotal = adviceData.suggestedDeductions.reduce(
+      (sum, deduction) => sum + deduction.potentialSavings,
+      0
+    );
+
     const advice = new TaxAdviceModel({
       declarationId: new mongoose.Types.ObjectId(declarationId),
       userId: userId
@@ -141,7 +147,7 @@ export class TaxService {
         ? new mongoose.Types.ObjectId(declaration.userId)
         : null,
       suggestedDeductions: adviceData.suggestedDeductions,
-      totalPotentialSavings: adviceData.totalPotentialSavings,
+      totalPotentialSavings: calculatedTotal,
       riskAssessment: adviceData.riskAssessment,
       recommendations: adviceData.recommendations,
     });
@@ -169,14 +175,14 @@ export class TaxService {
         relatedReceipts: [],
       })) || [];
 
+    const calculatedTotalPotentialSavings = suggestedDeductions.reduce(
+      (sum: number, d: any) => sum + d.potentialSavings,
+      0
+    );
+
     return {
       suggestedDeductions,
-      totalPotentialSavings:
-        llmResults.totalDeductions ||
-        suggestedDeductions.reduce(
-          (sum: number, d: any) => sum + d.potentialSavings,
-          0
-        ),
+      totalPotentialSavings: calculatedTotalPotentialSavings,
       riskAssessment: {
         level: "low" as const,
         factors: [],
@@ -194,7 +200,6 @@ export class TaxService {
     receipts: Receipt[]
   ): TaxAdvice {
     const suggestedDeductions = [];
-    let totalPotentialSavings = 0;
 
     // Analyze work equipment expenses (Arbetsutrustning)
     const workReceipts = receipts.filter((r) => r.category === "work");
@@ -233,7 +238,6 @@ export class TaxService {
         ],
         relatedReceipts: workReceipts.map((r) => r.id),
       });
-      totalPotentialSavings += potentialSavings;
     }
 
     // Analyze commute expenses (Resekostnader)
@@ -277,7 +281,6 @@ export class TaxService {
           ],
           relatedReceipts: travelReceipts.map((r) => r.id),
         });
-        totalPotentialSavings += potentialSavings;
       }
     }
 
@@ -303,7 +306,6 @@ export class TaxService {
         ],
         relatedReceipts: [],
       });
-      totalPotentialSavings += potentialSavings;
     }
 
     if (declaration.rotRut.hasRutWork && rutAmount > 0) {
@@ -324,7 +326,6 @@ export class TaxService {
         ],
         relatedReceipts: [],
       });
-      totalPotentialSavings += potentialSavings;
     }
 
     // Education expenses (Utbildningskostnader)
@@ -357,7 +358,6 @@ export class TaxService {
         ],
         relatedReceipts: educationReceipts.map((r) => r.id),
       });
-      totalPotentialSavings += potentialSavings;
     }
 
     // Housing deductions (Bostadsränteavdrag)
@@ -382,7 +382,6 @@ export class TaxService {
         ],
         relatedReceipts: [],
       });
-      totalPotentialSavings += potentialSavings;
     }
 
     // Charitable donations (Gåvoavdrag)
@@ -410,7 +409,6 @@ export class TaxService {
         ],
         relatedReceipts: [],
       });
-      totalPotentialSavings += potentialSavings;
     }
 
     // Union and unemployment insurance fees
@@ -437,7 +435,6 @@ export class TaxService {
         ],
         relatedReceipts: [],
       });
-      totalPotentialSavings += potentialSavings;
     }
 
     // Rental income deductions
@@ -466,7 +463,6 @@ export class TaxService {
         ],
         relatedReceipts: [],
       });
-      totalPotentialSavings += potentialSavings;
     }
 
     // Green technology deductions
@@ -497,8 +493,13 @@ export class TaxService {
         ],
         relatedReceipts: [],
       });
-      totalPotentialSavings += potentialSavings;
     }
+
+    // Calculate total potential savings by summing up individual deductions
+    const totalPotentialSavings = suggestedDeductions.reduce(
+      (sum, deduction) => sum + deduction.potentialSavings,
+      0
+    );
 
     return {
       id: Math.random().toString(36).substring(7),
