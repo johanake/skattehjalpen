@@ -72,7 +72,6 @@ const receiptSchema = new Schema<IReceipt>(
 );
 
 // Indexes for better performance
-receiptSchema.index({ declarationId: 1 });
 receiptSchema.index({ category: 1 });
 receiptSchema.index({ uploadedAt: -1 });
 receiptSchema.index({ declarationId: 1, category: 1 });

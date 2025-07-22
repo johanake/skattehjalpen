@@ -22,6 +22,7 @@ export class DatabaseService {
 
     try {
       const mongoUri = env.MONGODB_URI;
+      console.log('Attempting to connect to MongoDB URI:', mongoUri.replace(/\/\/[^:]+:[^@]+@/, '//***:***@'));
       
       await mongoose.connect(mongoUri, {
         maxPoolSize: 10,

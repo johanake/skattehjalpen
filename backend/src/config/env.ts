@@ -28,5 +28,8 @@ const envSchema = z.object({
     ),
 });
 
+console.log('Loading environment variables...');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('MONGODB_URI set:', !!process.env.MONGODB_URI);
 export const env = envSchema.parse(process.env);
 export type Env = z.infer<typeof envSchema>;
