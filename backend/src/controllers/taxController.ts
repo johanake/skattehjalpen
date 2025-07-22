@@ -10,10 +10,12 @@ import { publicProcedure, protectedProcedure } from '../trpc.js';
 
 export const taxController = {
   // Tax Declaration endpoints
-  createDeclaration: protectedProcedure
+  createDeclaration: publicProcedure
     .input(createTaxDeclarationSchema)
     .mutation(async ({ input, ctx }) => {
-      return await TaxService.createTaxDeclaration(ctx.user!.id, input);
+      // Allow anonymous users to create declarations
+      const userId = ctx.user?.id || null;
+      return await TaxService.createTaxDeclaration(userId, input);
     }),
 
   getDeclaration: protectedProcedure
@@ -45,15 +47,12 @@ export const taxController = {
     }),
 
   // Tax Advice endpoints
-  generateAdvice: protectedProcedure
+  generateAdvice: publicProcedure
     .input(generateAdviceSchema)
     .mutation(async ({ input, ctx }) => {
-      // Verify the declaration belongs to the user
-      const declaration = await TaxService.getTaxDeclaration(input.declarationId);
-      if (!declaration || declaration.userId !== ctx.user!.id) {
-        throw new Error('Unauthorized access to tax advice');
-      }
-      return await TaxService.generateAdvice(input.declarationId, ctx.user!.id);
+      // Allow anonymous users to generate advice for their declarations
+      const userId = ctx.user?.id || null;
+      return await TaxService.generateAdvice(input.declarationId, userId);
     }),
 
   getUserTaxAdviceHistory: protectedProcedure

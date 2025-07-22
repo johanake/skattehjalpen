@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITaxDeclaration extends Document {
-  userId: mongoose.Types.ObjectId;
+  userId: mongoose.Types.ObjectId | null;
   year: number;
   personalInfo: {
     name: string;
@@ -95,7 +95,8 @@ const taxDeclarationSchema = new Schema<ITaxDeclaration>(
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
+      default: null,
     },
     year: {
       type: Number,

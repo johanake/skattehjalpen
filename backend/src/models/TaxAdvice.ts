@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITaxAdvice extends Document {
   declarationId: mongoose.Types.ObjectId;
-  userId: mongoose.Types.ObjectId;
+  userId: mongoose.Types.ObjectId | null;
   suggestedDeductions: {
     category: string;
     currentAmount: number;
@@ -33,7 +33,8 @@ const taxAdviceSchema = new Schema<ITaxAdvice>(
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
+      default: null,
     },
     suggestedDeductions: [{
       category: {

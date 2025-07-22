@@ -70,13 +70,27 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
   return (
     <div className="bg-bg-white p-8 rounded-lg shadow-lg border border-border-light">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-2xl">🎉</span>
-        </div>
-        <h2 className="text-3xl font-bold text-primary mb-2">Fantastisk!</h2>
-        <p className="text-lg text-text-secondary">
-          Vi hittade möjliga besparingar för dig
-        </p>
+        {totalDeductions !== null && totalDeductions >= 1 ? (
+          <>
+            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">🎉</span>
+            </div>
+            <h2 className="text-3xl font-bold text-primary mb-2">Fantastisk!</h2>
+            <p className="text-lg text-text-secondary">
+              Vi hittade möjliga besparingar för dig
+            </p>
+          </>
+        ) : (
+          <>
+            <div className="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">📋</span>
+            </div>
+            <h2 className="text-3xl font-bold text-primary mb-2">Analys klar!</h2>
+            <p className="text-lg text-text-secondary">
+              Vi har granskat din deklaration noggrant
+            </p>
+          </>
+        )}
       </div>
 
       <div className="bg-accent-light p-6 rounded-lg mb-8 text-center">
@@ -144,8 +158,7 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
               : "Registrera dig och betala"}
           </button>
 
-          <div className="text-center text-sm text-text-muted">
-            <p>30 dagar pengarna tillbaka-garanti</p>
+          <div className="text-center text-sm text-text-secondary">
             <p>Säker betalning via Stripe</p>
           </div>
         </div>

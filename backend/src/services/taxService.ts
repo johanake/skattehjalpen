@@ -18,14 +18,14 @@ import { LLMService } from "./llmService.js";
 export class TaxService {
   // Tax Declaration methods
   static async createTaxDeclaration(
-    userId: string,
+    userId: string | null,
     data: CreateTaxDeclarationInput
   ): Promise<TaxDeclaration> {
     console.log("Creating tax declaration and running LLM analysis");
 
     // Create the declaration in MongoDB
     const declaration = new TaxDeclarationModel({
-      userId: new mongoose.Types.ObjectId(userId),
+      userId: userId ? new mongoose.Types.ObjectId(userId) : null,
       ...data,
       status: "draft",
     });
@@ -101,7 +101,7 @@ export class TaxService {
   }
 
   // Tax Advice methods
-  static async generateAdvice(declarationId: string, userId?: string): Promise<TaxAdvice> {
+  static async generateAdvice(declarationId: string, userId?: string | null): Promise<TaxAdvice> {
     const declaration = await this.getTaxDeclaration(declarationId);
     const receipts = await this.getReceipts(declarationId);
 
@@ -123,7 +123,7 @@ export class TaxService {
     
     advice = new TaxAdviceModel({
       declarationId: new mongoose.Types.ObjectId(declarationId),
-      userId: userId ? new mongoose.Types.ObjectId(userId) : new mongoose.Types.ObjectId(declaration.userId),
+      userId: userId ? new mongoose.Types.ObjectId(userId) : (declaration.userId ? new mongoose.Types.ObjectId(declaration.userId) : null),
       suggestedDeductions: adviceData.suggestedDeductions,
       totalPotentialSavings: adviceData.totalPotentialSavings,
       riskAssessment: adviceData.riskAssessment,
@@ -530,7 +530,7 @@ export class TaxService {
   private static formatDeclaration(doc: ITaxDeclaration): TaxDeclaration {
     return {
       id: (doc._id as any).toString(),
-      userId: doc.userId.toString(),
+      userId: doc.userId ? doc.userId.toString() : null,
       year: doc.year,
       personalInfo: doc.personalInfo,
       employment: doc.employment,
@@ -586,7 +586,7 @@ export class TaxService {
     return {
       id: (doc._id as any).toString(),
       declarationId: doc.declarationId.toString(),
-      userId: doc.userId.toString(),
+      userId: doc.userId ? doc.userId.toString() : null,
       suggestedDeductions: doc.suggestedDeductions.map(d => ({
         ...d,
         relatedReceipts: d.relatedReceipts.map(id => id.toString()),

@@ -1,6 +1,6 @@
 export interface TaxDeclaration {
   id: string;
-  userId: string;
+  userId: string | null;
   year: number;
   personalInfo: {
     name: string;
@@ -113,7 +113,7 @@ export interface Receipt {
 export interface TaxAdvice {
   id: string;
   declarationId: string;
-  userId: string;
+  userId: string | null;
   suggestedDeductions: {
     category: string;
     currentAmount: number;
