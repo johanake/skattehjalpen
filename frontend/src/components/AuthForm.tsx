@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface AuthFormProps {
   mode: "login" | "register";
@@ -14,14 +15,23 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const { login, register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    // Validate terms acceptance for registration
+    if (mode === "register" && !acceptTerms) {
+      setError("Du måste godkänna användaravtalet för att skapa ett konto");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -116,6 +126,34 @@ export const AuthForm: React.FC<AuthFormProps> = ({
             </p>
           )}
         </div>
+
+        {mode === "register" && (
+          <div className="flex items-start space-x-3 py-2">
+            <div className="flex items-center h-5">
+              <input
+                id="accept-terms"
+                type="checkbox"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
+                className="w-4 h-4 text-primary-600 bg-gray-50 border-gray-300 rounded focus:ring-primary-500 focus:ring-2"
+                required
+              />
+            </div>
+            <div className="text-sm">
+              <label htmlFor="accept-terms" className="text-gray-700">
+                Jag godkänner{" "}
+                <a
+                  href="/user-agreement"
+                  className="text-primary-600 hover:text-primary-800 underline"
+                  onClick={() => navigate("/user-agreement")}
+                >
+                  användarvillkoren
+                </a>{" "}
+                och bekräftar att jag har läst och förstått villkoren.
+              </label>
+            </div>
+          </div>
+        )}
       </div>
 
       {error && (
@@ -139,7 +177,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 
       <button
         type="submit"
-        disabled={isLoading}
+        disabled={isLoading || (mode === "register" && !acceptTerms)}
         className="w-full bg-primary-600 text-text-primary py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
       >
         {isLoading ? (
