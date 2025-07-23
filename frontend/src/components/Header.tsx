@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { AuthModal } from "./AuthModal";
+import { SecondaryButton } from "./buttons/SecondaryButton";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Header: React.FC = () => {
   const isWizardPage = location.pathname === "/skatt/inkomstdeklaration";
   const isUserAgreement = location.pathname === "/user-agreement";
   const isAnalysisPage =
-    location.pathname === "/skatt/inkomstdeklaration/analys" || 
+    location.pathname === "/skatt/inkomstdeklaration/analys" ||
     location.pathname.startsWith("/mina-analyser/");
   const isHistoryPage = location.pathname === "/mina-analyser";
 
@@ -25,7 +26,10 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            {(isWizardPage || isUserAgreement || isAnalysisPage || isHistoryPage) && (
+            {(isWizardPage ||
+              isUserAgreement ||
+              isAnalysisPage ||
+              isHistoryPage) && (
               <button
                 onClick={handleBackClick}
                 className="mr-4 p-2 rounded-full hover:bg-bg-secondary transition-colors"
@@ -95,21 +99,21 @@ const Header: React.FC = () => {
             {isAuthenticated && (
               <nav className="hidden md:flex space-x-4 lg:space-x-6 mr-4">
                 <button
-                  onClick={() => navigate('/skatt/inkomstdeklaration')}
+                  onClick={() => navigate("/skatt/inkomstdeklaration")}
                   className={`text-sm lg:text-base transition-colors ${
                     isWizardPage
-                      ? 'text-primary-600 font-medium'
-                      : 'text-gray-700 hover:text-gray-900'
+                      ? "text-primary-600 font-medium"
+                      : "text-gray-700 hover:text-gray-900"
                   }`}
                 >
                   Ny analys
                 </button>
                 <button
-                  onClick={() => navigate('/mina-analyser')}
+                  onClick={() => navigate("/mina-analyser")}
                   className={`text-sm lg:text-base transition-colors ${
                     isHistoryPage
-                      ? 'text-primary-600 font-medium'
-                      : 'text-gray-700 hover:text-gray-900'
+                      ? "text-primary-600 font-medium"
+                      : "text-gray-700 hover:text-gray-900"
                   }`}
                 >
                   Mina analyser
@@ -129,12 +133,12 @@ const Header: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <button
+                <SecondaryButton
+                  className=""
                   onClick={() => setIsAuthModalOpen(true)}
-                  className="px-3 py-2 sm:px-4 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium whitespace-nowrap"
                 >
-                  Logga In
-                </button>
+                  Logga in
+                </SecondaryButton>
               )}
             </div>
           </div>

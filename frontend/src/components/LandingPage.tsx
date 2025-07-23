@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { PrimaryButton } from "./buttons/PrimaryButton";
+import { SecondaryButton } from "./buttons/SecondaryButton";
+import { ProductCard } from "./products/ProductCard";
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -31,15 +34,16 @@ export const LandingPage: React.FC = () => {
               och maximera din skatteåterbäring.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button
-                onClick={handleStartWizard}
-                className="bg-bg-accent-dark text-text-inverse px-8 py-4 rounded-lg text-lg font-semibold hover:bg-bg-accent-light transition-colors shadow-lg"
-              >
+              <PrimaryButton size="lg" onClick={handleStartWizard}>
                 Kom igång nu
-              </button>
-              <button className="text-accent px-8 py-4 rounded-lg text-lg font-semibold hover:bg-bg-accent-light transition-colors border border-accent">
+              </PrimaryButton>
+              <SecondaryButton
+                size="lg"
+                onClick={() => console.log("Pressed Se Demo")}
+                className="px-8 py-4 text-lg"
+              >
                 Se demo
-              </button>
+              </SecondaryButton>
             </div>
           </div>
         </div>
@@ -217,69 +221,59 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h3 className="text-3xl font-bold text-text-primary mb-4">
-              Enkla priser
+              Priser
             </h3>
           </div>
-
           <div className="flex justify-center">
-            <div className="relative bg-white rounded-2xl p-8 max-w-md shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
-                  Rekommenderas
-                </span>
-              </div>
-              <div className="text-center pt-4">
-                <h4 className="text-3xl font-bold text-gray-800 mb-3">
-                  Skatteanalys
-                </h4>
-                <div className="mb-2">
-                  <div className="text-2xl text-red-500 line-through mb-1">
-                    249 kr
-                  </div>
-                  <div className="text-5xl font-extrabold text-primary">
-                    199 kr
-                  </div>
-                </div>
-                <p className="text-text-primary mb-8 text-sm">
-                  Engångsbetalning
-                </p>
-                <ul className="text-left text-gray-700 space-y-4 mb-8">
-                  <li className="flex items-start">
-                    <span className="text-green-500 font-bold mr-3 text-lg">
-                      ✓
-                    </span>
-                    <span>Omfattande AI-baserad skatteanalys</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 font-bold mr-3 text-lg">
-                      ✓
-                    </span>
-                    <span>Automatisk identifiering av avdrag</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 font-bold mr-3 text-lg">
-                      ✓
-                    </span>
-                    <span>Detaljerade avdragsrekommendationer</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-500 font-bold mr-3 text-lg">
-                      ✓
-                    </span>
-                    <span>Visar var du fyller i avdraget i deklarationen</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <div className="ms-4 me-4" />
+            <ProductCard
+              title="Skatteanalys"
+              price={199}
+              strikeThroughPrice={249}
+              isRecommended={true}
+            >
+              <li className="flex items-start">
+                <span className="text-green-500 font-bold mr-3 text-lg">✓</span>
+                <span>Omfattande AI-baserad skatteanalys</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-500 font-bold mr-3 text-lg">✓</span>
+                <span>Automatisk identifiering av avdrag</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-500 font-bold mr-3 text-lg">✓</span>
+                <span>Detaljerade avdragsrekommendationer</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-500 font-bold mr-3 text-lg">✓</span>
+                <span>Visar var du fyller i avdraget i deklarationen</span>
+              </li>
+            </ProductCard>
+            <div className="ms-4 me-4" />
+            <ProductCard
+              title="Partner-paketet"
+              price={499}
+              isRecommended={false}
+            >
+              <li className="flex items-start">
+                <span className="text-green-500 font-bold mr-3 text-lg">✓</span>
+                <span>Ingår två analyser</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-500 font-bold mr-3 text-lg">✓</span>
+                <span>Dela med valfri person</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-500 font-bold mr-3 text-lg">✓</span>
+                <span>Samma funktion som "Skatteanalys"</span>
+              </li>
+            </ProductCard>
           </div>
 
           <div className="text-center mt-12">
-            <button
-              onClick={handleStartWizard}
-              className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors shadow-lg"
-            >
+            <PrimaryButton size="lg" onClick={handleStartWizard}>
               Kom igång nu
-            </button>
+            </PrimaryButton>
           </div>
         </div>
       </section>
@@ -297,9 +291,6 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 <div className="flex-1 text-center md:text-left">
-                  <h4 className="text-2xl font-bold text-text-primary mb-4">
-                    Om oss
-                  </h4>
                   <p className="text-text-secondary mb-4 leading-relaxed">
                     Vi vill göra skattedeklarationer enklare för alla svenskar.
                     Som många andra har vi märkt att det kan vara svårt att
