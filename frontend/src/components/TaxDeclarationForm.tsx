@@ -273,7 +273,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Har du bott utomlands under året?
+                Har du bott utomlands under året
               </span>
             </label>
           </div>
@@ -286,7 +286,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
           💼 Arbetsliv och Inkomst
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="md:col-span-2">
+          <div className="md:col-span-1">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -301,7 +301,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Har du haft en eller flera anställningar under året?
+                Har du haft en eller flera anställningar under året
               </span>
             </label>
             {formData.employment.hasEmployment && (
@@ -335,7 +335,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Inkomst från eget företag
+                Haft inkomst från eget företag (t.ex. enskild firma)
               </span>
             </label>
           </div>
@@ -354,7 +354,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Inkomst från pension
+                Kommer din inkomst från pensionen
               </span>
             </label>
           </div>
@@ -373,7 +373,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                A-kassa eller sjukersättning
+                Tagit emot A-kassa eller sjukersättning
               </span>
             </label>
           </div>
@@ -385,7 +385,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
         <h3 className="text-lg font-semibold mb-4 text-text-primary">
           🚗 Resor till och från arbetet
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
           <div className="md:col-span-2">
             <label className="flex items-center space-x-2">
               <input
@@ -397,7 +397,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Har du pendlat till jobbet minst 5 km enkel väg?
+                Har du pendlat till jobbet minst 5 km enkel väg
               </span>
             </label>
             {formData.commute.hasCommute && (
@@ -437,25 +437,6 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   <option value="walk">Gång</option>
                 </select>
               </div>
-              <div>
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={formData.commute.savesTwoHours}
-                    onChange={(e) =>
-                      handleSectionChange(
-                        "commute",
-                        "savesTwoHours",
-                        e.target.checked
-                      )
-                    }
-                    className="rounded"
-                  />
-                  <span className="text-sm font-medium text-text-secondary">
-                    Sparar 2h/dag med bil
-                  </span>
-                </label>
-              </div>
               <div className="md:col-span-2">
                 <label className="flex items-center space-x-2">
                   <input
@@ -471,7 +452,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     className="rounded"
                   />
                   <span className="text-sm font-medium text-text-secondary">
-                    Parkering vid jobbet
+                    Parkerar du vid jobbet
                   </span>
                 </label>
                 {formData.commute.hasParkingCosts && (
@@ -489,6 +470,25 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
                   />
                 )}
+              </div>
+              <div>
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={formData.commute.savesTwoHours}
+                    onChange={(e) =>
+                      handleSectionChange(
+                        "commute",
+                        "savesTwoHours",
+                        e.target.checked
+                      )
+                    }
+                    className="rounded"
+                  />
+                  <span className="text-sm font-medium text-text-secondary">
+                    Sparar du 2 timmar per dag med ditt fordon
+                  </span>
+                </label>
               </div>
             </>
           )}
@@ -517,7 +517,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
               />
               <span className="text-sm font-medium text-text-secondary">
                 Har du köpt arbetsutrustning eller skyddsutrustning som du
-                betalat själv?
+                betalat själv
               </span>
             </label>
           </div>
@@ -641,7 +641,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   />
                   <span className="text-sm font-medium text-text-secondary">
                     Har du bekostat detta själv utan ersättning från
-                    arbetsgivaren?
+                    arbetsgivaren
                   </span>
                 </label>
               </div>
@@ -776,7 +776,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Dubbelt boende p.g.a. arbete
+                Haft dubbelt boende p.g.a. arbete
               </span>
             </label>
             {formData.housing.hasDoubleResidence && (
@@ -964,7 +964,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Tillfälligt arbete &gt;50 km från hemorten
+                Haft ett tillfälligt arbete mer än 50 km från hemorten
               </span>
             </label>
             {formData.temporaryWork.hasTemporaryWork && (
@@ -1094,7 +1094,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       className="rounded"
                     />
                     <span className="text-sm font-medium text-text-secondary">
-                      Arbetsgivaren tillhandahåller ingen arbetsplats
+                      Din arbetsgivaren tillhandahåller ingen arbetsplats
                     </span>
                   </label>
                 </div>
@@ -1199,7 +1199,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Advokat/rättegångskostnader
+                Haft utgifter för Advokat eller rättegångskostnader
               </span>
             </label>
             {formData.professionalServices.hasLegalCosts && (
@@ -1299,7 +1299,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Agent/managerkostnader (artister/idrottsutövare)
+                Betalt en agent eller manager (artister/idrottsutövare)
               </span>
             </label>
             {formData.professionalServices.hasAgentCosts && (
@@ -1344,7 +1344,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Facklitteratur nödvändig för arbetet
+                Köpt nödvändig facklitteratur för arbetet
               </span>
             </label>
             {formData.professionalLiterature.hasProfessionalLiterature && (
@@ -1393,7 +1393,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Arbetsrelaterad utbildning
+                Bekostat arbetsrelaterad utbildning
               </span>
             </label>
             {formData.professionalLiterature.hasJobRelatedEducation && (
@@ -1451,7 +1451,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Artist/idrottsutövare
+                Jag arbetar som artist eller idrottsutövare
               </span>
             </label>
             {formData.specificProfessions.isArtistOrAthlete && (
@@ -1506,7 +1506,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Tjänstehund (polis/militär)
+                Jag har en tjänstehund (polis/militär)
               </span>
             </label>
             {formData.specificProfessions.hasServiceDog && (
@@ -1540,7 +1540,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Dagbarnvårdare
+                Jag arbetar som dagbarnvårdare
               </span>
             </label>
             {formData.specificProfessions.isDaycareProfessional && (
@@ -1807,7 +1807,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Hobbyverksamhet (bilaga T1/T2)
+                Bedriver du hobbyverksamhet
               </span>
             </label>
             {formData.hobbyBusiness.hasHobbyBusiness && (
@@ -1987,7 +1987,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Har du anlitat företag för ROT- eller RUT-arbete?
+                Har du anlitat företag för ROT- eller RUT-arbete
               </span>
             </label>
           </div>
@@ -2023,7 +2023,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                           e.target.value
                         )
                       }
-                      placeholder="Typ av arbete"
+                      placeholder="Typ av arbete (ex. renovering av badrum)"
                       className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
                     />
                     <input
@@ -2072,7 +2072,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                           e.target.value
                         )
                       }
-                      placeholder="Typ av tjänst"
+                      placeholder="Typ av tjänst (ex. städning)"
                       className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
                     />
                     <input
@@ -2166,7 +2166,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                A-kassa medlemskap
+                Medlem i A-kassa
               </span>
             </label>
             {formData.donations.hasUnemploymentInsurance && (
@@ -2200,7 +2200,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Fackföreningsavgift
+                Medlem i Fackförening
               </span>
             </label>
             {formData.donations.hasUnionMembership && (
@@ -2258,7 +2258,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               <span className="text-sm font-medium text-text-secondary">
-                Köpt kurslitteratur/avgifter
+                Köpt kurslitteratur eller betalt studieavgifter
               </span>
             </label>
           </div>
@@ -2383,7 +2383,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
               />
               <span className="text-sm font-medium text-text-secondary">
                 Har du installerat grön teknik (solceller, laddbox,
-                batterilagring)?
+                batterilagring)
               </span>
             </label>
           </div>
@@ -2404,7 +2404,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     className="rounded"
                   />
                   <span className="text-sm font-medium text-text-secondary">
-                    Solceller (15% skattereduktion)
+                    Solceller
                   </span>
                 </label>
                 {formData.greenTech.hasSolarPanels && (
@@ -2438,7 +2438,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     className="rounded"
                   />
                   <span className="text-sm font-medium text-text-secondary">
-                    Laddbox till elbil (50% skattereduktion)
+                    Laddbox till elbil
                   </span>
                 </label>
                 {formData.greenTech.hasChargingStation && (
@@ -2472,7 +2472,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     className="rounded"
                   />
                   <span className="text-sm font-medium text-text-secondary">
-                    Batterilagring (50% skattereduktion)
+                    Batterilagring
                   </span>
                 </label>
                 {formData.greenTech.hasBatteryStorage && (
@@ -2511,9 +2511,10 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
               onChange={(e) =>
                 handleSectionChange("other", "description", e.target.value)
               }
-              placeholder="Beskriv kortfattat andra utgifter som kan påverka din deklaration (flytt, vårdkostnader, juridiska tvister, handikapp, arbetslöshet)..."
+              placeholder="Beskriv kortfattat andra utgifter som kan påverka din deklaration (flytt, vårdkostnader, juridiska tvister, handikapp, arbetslöshet)... Max 250 tecken!"
               rows={3}
               className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+              maxLength={250}
             />
           </div>
         </div>

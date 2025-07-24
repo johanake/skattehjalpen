@@ -257,7 +257,7 @@ export const LandingPage: React.FC = () => {
             >
               <li className="flex items-start">
                 <span className="text-green-500 font-bold mr-3 text-lg">✓</span>
-                <span>Ingår två analyser</span>
+                <span>Två analyser ingår</span>
               </li>
               <li className="flex items-start">
                 <span className="text-green-500 font-bold mr-3 text-lg">✓</span>

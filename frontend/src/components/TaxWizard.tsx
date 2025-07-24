@@ -104,7 +104,7 @@ export const TaxWizard: React.FC = () => {
           <div className="lg:hidden">
             <div className="flex items-center justify-center mb-4">
               <div className="flex space-x-2">
-                {steps.map((step, index) => (
+                {steps.map((step) => (
                   <div
                     key={step.id}
                     className={`w-3 h-3 rounded-full ${
@@ -121,17 +121,19 @@ export const TaxWizard: React.FC = () => {
             <div className="text-center">
               <div
                 className={`w-12 h-12 mx-auto rounded-full flex items-center justify-center text-lg font-medium mb-3 ${
-                  steps.find(s => s.id === currentStep)?.completed
+                  steps.find((s) => s.id === currentStep)?.completed
                     ? "bg-accent text-white"
                     : currentStep
                     ? "bg-accent text-white"
                     : "bg-bg-secondary text-text-secondary border border-border-default"
                 }`}
               >
-                {steps.find(s => s.id === currentStep)?.completed ? "✓" : steps.findIndex(s => s.id === currentStep) + 1}
+                {steps.find((s) => s.id === currentStep)?.completed
+                  ? "✓"
+                  : steps.findIndex((s) => s.id === currentStep) + 1}
               </div>
               <p className="text-lg font-medium text-accent">
-                {steps.find(s => s.id === currentStep)?.name}
+                {steps.find((s) => s.id === currentStep)?.name}
               </p>
             </div>
           </div>

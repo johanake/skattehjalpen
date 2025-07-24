@@ -8,21 +8,14 @@ import {
   TaxAdvice as TaxAdviceModel,
   ITaxAdvice,
 } from "../models/TaxAdvice.js";
+import type { CreateTaxDeclarationInput } from "../validators/taxValidators.js";
+import { LLMService } from "./llmService.js";
 import {
-  PaymentSession as PaymentSessionModel,
-  IPaymentSession,
-} from "../models/PaymentSession.js";
-import type {
   TaxDeclaration,
   Receipt,
   TaxAdvice,
-  PaymentSession,
-} from "../types/tax.js";
-import type {
-  CreateTaxDeclarationInput,
-  CreatePaymentSessionInput,
-} from "../validators/taxValidators.js";
-import { DeductionResult, LLMService } from "./llmService.js";
+  DeductionResult,
+} from "../models/Tax.js";
 
 export class TaxService {
   // Tax Declaration methods
@@ -522,39 +515,6 @@ export class TaxService {
     };
   }
 
-  // Payment methods
-  static async createPaymentSession(
-    userId: string,
-    data: CreatePaymentSessionInput
-  ): Promise<PaymentSession> {
-    const payment = new PaymentSessionModel({
-      userId: new mongoose.Types.ObjectId(userId),
-      ...data,
-      status: "pending",
-    });
-
-    await payment.save();
-    return this.formatPaymentSession(payment);
-  }
-
-  static async completePayment(paymentId: string): Promise<PaymentSession> {
-    const payment = await PaymentSessionModel.findById(paymentId);
-    if (!payment) {
-      throw new Error("Payment not found");
-    }
-
-    payment.status = "completed";
-    payment.completedAt = new Date();
-    await payment.save();
-
-    return this.formatPaymentSession(payment);
-  }
-
-  static async getPayment(id: string): Promise<PaymentSession | null> {
-    const payment = await PaymentSessionModel.findById(id);
-    return payment ? this.formatPaymentSession(payment) : null;
-  }
-
   // Helper formatting methods
   private static formatDeclaration(doc: ITaxDeclaration): TaxDeclaration {
     return {
@@ -628,19 +588,6 @@ export class TaxService {
       riskAssessment: doc.riskAssessment,
       recommendations: doc.recommendations,
       generatedAt: doc.generatedAt,
-    };
-  }
-
-  private static formatPaymentSession(doc: IPaymentSession): PaymentSession {
-    return {
-      id: (doc._id as any).toString(),
-      userId: doc.userId.toString(),
-      amount: doc.amount,
-      currency: doc.currency,
-      status: doc.status,
-      paymentMethod: doc.paymentMethod,
-      createdAt: doc.createdAt,
-      completedAt: doc.completedAt,
     };
   }
 }

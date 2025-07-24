@@ -4,6 +4,7 @@ import { readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { env } from "../config/env.js";
+import { DeductionEntry, DeductionResult } from "../models/Tax.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -146,18 +147,4 @@ export class LLMService {
       throw new Error("Error generating structured content");
     }
   }
-}
-
-export interface DeductionResult {
-  deductions: DeductionEntry[];
-  totalDeductions: number;
-}
-
-export interface DeductionEntry {
-  title: string;
-  amount: string;
-  potentialSaving: string;
-  motivation: string;
-  calculation: string;
-  where: string;
 }

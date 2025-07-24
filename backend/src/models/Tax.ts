@@ -4,7 +4,7 @@ export interface TaxDeclaration {
   year: number;
   personalInfo: {
     name: string;
-    maritalStatus: 'single' | 'married' | 'cohabiting' | 'divorced' | 'widowed';
+    maritalStatus: "single" | "married" | "cohabiting" | "divorced" | "widowed";
     livedAbroad?: boolean;
   };
   employment: {
@@ -81,7 +81,7 @@ export interface TaxDeclaration {
   other: {
     description?: string;
   };
-  status: 'draft' | 'submitted' | 'processing' | 'completed';
+  status: "draft" | "submitted" | "processing" | "completed";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -92,7 +92,14 @@ export interface Receipt {
   fileName: string;
   fileType: string;
   fileSize: number;
-  category: 'work' | 'home' | 'travel' | 'education' | 'charity' | 'medical' | 'other';
+  category:
+    | "work"
+    | "home"
+    | "travel"
+    | "education"
+    | "charity"
+    | "medical"
+    | "other";
   amount?: number;
   description?: string;
   date?: Date;
@@ -116,14 +123,14 @@ export interface TaxAdvice {
     currentAmount: number;
     suggestedAmount: number;
     potentialSavings: number;
-    confidence: 'high' | 'medium' | 'low';
+    confidence: "high" | "medium" | "low";
     explanation: string;
     requiredDocuments: string[];
     relatedReceipts: string[];
   }[];
   totalPotentialSavings: number;
   riskAssessment: {
-    level: 'low' | 'medium' | 'high';
+    level: "low" | "medium" | "high";
     factors: string[];
   };
   recommendations: string[];
@@ -135,8 +142,22 @@ export interface PaymentSession {
   userId: string;
   amount: number;
   currency: string;
-  status: 'pending' | 'completed' | 'failed' | 'refunded';
+  status: "pending" | "completed" | "failed" | "refunded";
   paymentMethod?: string;
   createdAt: Date;
   completedAt?: Date;
+}
+
+export interface DeductionResult {
+  deductions: DeductionEntry[];
+  totalDeductions: number;
+}
+
+export interface DeductionEntry {
+  title: string;
+  amount: string;
+  potentialSaving: string;
+  motivation: string;
+  calculation: string;
+  where: string;
 }
