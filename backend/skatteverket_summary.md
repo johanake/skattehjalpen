@@ -212,6 +212,11 @@ Från 2026: Bara avdrag för lån med säkerhet.
 
 21 % på överskjutande del
 
+Exempel
+Om du betalade 100 000 kr i ränta under ett år och hade kapitalinkomster på 20 000 kr. Då får du göra avdrag med 30 % på det som blir kvar, alltså 80 000 kr. 80 000 x 0,3 = 24 000 kr. Du kommer alltså kunna dra av 24 000 kr på din beräknade skatt.
+
+Har du inga kapitalinkomster multiplicerar du bara dina räntekostnader med 0,3 eller 0,21. Då ser exemplet ut såhär: 100 000 x 0,3 = 30 000. Du får dra av 30 000 kr på din beräknade skatt.
+
 👥 Gemensamma lån & omfördelning
 Låntagare kan justera förtryckt fördelning i deklarationen (punkt 8.1).
 
