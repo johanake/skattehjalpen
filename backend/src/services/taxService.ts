@@ -3,7 +3,6 @@ import {
   TaxDeclaration as TaxDeclarationModel,
   ITaxDeclaration,
 } from "../models/TaxDeclaration.js";
-import { Receipt as ReceiptModel, IReceipt } from "../models/Receipt.js";
 import {
   TaxAdvice as TaxAdviceModel,
   ITaxAdvice,
@@ -12,7 +11,6 @@ import type { CreateTaxDeclarationInput } from "../validators/taxValidators.js";
 import { LLMService } from "./llmService.js";
 import {
   TaxDeclaration,
-  Receipt,
   TaxAdvice,
   DeductionResult,
 } from "../models/Tax.js";
@@ -72,35 +70,6 @@ export class TaxService {
     return declarations.map((d) => this.formatDeclaration(d));
   }
 
-  // Receipt methods
-  static async createReceipt(
-    declarationId: string,
-    receiptData: Partial<Receipt>
-  ): Promise<Receipt> {
-    const receipt = new ReceiptModel({
-      declarationId: new mongoose.Types.ObjectId(declarationId),
-      fileName: receiptData.fileName || "",
-      fileType: receiptData.fileType || "",
-      fileSize: receiptData.fileSize || 0,
-      category: receiptData.category || "other",
-      amount: receiptData.amount,
-      description: receiptData.description,
-      date: receiptData.date,
-      uploadedAt: new Date(),
-      processedAt: new Date(),
-      extractedData: receiptData.extractedData,
-    });
-
-    await receipt.save();
-    return this.formatReceipt(receipt);
-  }
-
-  static async getReceipts(declarationId: string): Promise<Receipt[]> {
-    const receipts = await ReceiptModel.find({
-      declarationId: new mongoose.Types.ObjectId(declarationId),
-    }).sort({ uploadedAt: -1 });
-    return receipts.map((r) => this.formatReceipt(r));
-  }
 
   // Tax Advice methods
   static async generateAdvice(
@@ -136,7 +105,6 @@ export class TaxService {
           deduction.calculation ||
           "Ingen förklaring tillgänglig",
         requiredDocuments: [deduction.where || "Se Skatteverkets anvisningar"],
-        relatedReceipts: [],
       })) || [];
 
     const calculatedTotalPotentialSavings = suggestedDeductions.reduce(
@@ -183,22 +151,6 @@ export class TaxService {
     };
   }
 
-  private static formatReceipt(doc: IReceipt): Receipt {
-    return {
-      id: (doc._id as any).toString(),
-      declarationId: doc.declarationId.toString(),
-      fileName: doc.fileName,
-      fileType: doc.fileType,
-      fileSize: doc.fileSize,
-      category: doc.category,
-      amount: doc.amount,
-      description: doc.description,
-      date: doc.date,
-      uploadedAt: doc.uploadedAt,
-      processedAt: doc.processedAt,
-      extractedData: doc.extractedData,
-    };
-  }
 
   static async getUserTaxAdviceHistory(userId: string): Promise<TaxAdvice[]> {
     const adviceList = await TaxAdviceModel.find({
@@ -225,10 +177,7 @@ export class TaxService {
       id: (doc._id as any).toString(),
       declarationId: doc.declarationId.toString(),
       userId: doc.userId ? doc.userId.toString() : null,
-      suggestedDeductions: doc.suggestedDeductions.map((d) => ({
-        ...d,
-        relatedReceipts: d.relatedReceipts.map((id) => id.toString()),
-      })),
+      suggestedDeductions: doc.suggestedDeductions,
       totalPotentialSavings: doc.totalPotentialSavings,
       riskAssessment: doc.riskAssessment,
       recommendations: doc.recommendations,

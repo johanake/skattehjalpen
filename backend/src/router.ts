@@ -60,8 +60,6 @@ export const appRouter = router({
     getDeclaration: taxController.getDeclaration,
     getUserDeclarations: taxController.getUserDeclarations,
 
-    // Receipt management
-    getReceipts: taxController.getReceipts,
 
     // Tax advice
     generateAdvice: taxController.generateAdvice,

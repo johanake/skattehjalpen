@@ -11,7 +11,6 @@ export interface ITaxAdvice extends Document {
     confidence: 'high' | 'medium' | 'low';
     explanation: string;
     requiredDocuments: string[];
-    relatedReceipts: mongoose.Types.ObjectId[];
   }[];
   totalPotentialSavings: number;
   riskAssessment: {
@@ -67,10 +66,6 @@ const taxAdviceSchema = new Schema<ITaxAdvice>(
       },
       requiredDocuments: [{
         type: String,
-      }],
-      relatedReceipts: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Receipt',
       }],
     }],
     totalPotentialSavings: {

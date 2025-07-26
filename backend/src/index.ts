@@ -5,9 +5,6 @@ import { appRouter } from './router.js';
 import { env } from './config/env.js';
 import { database } from './config/database.js';
 import { createAuthMiddleware } from './middleware/auth.js';
-import { upload } from './services/fileUploadService.js';
-import { FileUploadService } from './services/fileUploadService.js';
-import { TaxService } from './services/taxService.js';
 
 const app = express();
 
@@ -25,37 +22,6 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// File upload endpoint
-app.post('/api/upload-receipt', upload.single('file'), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
-    }
-
-    const { declarationId, category, amount, description, date } = req.body;
-    
-    if (!declarationId || !category) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
-
-    // Process the uploaded file
-    const fileData = await FileUploadService.processUploadedFile(req.file, category);
-    
-    // Create receipt record
-    const receipt = await TaxService.createReceipt(declarationId, {
-      ...fileData,
-      category,
-      amount: amount ? parseFloat(amount) : undefined,
-      description,
-      date: date ? new Date(date) : undefined,
-    });
-
-    res.json({ receipt });
-  } catch (error) {
-    console.error('Upload error:', error);
-    res.status(500).json({ error: 'Upload failed' });
-  }
-});
 
 // tRPC middleware
 app.use(
@@ -84,7 +50,6 @@ async function startServer() {
       console.log(`🚀 Server running on http://localhost:${PORT}`);
       console.log(`📊 Health check: http://localhost:${PORT}/health`);
       console.log(`🔧 tRPC endpoint: http://localhost:${PORT}/trpc`);
-      console.log(`📁 File upload: http://localhost:${PORT}/api/upload-receipt`);
       console.log(`🗄️ MongoDB connected successfully`);
     });
   } catch (error) {

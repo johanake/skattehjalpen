@@ -3,7 +3,6 @@ import {
   createTaxDeclarationSchema,
   createPaymentSessionSchema,
   getTaxDeclarationSchema,
-  getReceiptsSchema,
   generateAdviceSchema,
 } from "../validators/taxValidators.js";
 import { publicProcedure, protectedProcedure } from "../trpc.js";
@@ -34,19 +33,6 @@ export const taxController = {
     return await TaxService.getUserDeclarations(ctx.user!.id);
   }),
 
-  // Receipt endpoints
-  getReceipts: protectedProcedure
-    .input(getReceiptsSchema)
-    .query(async ({ input, ctx }) => {
-      // Verify the declaration belongs to the user
-      const declaration = await TaxService.getTaxDeclaration(
-        input.declarationId
-      );
-      if (!declaration || declaration.userId !== ctx.user!.id) {
-        throw new Error("Unauthorized access to receipts");
-      }
-      return await TaxService.getReceipts(input.declarationId);
-    }),
 
   // Tax Advice endpoints
   generateAdvice: publicProcedure

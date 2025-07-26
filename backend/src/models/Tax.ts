@@ -126,7 +126,6 @@ export interface TaxAdvice {
     confidence: "high" | "medium" | "low";
     explanation: string;
     requiredDocuments: string[];
-    relatedReceipts: string[];
   }[];
   totalPotentialSavings: number;
   riskAssessment: {
