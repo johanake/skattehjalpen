@@ -31,7 +31,8 @@
       "Bash(GEMINI_API_KEY=\"test-key\" npm run dev)",
       "Bash(echo:*)",
       "Bash(pkill:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(powershell:*)"
     ],
     "deny": []
   }

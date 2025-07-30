@@ -14,6 +14,14 @@ const Header: React.FC = () => {
     navigate("/");
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  };
+
   const isWizardPage = location.pathname === "/skatt/inkomstdeklaration";
   const isUserAgreement = location.pathname === "/user-agreement";
   const isAnalysisPage =
@@ -50,24 +58,27 @@ const Header: React.FC = () => {
                 </svg>
               </button>
             )}
-            <div className="flex items-center justify-center w-10 h-10 bg-accent rounded-full mr-3">
+            <div className="flex items-center justify-center w-10 h-10 mr-3">
               <svg
-                className="w-6 h-6 text-text-inverse"
+                className="w-8 h-8"
+                viewBox="0 0 32 32"
                 fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
+                <rect width="32" height="32" rx="6" fill="#1E3A8A"/>
+                <path d="M8 10C8 9.44772 8.44772 9 9 9H23C23.5523 9 24 9.44772 24 10V22C24 22.5523 23.5523 23 23 23H9C8.44772 23 8 22.5523 8 22V10Z" fill="#F1F5F9"/>
+                <path d="M10 12H22V13H10V12Z" fill="#3B82F6"/>
+                <path d="M10 15H22V16H10V15Z" fill="#3B82F6"/>
+                <path d="M10 18H18V19H10V18Z" fill="#3B82F6"/>
+                <circle cx="20" cy="18.5" r="1.5" fill="#16A34A"/>
+                <path d="M19.3 18.5L19.7 18.9L20.7 17.9" stroke="white" strokeWidth="0.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            <h1 className="text-2xl font-bold text-text-primary">
+            <button
+              onClick={handleLogoClick}
+              className="text-2xl font-bold text-text-primary hover:text-accent transition-colors"
+            >
               Skattehjälpen
-            </h1>
+            </button>
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-4">

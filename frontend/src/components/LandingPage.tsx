@@ -14,11 +14,19 @@ export const LandingPage: React.FC = () => {
   const handleShowUserAgreement = () => {
     navigate("/user-agreement");
   };
+
+  const handleShowFAQ = () => {
+    navigate("/vanliga-fragor");
+  };
+
+  const handleShowPrivacyPolicy = () => {
+    navigate("/integritetspolicy");
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br bg-primary">
       {/* Hero Section */}
       <section
-        className="pt-20 pb-32 bg-cover bg-center bg-no-repeat relative"
+        className="pt-20 pb-32 bg-cover bg-center bg-no-repeat relative bg-gradient-to-r from-primary to-primary-600"
         style={{ backgroundImage: "url(/hero-picture.jpg)" }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -175,11 +183,11 @@ export const LandingPage: React.FC = () => {
                   2
                 </div>
                 <h4 className="text-xl font-semibold text-gray-800 mb-3">
-                  Se resultatet
+                  Förhandsvisning
                 </h4>
                 <p className="text-text-secondary">
-                  Vi ger dig en förhandsvisning på vad du kan spara, INNAN du
-                  går vidare till betalning
+                  Vi ger dig en förhandsvisning på vad du kan spara innan du går
+                  vidare till betalning
                 </p>
               </div>
             </div>
@@ -204,7 +212,7 @@ export const LandingPage: React.FC = () => {
                   4
                 </div>
                 <h4 className="text-xl font-semibold text-gray-800 mb-3">
-                  Få rådgivning
+                  Få detaljerad analys
                 </h4>
                 <p className="text-text-secondary">
                   Detaljerad rapport med avdragsförslag och
@@ -224,8 +232,7 @@ export const LandingPage: React.FC = () => {
               Priser
             </h3>
           </div>
-          <div className="flex justify-center">
-            <div className="ms-4 me-4" />
+          <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-8">
             <ProductCard
               title="Skatteanalys"
               price={199}
@@ -249,10 +256,9 @@ export const LandingPage: React.FC = () => {
                 <span>Visar var du fyller i avdraget i deklarationen</span>
               </li>
             </ProductCard>
-            <div className="ms-4 me-4" />
             <ProductCard
               title="Partner-paketet"
-              price={499}
+              price={449}
               isRecommended={false}
             >
               <li className="flex items-start">
@@ -362,20 +368,12 @@ export const LandingPage: React.FC = () => {
               <h6 className="font-semibold mb-4 text-text-primary">Support</h6>
               <ul className="space-y-2 text-text-secondary">
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-text-primary transition-colors"
-                  >
-                    Hjälpcenter
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
+                  <button
+                    onClick={handleShowFAQ}
                     className="hover:text-text-primary transition-colors"
                   >
                     Vanliga frågor
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <a
@@ -393,19 +391,19 @@ export const LandingPage: React.FC = () => {
               <ul className="space-y-2 text-text-secondary">
                 <li>
                   <a
-                    href="#"
+                    href="#about"
                     className="hover:text-text-primary transition-colors"
                   >
                     Om oss
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <button
+                    onClick={handleShowPrivacyPolicy}
                     className="hover:text-text-primary transition-colors"
                   >
                     Integritetspolicy
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <button

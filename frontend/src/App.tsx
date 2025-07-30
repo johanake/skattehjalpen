@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./components/LandingPage";
 import { TaxWizard } from "./components/TaxWizard";
 import { UserAgreement } from "./components/UserAgreement";
+import { FAQ } from "./components/FAQ";
+import { PrivacyPolicy } from "./components/PrivacyPolicy";
 import { TaxAnalysisResult } from "./components/TaxAnalysisResult";
 import { TaxAdviceHistory } from "./components/TaxAdviceHistory";
 import { StripeProvider } from "./components/StripeProvider";
@@ -37,6 +39,22 @@ function App() {
           element={
             <Layout>
               <UserAgreement />
+            </Layout>
+          }
+        />
+        <Route
+          path="/vanliga-fragor"
+          element={
+            <Layout>
+              <FAQ />
+            </Layout>
+          }
+        />
+        <Route
+          path="/integritetspolicy"
+          element={
+            <Layout>
+              <PrivacyPolicy />
             </Layout>
           }
         />
