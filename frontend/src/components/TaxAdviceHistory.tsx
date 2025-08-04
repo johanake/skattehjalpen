@@ -167,7 +167,7 @@ export const TaxAdviceHistory: React.FC = () => {
                     )}{" "}
                     kr
                   </div>
-                  <div className="text-sm text-text-inverse">
+                  <div className="text-sm text-text-primary">
                     Potentiell besparing
                   </div>
                 </div>
@@ -224,11 +224,14 @@ export const TaxAdviceHistory: React.FC = () => {
                                   : "Låg"}
                               </span>
                             </div>
-                            <p className="text-sm text-text-secondary break-words overflow-hidden" style={{
-                              display: '-webkit-box',
-                              WebkitLineClamp: 2,
-                              WebkitBoxOrient: 'vertical' as const
-                            }}>
+                            <p
+                              className="text-sm text-text-secondary break-words overflow-hidden"
+                              style={{
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: "vertical" as const,
+                              }}
+                            >
                               {deduction.explanation ||
                                 "Ingen förklaring tillgänglig"}
                             </p>

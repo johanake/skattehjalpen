@@ -216,7 +216,7 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                       )}{" "}
                       kr
                     </div>
-                    <div className="text-sm text-text-muted">
+                    <div className="text-sm text-text-primary">
                       Potentiell besparing
                     </div>
                     <div
@@ -232,10 +232,12 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div>
                     <h4 className="font-medium text-text-primary mb-2">
-                      💰 Nuvarande avdrag
+                      💸 Potentiell besparing
                     </h4>
-                    <p className="text-lg font-semibold text-text-secondary">
-                      {(deduction.currentAmount || 0).toLocaleString("sv-SE")}{" "}
+                    <p className="text-lg font-semibold text-accent">
+                      {(deduction.potentialSavings || 0).toLocaleString(
+                        "sv-SE"
+                      )}{" "}
                       kr
                     </p>
                   </div>
@@ -248,17 +250,7 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                       kr
                     </p>
                   </div>
-                  <div>
-                    <h4 className="font-medium text-text-primary mb-2">
-                      💸 Potentiell besparing
-                    </h4>
-                    <p className="text-lg font-semibold text-accent">
-                      {(deduction.potentialSavings || 0).toLocaleString(
-                        "sv-SE"
-                      )}{" "}
-                      kr
-                    </p>
-                  </div>
+                  <div></div>
                 </div>
 
                 {(deduction.requiredDocuments?.length || 0) > 0 && (

@@ -156,16 +156,16 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
       </h3>
 
       {/* Plan Summary */}
-      <div className="border border-accent rounded-lg p-4 mb-6 bg-accent-light">
+      <div className="border border-border-default rounded-lg p-4 mb-6 bg-bg-secondary">
         <div className="text-center">
           <h4 className="font-semibold text-text-primary mb-2">{plan.name}</h4>
-          <div className="text-3xl font-bold text-accent mb-4">
+          <div className="text-3xl font-bold text-text-primary mb-4">
             {plan.price} kr
           </div>
           <ul className="text-left text-sm text-text-secondary space-y-1">
             {plan.features.map((feature, index) => (
               <li key={index} className="flex items-start">
-                <span className="text-accent mr-2">✓</span>
+                <span className="text-text-primary mr-2">•</span>
                 {feature}
               </li>
             ))}
@@ -175,8 +175,8 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
 
       {/* Registration Form (if needed) */}
       {requireRegistration && !user && (
-        <div className="bg-primary-light p-4 rounded-lg mb-6">
-          <h4 className="font-medium text-primary mb-3">
+        <div className="bg-bg-secondary p-4 rounded-lg mb-6 border border-border-light">
+          <h4 className="font-medium text-text-primary mb-3">
             Skapa konto för att fortsätta
           </h4>
           <div className="space-y-3">
@@ -193,7 +193,7 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
                     email: e.target.value,
                   }))
                 }
-                className="w-full p-3 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                className="w-full p-3 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-text-primary focus:border-transparent"
                 placeholder="din@email.com"
               />
             </div>
@@ -210,7 +210,7 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
                     password: e.target.value,
                   }))
                 }
-                className="w-full p-3 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                className="w-full p-3 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-text-primary focus:border-transparent"
                 placeholder="Välj ett säkert lösenord"
               />
             </div>
@@ -220,14 +220,14 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
 
       {/* Payment Method Selection */}
       <div className="mb-6">
-        <h4 className="font-medium text-primary mb-3">Välj betalningsmetod</h4>
+        <h4 className="font-medium text-text-primary mb-3">Välj betalningsmetod</h4>
         <div className="space-y-2">
           <button
             onClick={() => setShowMockPayment(true)}
             className={`w-full p-4 border rounded-lg text-left transition-colors ${
               showMockPayment
-                ? "border-accent bg-accent-light"
-                : "border-border-default hover:border-accent"
+                ? "border-text-primary bg-bg-secondary"
+                : "border-border-default hover:border-text-secondary"
             }`}
           >
             <div className="font-medium">Mock Payment (För utveckling)</div>
@@ -239,8 +239,8 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
             onClick={() => setShowMockPayment(false)}
             className={`w-full p-4 border rounded-lg text-left transition-colors ${
               !showMockPayment
-                ? "border-accent bg-accent-light"
-                : "border-border-default hover:border-accent"
+                ? "border-text-primary bg-bg-secondary"
+                : "border-border-default hover:border-text-secondary"
             }`}
           >
             <div className="font-medium">Stripe Payment</div>
@@ -267,7 +267,7 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
         <button
           onClick={showMockPayment ? handleMockPayment : handleRealPayment}
           disabled={processing || (!showMockPayment && (!stripe || !elements))}
-          className="w-full bg-accent text-white py-3 px-6 rounded-lg hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+          className="w-full bg-text-primary text-white py-3 px-6 rounded-lg hover:bg-text-secondary disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
         >
           {processing
             ? requireRegistration && !user
@@ -291,9 +291,9 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
         )}
       </div>
 
-      <div className="mt-4 text-xs text-text-primary text-center">
+      <div className="mt-4 text-xs text-text-secondary text-center">
         <p>
-          🔒 Säker betalning via Stripe. Dina kortuppgifter är krypterade och
+          Säker betalning via Stripe. Dina kortuppgifter är krypterade och
           skyddade.
         </p>
       </div>

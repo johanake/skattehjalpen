@@ -32,7 +32,8 @@
       "Bash(echo:*)",
       "Bash(pkill:*)",
       "Bash(npx tsc:*)",
-      "Bash(powershell:*)"
+      "Bash(powershell:*)",
+      "Bash(rg:*)"
     ],
     "deny": []
   }

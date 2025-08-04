@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { env } from './env.js';
+import { logger } from '../utils/logger.js';
 
 export class DatabaseService {
   private static instance: DatabaseService;
@@ -16,13 +17,14 @@ export class DatabaseService {
 
   public async connect(): Promise<void> {
     if (this.isConnected) {
-      console.log('Database already connected');
+      logger.info('Database already connected');
       return;
     }
 
     try {
       const mongoUri = env.MONGODB_URI;
-      console.log('Attempting to connect to MongoDB URI:', mongoUri.replace(/\/\/[^:]+:[^@]+@/, '//***:***@'));
+      const maskedUri = mongoUri.replace(/\/\/[^:]+:[^@]+@/, '//***:***@');
+      logger.info('Attempting to connect to MongoDB', { uri: maskedUri });
       
       await mongoose.connect(mongoUri, {
         maxPoolSize: 10,
@@ -31,19 +33,23 @@ export class DatabaseService {
       });
 
       this.isConnected = true;
-      console.log('Connected to MongoDB successfully');
+      logger.info('Connected to MongoDB successfully', {
+        readyState: mongoose.connection.readyState,
+        host: mongoose.connection.host,
+        name: mongoose.connection.name
+      });
       
       mongoose.connection.on('error', (error) => {
-        console.error('MongoDB connection error:', error);
+        logger.error('MongoDB connection error', error);
       });
 
       mongoose.connection.on('disconnected', () => {
-        console.log('MongoDB disconnected');
+        logger.warn('MongoDB disconnected');
         this.isConnected = false;
       });
 
     } catch (error) {
-      console.error('Failed to connect to MongoDB:', error);
+      logger.error('Failed to connect to MongoDB', error);
       throw error;
     }
   }
@@ -56,9 +62,9 @@ export class DatabaseService {
     try {
       await mongoose.disconnect();
       this.isConnected = false;
-      console.log('Disconnected from MongoDB');
+      logger.info('Disconnected from MongoDB successfully');
     } catch (error) {
-      console.error('Error disconnecting from MongoDB:', error);
+      logger.error('Error disconnecting from MongoDB', error);
       throw error;
     }
   }

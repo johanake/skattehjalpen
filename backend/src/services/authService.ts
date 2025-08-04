@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { TRPCError } from '@trpc/server';
 import { User, IUser } from '../models/User.js';
 import { env } from '../config/env.js';
+import { logger } from '../utils/logger.js';
 
 export interface RegisterInput {
   username: string;
@@ -49,8 +50,11 @@ export class AuthService {
   static async register(input: RegisterInput): Promise<AuthResponse> {
     const { username, password } = input;
 
+    logger.info('User registration attempt', { username });
+
     const existingUser = await User.findOne({ username });
     if (existingUser) {
+      logger.warn('Registration failed - username already exists', { username });
       throw new TRPCError({
         code: 'CONFLICT',
         message: 'Username already exists',
@@ -63,6 +67,10 @@ export class AuthService {
     });
 
     await user.save();
+    logger.info('User registered successfully', { 
+      userId: (user._id as any).toString(),
+      username 
+    });
 
     const token = this.generateToken((user._id as any).toString());
 
@@ -75,8 +83,11 @@ export class AuthService {
   static async login(input: LoginInput): Promise<AuthResponse> {
     const { username, password } = input;
 
+    logger.info('User login attempt', { username });
+
     const user = await User.findOne({ username });
     if (!user) {
+      logger.warn('Login failed - user not found', { username });
       throw new TRPCError({
         code: 'UNAUTHORIZED',
         message: 'Invalid credentials',
@@ -85,11 +96,20 @@ export class AuthService {
 
     const isValidPassword = await user.comparePassword(password);
     if (!isValidPassword) {
+      logger.warn('Login failed - invalid password', { 
+        username,
+        userId: (user._id as any).toString()
+      });
       throw new TRPCError({
         code: 'UNAUTHORIZED',
         message: 'Invalid credentials',
       });
     }
+
+    logger.info('User logged in successfully', { 
+      userId: (user._id as any).toString(),
+      username 
+    });
 
     const token = this.generateToken((user._id as any).toString());
 

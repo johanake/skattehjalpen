@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Skattehjalpen is a Swedish tax assistance application with a monorepo structure using npm workspaces. The application consists of:
 
-- **Frontend**: React + TypeScript with Vite, TailwindCSS, and tRPC client
+- **Frontend**: React + TypeScript with Vite, TailwindCSS, and tRPC client (hosted on Vercel)
 - **Backend**: Node.js + Express + tRPC server with file upload capabilities
 - **Communication**: Full-stack type-safe tRPC for API communication
 
@@ -66,6 +66,11 @@ Skattehjalpen is a Swedish tax assistance application with a monorepo structure 
 - **User Authentication**: JWT-based with bcrypt password hashing
 - File uploads stored in backend/uploads/
 - Environment variables handled through src/config/env.ts
+
+### Deployment
+
+- **Frontend**: Hosted on Vercel
+- **Backend**: Hosted on Railway
 
 ### API Endpoints
 

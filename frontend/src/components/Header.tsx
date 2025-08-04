@@ -97,6 +97,12 @@ const Header: React.FC = () => {
                 >
                   Priser
                 </a>
+                <button
+                  onClick={() => navigate("/blogg")}
+                  className="text-gray-700 hover:text-gray-900 transition-colors text-sm lg:text-base"
+                >
+                  Blogg
+                </button>
                 <a
                   href="#about"
                   className="text-gray-700 hover:text-gray-900 transition-colors text-sm lg:text-base"
@@ -128,6 +134,16 @@ const Header: React.FC = () => {
                   }`}
                 >
                   Mina analyser
+                </button>
+                <button
+                  onClick={() => navigate("/blogg")}
+                  className={`text-sm lg:text-base transition-colors ${
+                    location.pathname.startsWith("/blogg")
+                      ? "text-primary-600 font-medium"
+                      : "text-gray-700 hover:text-gray-900"
+                  }`}
+                >
+                  Blogg
                 </button>
               </nav>
             )}

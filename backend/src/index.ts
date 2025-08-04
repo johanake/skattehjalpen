@@ -5,8 +5,13 @@ import { appRouter } from './router.js';
 import { env } from './config/env.js';
 import { database } from './config/database.js';
 import { createAuthMiddleware } from './middleware/auth.js';
+import { requestLoggingMiddleware, errorLoggingMiddleware } from './middleware/logging.js';
+import { logger } from './utils/logger.js';
 
 const app = express();
+
+// Request logging middleware (before other middleware)
+app.use(requestLoggingMiddleware);
 
 // CORS configuration
 app.use(cors({
@@ -40,6 +45,9 @@ app.use(
   }),
 );
 
+// Error logging middleware (after routes)
+app.use(errorLoggingMiddleware);
+
 const PORT = parseInt(env.PORT, 10);
 
 async function startServer() {
@@ -47,26 +55,34 @@ async function startServer() {
     await database.connect();
     
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
-      console.log(`📊 Health check: http://localhost:${PORT}/health`);
-      console.log(`🔧 tRPC endpoint: http://localhost:${PORT}/trpc`);
-      console.log(`🗄️ MongoDB connected successfully`);
+      logger.info('Server started successfully', {
+        port: PORT,
+        environment: process.env.NODE_ENV || 'development',
+        endpoints: {
+          server: `http://localhost:${PORT}`,
+          health: `http://localhost:${PORT}/health`,
+          trpc: `http://localhost:${PORT}/trpc`
+        }
+      });
+      logger.info('MongoDB connected successfully');
     });
   } catch (error) {
-    console.error('Failed to start server:', error);
+    logger.error('Failed to start server', error);
     process.exit(1);
   }
 }
 
 process.on('SIGINT', async () => {
-  console.log('Shutting down server...');
+  logger.info('Received SIGINT, shutting down server gracefully...');
   await database.disconnect();
+  logger.info('Server shutdown completed');
   process.exit(0);
 });
 
 process.on('SIGTERM', async () => {
-  console.log('Shutting down server...');
+  logger.info('Received SIGTERM, shutting down server gracefully...');
   await database.disconnect();
+  logger.info('Server shutdown completed');
   process.exit(0);
 });
 
