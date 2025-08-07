@@ -5,9 +5,13 @@ export interface User {
   updatedAt: Date;
 }
 
+import { Request, Response } from 'express';
+
 export interface AuthContext {
   user?: User;
   isAuthenticated: boolean;
+  req?: Request;
+  res?: Response;
 }
 
 export interface ApiResponse<T> {

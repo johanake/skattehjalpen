@@ -3,6 +3,7 @@ import { userController } from "./controllers/userController.js";
 import { taxController } from "./controllers/taxController.js";
 import { paymentRouter } from "./controllers/paymentController.js";
 import { AuthController } from "./controllers/authController.js";
+import { analyticsController } from "./controllers/analyticsController.js";
 import { registerSchema, loginSchema } from "./validators/authValidators.js";
 import { z } from "zod";
 
@@ -74,6 +75,13 @@ export const appRouter = router({
 
   // Stripe payment endpoints
   payment: paymentRouter,
+
+  // Analytics endpoints
+  analytics: router({
+    logVisit: analyticsController.logVisit,
+    logEvent: analyticsController.logEvent,
+    getStats: analyticsController.getAnalytics,
+  }),
 });
 
 export type AppRouter = typeof appRouter;

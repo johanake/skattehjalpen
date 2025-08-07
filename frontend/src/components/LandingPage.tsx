@@ -3,11 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { PrimaryButton } from "./buttons/PrimaryButton";
 import { SecondaryButton } from "./buttons/SecondaryButton";
 import { ProductCard } from "./products/ProductCard";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
+  const { trackButtonClick, trackTaxFormStart } = useAnalytics();
 
   const handleStartWizard = () => {
+    trackButtonClick('start_tax_declaration', { location: 'hero_section' });
+    trackTaxFormStart();
+    navigate("/skatt/inkomstdeklaration");
+  };
+
+  const handleStartWizardPricing = () => {
+    trackButtonClick('start_tax_declaration', { location: 'pricing_section' });
+    trackTaxFormStart();
     navigate("/skatt/inkomstdeklaration");
   };
 
@@ -275,7 +285,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <PrimaryButton size="lg" onClick={handleStartWizard}>
+            <PrimaryButton size="lg" onClick={handleStartWizardPricing}>
               Kom igång nu
             </PrimaryButton>
           </div>

@@ -11,6 +11,7 @@ import { StripeProvider } from "./components/StripeProvider";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Layout from "./components/Layout";
+import { AdminStats } from "./components/AdminStats";
 
 // Lazy load blog components to avoid import issues on main page
 const BlogList = React.lazy(() => import("./components/BlogList").then(module => ({ default: module.BlogList })));
@@ -112,6 +113,10 @@ function App() {
               </Suspense>
             </Layout>
           }
+        />
+        <Route
+          path="/admin/stats"
+          element={<AdminStats />}
         />
       </Routes>
     </Router>

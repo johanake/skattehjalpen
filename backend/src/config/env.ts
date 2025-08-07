@@ -27,6 +27,12 @@ const envSchema = z.object({
     .default(
       "mongodb://admin:password123@localhost:27017/skattehjalpen?authSource=admin"
     ),
+  IP_SALT: z
+    .string()
+    .default("default-analytics-salt-change-in-production"),
+  ADMIN_ANALYTICS_KEY: z
+    .string()
+    .default("admin123-change-in-production"),
 });
 
 console.log("Loading environment variables...");
