@@ -23,20 +23,20 @@ export const LandingPage: React.FC = () => {
     navigate("/integritetspolicy");
   };
   return (
-    <div className="min-h-screen bg-gradient-to-br bg-primary">
+    <div className="min-h-screen bg-gradient-to-br bg-blue-800">
       {/* Hero Section */}
       <section
-        className="pt-20 pb-32 bg-cover bg-center bg-no-repeat relative bg-gradient-to-r from-primary to-primary-600"
+        className="pt-20 pb-32 bg-cover bg-center bg-no-repeat relative bg-gradient-to-r from-blue-800 to-blue-600"
         style={{ backgroundImage: "url(/hero-picture.jpg)" }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <h2 className="text-5xl font-bold text-text-inverse mb-6">
+            <h2 className="text-5xl font-bold text-white mb-6">
               AI-driven skatterådgivning för{" "}
-              <span className="text-accent">svenska</span> skattebetalare
+              <span className="text-green-600">svenska</span> skattebetalare
             </h2>
-            <p className="text-xl text-text-inverse mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
               Din personliga AI-assistent för deklarationen. Fyll i vårt smarta
               frågeformulär på 10 minuter och få hjälp att hitta dolda avdrag
               och maximera din skatteåterbäring.
@@ -58,7 +58,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-bg-secondary">
+      <section id="features" className="py-20 bg-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h3 className="text-3xl font-bold text-text-primary mb-4">
@@ -72,9 +72,9 @@ export const LandingPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-accent rounded-full mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-6">
                 <svg
-                  className="w-8 h-8 text-text-inverse"
+                  className="w-8 h-8 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -97,9 +97,9 @@ export const LandingPage: React.FC = () => {
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-accent rounded-full mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-6">
                 <svg
-                  className="w-8 h-8 text-text-inverse"
+                  className="w-8 h-8 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -122,9 +122,9 @@ export const LandingPage: React.FC = () => {
             </div>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-accent rounded-full mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-6">
                 <svg
-                  className="w-8 h-8 text-text-inverse"
+                  className="w-8 h-8 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -150,15 +150,13 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* How it Works */}
-      <section className="py-20 bg-primary">
+      <section className="py-20 bg-blue-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-text-inverse mb-4">
+            <h3 className="text-3xl font-bold text-white mb-4">
               Så här fungerar det
             </h3>
-            <p className="text-xl text-text-inverse">
-              Enkel process i fyra steg
-            </p>
+            <p className="text-xl text-white">Enkel process i fyra steg</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -225,7 +223,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-primary-bg">
+      <section id="pricing" className="py-20 bg-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h3 className="text-3xl font-bold text-text-primary mb-4">
@@ -297,12 +295,12 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 <div className="flex-1 text-center md:text-left">
-                  <p className="text-text-secondary mb-4 leading-relaxed">
+                  <p className="text-gray-900 mb-4 leading-relaxed">
                     Vi vill göra skattedeklarationer enklare för alla svenskar.
                     Som många andra har vi märkt att det kan vara svårt att
                     hitta alla avdrag man har rätt till.
                   </p>
-                  <p className="text-text-secondary mb-4 leading-relaxed">
+                  <p className="text-gray-900 mb-4 leading-relaxed">
                     Vår idé var att använda teknik för att hjälpa fler människor
                     att få tillbaka mer pengar från skatten. Vi byggde
                     Skattehjälpen för att göra kunskap om skatt och avdrag mer
@@ -321,7 +319,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-bg-secondary text-white py-12">
+      <footer className="bg-slate-100 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -341,23 +339,20 @@ export const LandingPage: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <h5 className="text-lg text-text-primary font-semibold">
+                <h5 className="text-lg text-gray-900 font-semibold">
                   Skattehjälpen
                 </h5>
               </div>
-              <p className="text-text-secondary">
+              <p className="text-gray-900">
                 AI-driven skatteanalys för svenska skattebetalare
               </p>
             </div>
 
             <div>
-              <h6 className="font-semibold mb-4 text-text-primary">Tjänster</h6>
-              <ul className="space-y-2 text-text-secondary">
+              <h6 className="font-semibold mb-4 text-gray-900">Tjänster</h6>
+              <ul className="space-y-2 text-gray-600">
                 <li>
-                  <a
-                    href="#"
-                    className="hover:text-text-secondary transition-colors"
-                  >
+                  <a href="#" className="hover:text-gray-900 transition-colors">
                     Analys av inkomstdeklaration
                   </a>
                 </li>
@@ -365,12 +360,12 @@ export const LandingPage: React.FC = () => {
             </div>
 
             <div>
-              <h6 className="font-semibold mb-4 text-text-primary">Support</h6>
-              <ul className="space-y-2 text-text-secondary">
+              <h6 className="font-semibold mb-4 text-gray-900">Support</h6>
+              <ul className="space-y-2 text-gray-600">
                 <li>
                   <button
                     onClick={handleShowFAQ}
-                    className="hover:text-text-primary transition-colors"
+                    className="hover:text-gray-900 transition-colors"
                   >
                     Vanliga frågor
                   </button>
@@ -387,12 +382,12 @@ export const LandingPage: React.FC = () => {
             </div>
 
             <div>
-              <h6 className="font-semibold mb-4 text-text-primary">Företag</h6>
-              <ul className="space-y-2 text-text-secondary">
+              <h6 className="font-semibold mb-4 text-gray-900">Företag</h6>
+              <ul className="space-y-2 text-gray-600">
                 <li>
                   <a
                     href="#about"
-                    className="hover:text-text-primary transition-colors"
+                    className="hover:text-gray-900 transition-colors"
                   >
                     Om oss
                   </a>
@@ -417,7 +412,7 @@ export const LandingPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-text-primary">
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-900">
             <p>&copy; 2024 Skattehjälpen. Alla rättigheter förbehållna.</p>
           </div>
         </div>

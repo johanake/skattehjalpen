@@ -38,8 +38,8 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
 
   if (generateAdvice.isPending) {
     return (
-      <div className="bg-bg-white p-6 rounded-lg shadow-lg border border-border-light">
-        <h2 className="text-2xl font-bold mb-4 text-primary">
+      <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+        <h2 className="text-2xl font-bold mb-4 text-blue-800">
           Analyserar din deklaration...
         </h2>
         <div className="flex items-center justify-center py-8">
@@ -59,8 +59,8 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
 
   if (generateAdvice.error) {
     return (
-      <div className="bg-danger-light border border-danger rounded-lg p-4">
-        <p className="text-danger">
+      <div className="bg-red-100 border border-red-600 rounded-lg p-4">
+        <p className="text-red-600">
           Ett fel uppstod vid analysen: {generateAdvice.error.message}
         </p>
       </div>
@@ -75,7 +75,9 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
             <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🎉</span>
             </div>
-            <h2 className="text-3xl font-bold text-primary mb-2">Fantastisk!</h2>
+            <h2 className="text-3xl font-bold text-blue-800 mb-2">
+              Fantastisk!
+            </h2>
             <p className="text-lg text-text-secondary">
               Vi hittade möjliga besparingar för dig
             </p>
@@ -85,7 +87,9 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
             <div className="w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">📋</span>
             </div>
-            <h2 className="text-3xl font-bold text-primary mb-2">Analys klar!</h2>
+            <h2 className="text-3xl font-bold text-blue-800 mb-2">
+              Analys klar!
+            </h2>
             <p className="text-lg text-text-secondary">
               Vi har granskat din deklaration noggrant
             </p>
@@ -93,9 +97,9 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
         )}
       </div>
 
-      <div className="bg-accent-light p-6 rounded-lg mb-8 text-center">
-        <div className="text-sm text-text-primary mb-2">
-          Totala möjliga avdrag
+      <div className="bg-green-100 p-6 rounded-lg mb-8 text-center">
+        <div className="text-sm text-gray-800 mb-2">
+          Vi har hittat en besparing på:
         </div>
         <div className="text-4xl font-bold text-text-inverse mb-2">
           {totalDeductions !== null ? formatCurrency(totalDeductions) : "---"}
@@ -107,7 +111,7 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
 
       <div className="space-y-6">
         <div className="bg-bg-secondary p-4 rounded-lg border-l-4 border-accent">
-          <h3 className="font-semibold text-primary mb-2">
+          <h3 className="font-semibold text-blue-800 mb-2">
             Vad ingår i den fullständiga analysen?
           </h3>
           <ul className="space-y-2 text-text-secondary">
@@ -121,11 +125,7 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
             </li>
             <li className="flex items-center">
               <span className="text-accent mr-2">✓</span>
-              Riskbedömning för varje avdrag
-            </li>
-            <li className="flex items-center">
-              <span className="text-accent mr-2">✓</span>
-              Lista över nödvändiga dokument
+              Vi visar vad och var du fyller i inkomstdeklarationen
             </li>
             <li className="flex items-center">
               <span className="text-accent mr-2">✓</span>
@@ -134,24 +134,24 @@ export const TaxAdvicePreview: React.FC<TaxAdvicePreviewProps> = ({
           </ul>
         </div>
 
-        <div className="bg-primary-light p-4 rounded-lg">
+        <div className="bg-blue-100 p-4 rounded-lg">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="font-medium text-primary">
+              <h4 className="font-medium text-blue-800">
                 Fullständig skatteanalys
               </h4>
               <p className="text-sm text-text-muted">
                 Engångsbetalning - inga prenumerationer
               </p>
             </div>
-            <div className="text-2xl font-bold text-primary">599 kr</div>
+            <div className="text-2xl font-bold text-blue-800">599 kr</div>
           </div>
         </div>
 
         <div className="flex flex-col gap-4">
           <button
             onClick={onContinue}
-            className="w-full bg-accent text-white py-4 px-6 rounded-lg hover:bg-accent-light transition-colors font-medium text-lg"
+            className="w-full bg-green-600 text-white py-4 px-6 rounded-lg hover:bg-green-500 transition-colors font-medium text-lg"
           >
             {isLoggedIn
               ? "Fortsätt till betalning"

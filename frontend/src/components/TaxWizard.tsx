@@ -57,7 +57,7 @@ export const TaxWizard: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-bg-white">
+    <div className="min-h-screen bg-white">
       {/* Progress Steps */}
       <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="mb-8">
@@ -68,10 +68,10 @@ export const TaxWizard: React.FC = () => {
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
                     step.completed
-                      ? "bg-accent text-white"
+                      ? "bg-green-600  text-white"
                       : currentStep === step.id
                       ? "bg-accent text-white"
-                      : "bg-bg-secondary text-text-secondary border border-border-default"
+                      : "bg-slate-100 text-gray-600 border border-gray-300"
                   }`}
                 >
                   {step.completed ? "✓" : index + 1}
@@ -83,7 +83,7 @@ export const TaxWizard: React.FC = () => {
                         ? "text-accent"
                         : currentStep === step.id
                         ? "text-accent"
-                        : "text-text-secondary"
+                        : "text-gray-600"
                     }`}
                   >
                     {step.name}
@@ -125,7 +125,7 @@ export const TaxWizard: React.FC = () => {
                     ? "bg-accent text-white"
                     : currentStep
                     ? "bg-accent text-white"
-                    : "bg-bg-secondary text-text-secondary border border-border-default"
+                    : "bg-gray-100 text-gray-600 border border-gray-300"
                 }`}
               >
                 {steps.find((s) => s.id === currentStep)?.completed
@@ -146,8 +146,8 @@ export const TaxWizard: React.FC = () => {
               onClick={() => setCurrentStep("declaration")}
               className={`px-4 py-2 rounded transition-colors ${
                 currentStep === "declaration"
-                  ? "bg-accent text-white"
-                  : "bg-bg-secondary text-text-secondary hover:bg-primary-light border border-border-default"
+                  ? "bg-green-600 text-white"
+                  : "bg-slate-100 text-gray-600 hover:bg-green-300 border border-border-default"
               }`}
             >
               Deklaration
@@ -157,8 +157,8 @@ export const TaxWizard: React.FC = () => {
                 onClick={() => setCurrentStep("preview")}
                 className={`px-4 py-2 rounded transition-colors ${
                   currentStep === "preview"
-                    ? "bg-accent text-text-primary"
-                    : "bg-bg-secondary text-text-secondary hover:bg-primary-light border border-border-default"
+                    ? "bg-green-600 text-white"
+                    : "bg-slate-100 text-gray-600 hover:bg-green-300 border border-border-default"
                 }`}
               >
                 Förhandsgranskning
@@ -170,7 +170,7 @@ export const TaxWizard: React.FC = () => {
                 className={`px-4 py-2 rounded transition-colors ${
                   currentStep === "advice"
                     ? "bg-accent text-white"
-                    : "bg-bg-secondary text-text-secondary hover:bg-primary-light border border-border-default"
+                    : "bg-bg-secondary text-gray-600 hover:bg-blue-500 border border-border-default"
                 }`}
               >
                 Fullständig analys

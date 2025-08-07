@@ -48,17 +48,17 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
   // Loading state for fetched advice
   if (!propAdvice && adviceId && isLoading) {
     return (
-      <div className="max-w-6xl mx-auto p-6 bg-bg-white">
+      <div className="max-w-6xl mx-auto p-6 bg-white">
         <div className="animate-pulse">
-          <div className="h-8 bg-bg-secondary rounded mb-4"></div>
+          <div className="h-8 bg-gray-100 rounded mb-4"></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="h-24 bg-bg-secondary rounded"></div>
+              <div key={i} className="h-24 bg-gray-100 rounded"></div>
             ))}
           </div>
           <div className="space-y-4">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="h-32 bg-bg-secondary rounded"></div>
+              <div key={i} className="h-32 bg-gray-100 rounded"></div>
             ))}
           </div>
         </div>
@@ -69,9 +69,9 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
   // Error state for fetched advice
   if (!propAdvice && adviceId && error) {
     return (
-      <div className="max-w-6xl mx-auto p-6 bg-bg-white">
-        <div className="bg-danger-light border border-danger rounded-lg p-4">
-          <p className="text-danger">
+      <div className="max-w-6xl mx-auto p-6 bg-white">
+        <div className="bg-red-50 border border-red-600 rounded-lg p-4">
+          <p className="text-red-600">
             Error loading tax advice: {error.message}
           </p>
         </div>
@@ -81,39 +81,13 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
   // Add safety check for advice prop
   if (!advice) {
     return (
-      <div className="max-w-6xl mx-auto p-6 bg-bg-white">
-        <div className="bg-danger-light border border-danger rounded-lg p-4">
-          <p className="text-danger">Error: No advice data available</p>
+      <div className="max-w-6xl mx-auto p-6 bg-white">
+        <div className="bg-red-50 border border-red-600 rounded-lg p-4">
+          <p className="text-red-600">Error: No advice data available</p>
         </div>
       </div>
     );
   }
-
-  const getConfidenceColor = (confidence: "high" | "medium" | "low") => {
-    switch (confidence) {
-      case "high":
-        return "text-accent bg-accent-light border-accent";
-      case "medium":
-        return "text-yellow-600 bg-yellow-50 border-yellow-300";
-      case "low":
-        return "text-red-600 bg-red-50 border-red-300";
-      default:
-        return "text-text-secondary bg-bg-secondary border-border-default";
-    }
-  };
-
-  const getConfidenceText = (confidence: "high" | "medium" | "low") => {
-    switch (confidence) {
-      case "high":
-        return "Hög tillförlitlighet";
-      case "medium":
-        return "Medel tillförlitlighet";
-      case "low":
-        return "Låg tillförlitlighet";
-      default:
-        return "Okänd";
-    }
-  };
 
   const totalDeductionAmount =
     advice.suggestedDeductions?.reduce(
@@ -124,7 +98,7 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-bg-white">
+    <div className="max-w-6xl mx-auto p-6 bg-white">
       {/* Breadcrumb Navigation - only show when viewing specific analysis */}
       {adviceId && (
         <nav className="mb-6">
@@ -152,10 +126,10 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-text-primary mb-2">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">
           📊 Analys av skatteavdragsmöjligheter
         </h1>
-        <p className="text-text-secondary">
+        <p className="text-gray-600">
           {adviceId
             ? `Analys från ${new Date(advice!.generatedAt).toLocaleDateString(
                 "sv-SE"
@@ -166,31 +140,31 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-accent-light border border-accent rounded-lg p-6 text-center">
-          <div className="text-3xl font-bold text-text-inverse mb-2">
+        <div className="bg-green-700 border border-accent rounded-lg p-6 text-center">
+          <div className="text-3xl font-bold text-white mb-2">
             {(advice.totalPotentialSavings || 0).toLocaleString("sv-SE")} kr
           </div>
-          <div className="text-text-inverse">Potentiell skattebesparning</div>
+          <div className="text-white">Potentiell skattebesparning</div>
         </div>
 
-        <div className="bg-primary-light border border-primary rounded-lg p-6 text-center">
-          <div className="text-3xl font-bold text-text-inverse mb-2">
+        <div className="bg-blue-700 border border-primary rounded-lg p-6 text-center">
+          <div className="text-3xl font-bold text-white mb-2">
             {totalDeductionAmount.toLocaleString("sv-SE")} kr
           </div>
-          <div className="text-text-inverse">Totalt avdragsbelopp</div>
+          <div className="text-white">Totalt avdragsbelopp</div>
         </div>
 
-        <div className="bg-bg-secondary border border-border-default rounded-lg p-6 text-center">
-          <div className="text-3xl font-bold text-text-primary mb-2">
+        <div className="bg-gray-100 border border-gray-300 rounded-lg p-6 text-center">
+          <div className="text-3xl font-bold text-gray-800 mb-2">
             {advice.suggestedDeductions?.length || 0}
           </div>
-          <div className="text-text-primary">Avdragsmöjligheter</div>
+          <div className="text-gray-800">Avdragsmöjligheter</div>
         </div>
       </div>
 
       {/* Detailed Deductions */}
       <div className="mb-8">
-        <h2 className="text-xl font-semibold text-text-primary mb-4">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">
           📋 Detaljerad genomgång av avdrag
         </h2>
         {advice.suggestedDeductions?.length > 0 ? (
@@ -198,14 +172,14 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
             {advice.suggestedDeductions.map((deduction, index) => (
               <div
                 key={index}
-                className="bg-bg-white border border-border-light rounded-lg p-6 shadow-sm"
+                className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-text-primary">
+                    <h3 className="text-lg font-semibold text-gray-800">
                       {deduction.category || "Okänt avdrag"}
                     </h3>
-                    <p className="text-text-secondary mt-1">
+                    <p className="text-gray-600 mt-1">
                       {deduction.explanation || "Ingen förklaring tillgänglig"}
                     </p>
                   </div>
@@ -216,22 +190,15 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                       )}{" "}
                       kr
                     </div>
-                    <div className="text-sm text-text-primary">
+                    <div className="text-sm text-gray-800">
                       Potentiell besparing
-                    </div>
-                    <div
-                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border mt-2 ${getConfidenceColor(
-                        deduction.confidence
-                      )}`}
-                    >
-                      {getConfidenceText(deduction.confidence)}
                     </div>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div>
-                    <h4 className="font-medium text-text-primary mb-2">
+                    <h4 className="font-medium text-gray-800 mb-2">
                       💸 Potentiell besparing
                     </h4>
                     <p className="text-lg font-semibold text-accent">
@@ -242,7 +209,7 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
                     </p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-text-primary mb-2">
+                    <h4 className="font-medium text-gray-800 mb-2">
                       📈 Föreslaget avdrag
                     </h4>
                     <p className="text-lg font-semibold text-accent">
@@ -255,10 +222,10 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
 
                 {(deduction.requiredDocuments?.length || 0) > 0 && (
                   <div>
-                    <h4 className="font-medium text-text-primary mb-2">
+                    <h4 className="font-medium text-gray-800 mb-2">
                       ✅ Sektion i din inkomstdeklaration
                     </h4>
-                    <ul className="text-text-secondary space-y-1">
+                    <ul className="text-gray-600 space-y-1">
                       {deduction.requiredDocuments?.map((doc, docIndex) => (
                         <li key={docIndex} className="flex items-start">
                           <span className="text-accent mr-2">•</span>
@@ -272,12 +239,12 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
             ))}
           </div>
         ) : (
-          <div className="bg-bg-secondary border border-border-light rounded-lg p-6 text-center">
-            <p className="text-text-secondary">
+          <div className="bg-gray-100 border border-gray-200 rounded-lg p-6 text-center">
+            <p className="text-gray-600">
               Inga specifika avdragsmöjligheter identifierades baserat på din
               deklaration.
             </p>
-            <p className="text-text-muted text-sm mt-2">
+            <p className="text-gray-400 text-sm mt-2">
               Detta betyder inte att du inte har några avdrag - kontrollera
               Skatteverkets standardavdrag.
             </p>
@@ -285,57 +252,16 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
         )}
       </div>
 
-      {/* Risk Assessment */}
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold text-text-primary mb-4">
-          ⚠️ Riskbedömning
-        </h2>
-        <div
-          className={`border rounded-lg p-4 ${
-            advice.riskAssessment?.level === "low"
-              ? "border-accent bg-accent-light"
-              : advice.riskAssessment?.level === "medium"
-              ? "border-yellow-300 bg-yellow-50"
-              : "border-red-300 bg-red-50"
-          }`}
-        >
-          <div className="flex items-center mb-2">
-            <span
-              className={`px-3 py-1 rounded text-sm font-medium ${
-                advice.riskAssessment?.level === "low"
-                  ? "bg-accent text-white"
-                  : advice.riskAssessment?.level === "medium"
-                  ? "bg-yellow-600 text-white"
-                  : "bg-red-600 text-white"
-              }`}
-            >
-              {advice.riskAssessment?.level === "low"
-                ? "LÅG RISK"
-                : advice.riskAssessment?.level === "medium"
-                ? "MEDEL RISK"
-                : "HÖG RISK"}
-            </span>
-          </div>
-          {advice.riskAssessment?.factors?.length > 0 && (
-            <ul className="text-sm list-disc list-inside text-text-secondary">
-              {advice.riskAssessment.factors.map((factor, index) => (
-                <li key={index}>{factor}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
-
       {/* Recommendations */}
       <div className="mb-8">
-        <h2 className="text-xl font-semibold text-text-primary mb-4">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">
           💡 Rekommendationer
         </h2>
         <ul className="space-y-2">
           {advice.recommendations?.map((recommendation, index) => (
             <li key={index} className="flex items-start">
               <span className="text-accent mr-2">•</span>
-              <span className="text-text-secondary">{recommendation}</span>
+              <span className="text-gray-600">{recommendation}</span>
             </li>
           ))}
         </ul>
@@ -343,29 +269,29 @@ export const TaxAnalysisResult: React.FC<TaxAnalysisResultProps> = ({
 
       {/* Action Items */}
       <div className="mt-8 bg-primary-light border border-primary rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-text-inverse mb-4">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">
           📝 Nästa steg
         </h2>
-        <ul className="space-y-2 text-text-inverse">
+        <ul className="space-y-2 text-gray-900">
           <li className="flex items-center">
-            <span className="text-text-inverse mr-2">1.</span>
+            <span className="text-gray-900 mr-2">1.</span>
             Samla in kvitton och dokumentation för alla avdrag
           </li>
           <li className="flex items-center">
-            <span className="text-text-inverse mr-2">2.</span>
+            <span className="text-gray-900 mr-2">2.</span>
             Logga in på Skatteverkets e-tjänst för att fylla i deklarationen
           </li>
           <li className="flex items-center">
-            <span className="text-text-inverse mr-2">3.</span>
+            <span className="text-gray-900 mr-2">3.</span>
             Fyll i beloppen enligt angivna deklarationspunkter
           </li>
           <li className="flex items-center">
-            <span className="text-text-inverse mr-2">4.</span>
+            <span className="text-gray-900 mr-2">4.</span>
             Kontrollera att alla krav är uppfyllda innan du lämnar in
           </li>
         </ul>
 
-        <div className="mt-4 text-sm text-text-inverse opacity-75">
+        <div className="mt-4 text-sm text-gray-900 opacity-75">
           Analys genererad den{" "}
           {new Date(advice.generatedAt).toLocaleDateString("sv-SE")}
         </div>

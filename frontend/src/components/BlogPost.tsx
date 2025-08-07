@@ -35,8 +35,8 @@ const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({
   };
 
   return (
-    <div className="flex items-center space-x-4 py-6 border-t border-border-light">
-      <span className="text-text-secondary font-medium">Dela artikel:</span>
+    <div className="flex items-center space-x-4 py-6 border-t border-gray-200">
+      <span className="text-gray-600 font-medium">Dela artikel:</span>
       <button
         onClick={shareOnLinkedIn}
         className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -59,7 +59,7 @@ const SocialShareButtons: React.FC<SocialShareButtonsProps> = ({
       </button>
       <button
         onClick={copyToClipboard}
-        className="flex items-center space-x-2 px-4 py-2 bg-bg-secondary text-text-primary rounded-lg hover:bg-border-light transition-colors"
+        className="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200 transition-colors"
         aria-label="Kopiera länk"
       >
         <svg
@@ -101,11 +101,11 @@ const BlogPost: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-bg-primary">
+      <div className="min-h-screen bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-            <p className="mt-4 text-text-secondary">Laddar blogginlägg...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Laddar blogginlägg...</p>
           </div>
         </div>
       </div>
@@ -114,18 +114,18 @@ const BlogPost: React.FC = () => {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-bg-primary">
+      <div className="min-h-screen bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-text-primary mb-4">
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">
               Blogginlägg hittades inte
             </h1>
-            <p className="text-text-secondary mb-6">
+            <p className="text-gray-600 mb-6">
               Det begärda blogginlägget kunde inte hittas.
             </p>
             <button
               onClick={() => navigate("/blogg")}
-              className="px-6 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+              className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
             >
               Tillbaka till bloggen
             </button>
@@ -136,12 +136,12 @@ const BlogPost: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-slate-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Back button */}
         <button
           onClick={() => navigate("/blogg")}
-          className="flex items-center text-text-secondary hover:text-text-primary mb-8 transition-colors"
+          className="flex items-center text-gray-600 hover:text-gray-800 mb-8 transition-colors"
         >
           <svg
             className="w-5 h-5 mr-2"
@@ -185,12 +185,12 @@ const BlogPost: React.FC = () => {
             )}
 
             {/* Title */}
-            <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
               {post.title}
             </h1>
 
             {/* Meta info */}
-            <div className="flex items-center justify-between text-text-accent-muted mb-8 pb-8 border-b border-border-light">
+            <div className="flex items-center justify-between text-gray-500 mb-8 pb-8 border-b border-gray-200">
               <div className="flex items-center space-x-4">
                 <span>Av {post.author}</span>
                 <span>•</span>
@@ -204,7 +204,7 @@ const BlogPost: React.FC = () => {
 
             {/* Content */}
             <div
-              className="prose prose-lg max-w-none prose-headings:text-text-primary prose-p:text-text-primary prose-li:text-text-primary prose-strong:text-text-primary prose-headings:font-semibold prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3 prose-ul:my-4 prose-ol:my-4 prose-li:my-1"
+              className="prose prose-lg max-w-none prose-headings:text-gray-800 prose-p:text-gray-800 prose-li:text-gray-800 prose-strong:text-gray-800 prose-headings:font-semibold prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3 prose-ul:my-4 prose-ol:my-4 prose-li:my-1"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 

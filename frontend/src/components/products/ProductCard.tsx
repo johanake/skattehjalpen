@@ -33,9 +33,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           ) : (
             <br />
           )}
-          <div className="text-5xl font-extrabold text-primary">{price} kr</div>
+          <div className="text-5xl font-extrabold text-blue-800">{price} kr</div>
         </div>
-        <p className="text-text-primary mb-8 text-sm">Engångsbetalning</p>
+        <p className="text-gray-800 mb-8 text-sm">Engångsbetalning</p>
         <ul className="text-left text-gray-700 space-y-4 mb-8">{children}</ul>
       </div>
     </div>

@@ -88,7 +88,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
               {mode === "login" ? "Välkommen tillbaka" : "Kom igång idag"}
             </h2>
-            <p className="text-text-primary text-base">
+            <p className="text-gray-800 text-base">
               {mode === "login"
                 ? "Logga in för att komma åt din skatteanalys"
                 : "Skapa ett konto och få personlig skattehjälp på bara några minuter"}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { AuthModal } from "./AuthModal";
-import { SecondaryButton } from "./buttons/SecondaryButton";
+import { PrimaryButton } from "./buttons/PrimaryButton";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Header: React.FC = () => {
   const isHistoryPage = location.pathname === "/mina-analyser";
 
   return (
-    <header className="bg-primary-bg shadow-lg sticky top-0 z-50">
+    <header className="bg-slate-50 shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -40,11 +40,11 @@ const Header: React.FC = () => {
               isHistoryPage) && (
               <button
                 onClick={handleBackClick}
-                className="mr-4 p-2 rounded-full hover:bg-bg-secondary transition-colors"
+                className="mr-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
                 aria-label="Tillbaka till startsida"
               >
                 <svg
-                  className="w-6 h-6 text-text-primary"
+                  className="w-6 h-6 text-gray-800"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -59,23 +59,29 @@ const Header: React.FC = () => {
               </button>
             )}
             <div className="flex items-center justify-center w-10 h-10 mr-3">
-              <svg
-                className="w-8 h-8"
-                viewBox="0 0 32 32"
-                fill="none"
-              >
-                <rect width="32" height="32" rx="6" fill="#1E3A8A"/>
-                <path d="M8 10C8 9.44772 8.44772 9 9 9H23C23.5523 9 24 9.44772 24 10V22C24 22.5523 23.5523 23 23 23H9C8.44772 23 8 22.5523 8 22V10Z" fill="#F1F5F9"/>
-                <path d="M10 12H22V13H10V12Z" fill="#3B82F6"/>
-                <path d="M10 15H22V16H10V15Z" fill="#3B82F6"/>
-                <path d="M10 18H18V19H10V18Z" fill="#3B82F6"/>
-                <circle cx="20" cy="18.5" r="1.5" fill="#16A34A"/>
-                <path d="M19.3 18.5L19.7 18.9L20.7 17.9" stroke="white" strokeWidth="0.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="6" fill="#1E3A8A" />
+                <path
+                  d="M8 10C8 9.44772 8.44772 9 9 9H23C23.5523 9 24 9.44772 24 10V22C24 22.5523 23.5523 23 23 23H9C8.44772 23 8 22.5523 8 22V10Z"
+                  fill="#F1F5F9"
+                />
+                <path d="M10 12H22V13H10V12Z" fill="#3B82F6" />
+                <path d="M10 15H22V16H10V15Z" fill="#3B82F6" />
+                <path d="M10 18H18V19H10V18Z" fill="#3B82F6" />
+                <circle cx="20" cy="18.5" r="1.5" fill="#16A34A" />
+                <path
+                  d="M19.3 18.5L19.7 18.9L20.7 17.9"
+                  stroke="white"
+                  strokeWidth="0.5"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
             <button
               onClick={handleLogoClick}
-              className="text-2xl font-bold text-text-primary hover:text-accent transition-colors"
+              className="text-2xl font-bold text-gray-800 hover:text-green-600 transition-colors"
             >
               Skattehjälpen
             </button>
@@ -160,12 +166,9 @@ const Header: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <SecondaryButton
-                  className=""
-                  onClick={() => setIsAuthModalOpen(true)}
-                >
+                <PrimaryButton onClick={() => setIsAuthModalOpen(true)}>
                   Logga in
-                </SecondaryButton>
+                </PrimaryButton>
               )}
             </div>
           </div>

@@ -80,7 +80,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
               placeholder="ange@din-email.com"
             />
           </div>
@@ -115,13 +115,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
               placeholder="Ange ditt lösenord"
               minLength={10}
             />
           </div>
           {mode === "register" && (
-            <p className="mt-1 text-xs text-text-primary">
+            <p className="mt-1 text-xs text-gray-800">
               Minst 10 tecken för ett säkert lösenord
             </p>
           )}
@@ -135,7 +135,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
                 type="checkbox"
                 checked={acceptTerms}
                 onChange={(e) => setAcceptTerms(e.target.checked)}
-                className="w-4 h-4 text-primary-600 bg-gray-50 border-gray-300 rounded focus:ring-primary-500 focus:ring-2"
+                className="w-4 h-4 text-blue-600 bg-gray-50 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                 required
               />
             </div>
@@ -144,7 +144,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
                 Jag godkänner{" "}
                 <a
                   href="/user-agreement"
-                  className="text-primary-600 hover:text-primary-800 underline"
+                  className="text-blue-600 hover:text-blue-800 underline"
                   onClick={() => navigate("/user-agreement")}
                 >
                   användarvillkoren
@@ -178,12 +178,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({
       <button
         type="submit"
         disabled={isLoading || (mode === "register" && !acceptTerms)}
-        className="w-full bg-primary-600 text-text-primary py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
+        className="w-full bg-blue-600 text-gray-800 py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
       >
         {isLoading ? (
           <div className="flex items-center justify-center">
             <svg
-              className="animate-spin -ml-1 mr-3 h-5 w-5 text-text-primary"
+              className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-800"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -216,7 +216,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
           <div className="w-full border-t border-gray-200" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-4 bg-white text-text-secondary">eller</span>
+          <span className="px-4 bg-white text-gray-600">eller</span>
         </div>
       </div>
 
@@ -224,7 +224,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({
         <button
           type="button"
           onClick={onToggleMode}
-          className="text-primary-600 hover:text-primary-800 font-medium text-sm transition-colors duration-200"
+          className="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-200"
         >
           {mode === "login"
             ? "Har du inget konto? Skapa ett här"

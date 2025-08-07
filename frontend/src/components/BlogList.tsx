@@ -38,11 +38,11 @@ const BlogList: React.FC = () => {
 
   if (postsLoading) {
     return (
-      <div className="min-h-screen bg-bg-primary">
+      <div className="min-h-screen bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-            <p className="mt-4 text-text-secondary">Laddar blogginlägg...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Laddar blogginlägg...</p>
           </div>
         </div>
       </div>
@@ -50,14 +50,14 @@ const BlogList: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-bg-primary">
+    <div className="min-h-screen bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-text-primary mb-4">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">
             Skattehjälpens Blogg
           </h1>
-          <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Få de senaste tipsen och råden om svenska privatskatter, deklaration
             och ekonomi
           </p>
@@ -66,7 +66,7 @@ const BlogList: React.FC = () => {
         {/* Tags Filter */}
         {tagsData && tagsData.length > 0 && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-text-primary mb-4">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
               Filtrera efter ämne:
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -74,8 +74,8 @@ const BlogList: React.FC = () => {
                 onClick={() => handleTagFilter("")}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   selectedTag === ""
-                    ? "bg-primary-600 text-white"
-                    : "bg-bg-secondary text-text-secondary hover:bg-border-light"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
               >
                 Alla ({postsData?.total || 0})
@@ -86,8 +86,8 @@ const BlogList: React.FC = () => {
                   onClick={() => handleTagFilter(tagInfo.tag)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors capitalize ${
                     selectedTag === tagInfo.tag
-                      ? "bg-primary-600 text-white"
-                      : "bg-bg-secondary text-text-secondary hover:bg-border-light"
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   }`}
                 >
                   {tagInfo.tag} ({tagInfo.count})
@@ -125,13 +125,13 @@ const BlogList: React.FC = () => {
                         </span>
                       ))}
                     </div>
-                    <h2 className="text-xl font-bold text-text-primary mb-3 line-clamp-2">
+                    <h2 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">
                       {post.title}
                     </h2>
-                    <p className="text-text-secondary mb-4 line-clamp-3">
+                    <p className="text-gray-600 mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
-                    <div className="flex items-center justify-between text-sm text-text-muted">
+                    <div className="flex items-center justify-between text-sm text-gray-400">
                       <span>Av {post.author}</span>
                       <div className="flex items-center space-x-2">
                         <span>{formatDate(post.publishedAt)}</span>
@@ -149,7 +149,7 @@ const BlogList: React.FC = () => {
               <div className="mt-12 text-center">
                 <button
                   onClick={() => setPage(page + 1)}
-                  className="px-6 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+                  className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   Ladda fler inlägg
                 </button>
@@ -158,10 +158,10 @@ const BlogList: React.FC = () => {
           </>
         ) : (
           <div className="text-center py-12">
-            <h3 className="text-xl font-semibold text-text-primary mb-2">
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Inga blogginlägg hittades
             </h3>
-            <p className="text-text-secondary">
+            <p className="text-gray-600">
               {selectedTag
                 ? `Det finns inga publicerade inlägg med taggen "${selectedTag}".`
                 : "Det finns inga publicerade blogginlägg ännu."}

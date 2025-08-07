@@ -2,18 +2,18 @@ import React from "react";
 
 export const PrivacyPolicy: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-bg-white to-bg-secondary">
+    <div className="min-h-screen bg-gradient-to-br from-white to-gray-100">
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-bg-white rounded-lg shadow-lg p-8 border border-border-light">
-          <h1 className="text-3xl font-bold text-text-primary mb-8">
+        <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+          <h1 className="text-3xl font-bold text-gray-800 mb-8">
             🔒 Integritetspolicy för Skattehjälpen
           </h1>
-          <p className="text-text-primary mb-8">
+          <p className="text-gray-800 mb-8">
             Senast uppdaterad: 30 juli 2025
           </p>
 
-          <div className="prose prose-lg text-text-secondary max-w-none">
+          <div className="prose prose-lg text-gray-600 max-w-none">
             <p className="mb-8 text-lg">
               Skattehjälpen AB ("vi", "oss", "vårt") respekterar din integritet
               och är engagerade i att skydda dina personuppgifter. Denna
@@ -22,14 +22,14 @@ export const PrivacyPolicy: React.FC = () => {
             </p>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 1. Personuppgiftsansvarig
               </h2>
               <p className="mb-4">
                 Personuppgiftsansvarig för behandlingen av dina personuppgifter
                 är:
               </p>
-              <div className="bg-bg-secondary p-4 rounded-lg mb-4">
+              <div className="bg-gray-100 p-4 rounded-lg mb-4">
                 <p className="mb-2">
                   <strong>Skattehjälpen AB</strong>
                 </p>
@@ -40,14 +40,14 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 2. Vilka personuppgifter samlar vi in?
               </h2>
               <p className="mb-4">
                 Vi kan samla in följande typer av personuppgifter:
               </p>
 
-              <h3 className="text-xl font-semibold text-text-primary mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
                 Kontouppgifter:
               </h3>
               <ul className="list-disc pl-6 mb-4 space-y-2">
@@ -56,7 +56,7 @@ export const PrivacyPolicy: React.FC = () => {
                 <li>Kontoskapandedatum</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-text-primary mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
                 Skattedeklarationsuppgifter:
               </h3>
               <ul className="list-disc pl-6 mb-4 space-y-2">
@@ -68,7 +68,7 @@ export const PrivacyPolicy: React.FC = () => {
                 <li>Uppladdade kvitton och dokument</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-text-primary mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
                 Betalningsuppgifter:
               </h3>
               <ul className="list-disc pl-6 mb-4 space-y-2">
@@ -79,7 +79,7 @@ export const PrivacyPolicy: React.FC = () => {
                 </li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-text-primary mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
                 Tekniska uppgifter:
               </h3>
               <ul className="list-disc pl-6 mb-4 space-y-2">
@@ -91,14 +91,14 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 3. Hur använder vi dina personuppgifter?
               </h2>
               <p className="mb-4">
                 Vi behandlar dina personuppgifter för följande ändamål:
               </p>
 
-              <h3 className="text-xl font-semibold text-text-primary mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
                 Tjänsteleverans (Artikel 6.1(b) GDPR - Avtalsuppfyllelse):
               </h3>
               <ul className="list-disc pl-6 mb-4 space-y-2">
@@ -108,7 +108,7 @@ export const PrivacyPolicy: React.FC = () => {
                 <li>Hantera betalningar och fakturer</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-text-primary mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
                 Kundservice (Artikel 6.1(f) GDPR - Berättigat intresse):
               </h3>
               <ul className="list-disc pl-6 mb-4 space-y-2">
@@ -117,7 +117,7 @@ export const PrivacyPolicy: React.FC = () => {
                 <li>Förbättra vår tjänst baserat på feedback</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-text-primary mb-3">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
                 Säkerhet och efterlevnad (Artikel 6.1(f) GDPR - Berättigat
                 intresse):
               </h3>
@@ -129,7 +129,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 4. Delning av personuppgifter
               </h2>
               <p className="mb-4">
@@ -157,7 +157,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 5. Lagringstid
               </h2>
               <p className="mb-4">
@@ -181,7 +181,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 6. Dina rättigheter enligt GDPR
               </h2>
               <p className="mb-4">
@@ -189,46 +189,46 @@ export const PrivacyPolicy: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="bg-bg-secondary p-4 rounded-lg">
-                  <h4 className="font-semibold text-text-primary mb-2">
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">
                     Rätt till information
                   </h4>
                   <p className="text-sm">
                     Få information om hur dina uppgifter behandlas
                   </p>
                 </div>
-                <div className="bg-bg-secondary p-4 rounded-lg">
-                  <h4 className="font-semibold text-text-primary mb-2">
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">
                     Ändring
                   </h4>
                   <p className="text-sm">
                     Rätta felaktiga eller ofullständiga uppgifter
                   </p>
                 </div>
-                <div className="bg-bg-secondary p-4 rounded-lg">
-                  <h4 className="font-semibold text-text-primary mb-2">
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">
                     Radering
                   </h4>
                   <p className="text-sm">Begära att dina uppgifter raderas</p>
                 </div>
-                <div className="bg-bg-secondary p-4 rounded-lg">
-                  <h4 className="font-semibold text-text-primary mb-2">
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">
                     Begränsning
                   </h4>
                   <p className="text-sm">
                     Begränsa behandlingen av dina uppgifter
                   </p>
                 </div>
-                <div className="bg-bg-secondary p-4 rounded-lg">
-                  <h4 className="font-semibold text-text-primary mb-2">
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">
                     Dataportabilitet
                   </h4>
                   <p className="text-sm">
                     Få ut dina uppgifter i strukturerat format
                   </p>
                 </div>
-                <div className="bg-bg-secondary p-4 rounded-lg">
-                  <h4 className="font-semibold text-text-primary mb-2">
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">
                     Invändning
                   </h4>
                   <p className="text-sm">
@@ -245,7 +245,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 7. Säkerhet
               </h2>
               <p className="mb-4">
@@ -262,7 +262,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 8. Cookies och spårningsteknologier
               </h2>
               <p className="mb-4">
@@ -290,7 +290,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 9. Internationella överföringar
               </h2>
               <p className="mb-4">
@@ -301,7 +301,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 10. Barn under 16 år
               </h2>
               <p className="mb-4">
@@ -312,7 +312,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 11. Ändringar av integritetspolicyn
               </h2>
               <p className="mb-4">
@@ -323,7 +323,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 12. Klagomål till tillsynsmyndighet
               </h2>
               <p className="mb-4">
@@ -331,7 +331,7 @@ export const PrivacyPolicy: React.FC = () => {
                 du rätt att lämna klagomål till Integritetsskyddsmyndigheten
                 (IMY):
               </p>
-              <div className="bg-bg-secondary p-4 rounded-lg mb-4">
+              <div className="bg-gray-100 p-4 rounded-lg mb-4">
                 <p className="mb-2">
                   <strong>Integritetsskyddsmyndigheten</strong>
                 </p>
@@ -342,7 +342,7 @@ export const PrivacyPolicy: React.FC = () => {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold text-accent mb-4">
+              <h2 className="text-2xl font-semibold text-green-600 mb-4">
                 13. Kontaktuppgifter
               </h2>
               <p className="mb-4">
@@ -351,19 +351,19 @@ export const PrivacyPolicy: React.FC = () => {
               </p>
               <div className="space-y-2">
                 <div className="flex items-center">
-                  <span className="text-accent mr-2">📧</span>
+                  <span className="text-green-600 mr-2">📧</span>
                   <span>
                     <strong>E-post:</strong> privacy@skattehjalpen.se
                   </span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-accent mr-2">📞</span>
+                  <span className="text-green-600 mr-2">📞</span>
                   <span>
                     <strong>Telefon:</strong> 08-XXX XX XX
                   </span>
                 </div>
                 <div className="flex items-center">
-                  <span className="text-accent mr-2">📍</span>
+                  <span className="text-green-600 mr-2">📍</span>
                   <span>
                     <strong>Postadress:</strong> Skattehjälpen AB, Box 123, 111
                     22 Stockholm

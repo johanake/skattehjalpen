@@ -208,20 +208,20 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-4xl mx-auto p-6 bg-bg-white rounded-lg shadow-lg border border-border-light"
+      className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg border border-gray-200"
     >
-      <h2 className="text-2xl font-bold mb-6 text-primary">
+      <h2 className="text-2xl font-bold mb-6 text-blue-800">
         Skattedeklaration
       </h2>
 
       {/* Personal Information */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           👤 Personuppgifter
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-secondary mb-1">
+            <label className="block text-sm font-medium text-gray-600 mb-1">
               Namn
             </label>
             <input
@@ -230,12 +230,12 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
               onChange={(e) =>
                 handleSectionChange("personalInfo", "name", e.target.value)
               }
-              className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+              className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-text-secondary mb-1">
+            <label className="block text-sm font-medium text-gray-600 mb-1">
               Civilstånd
             </label>
             <select
@@ -247,7 +247,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   e.target.value
                 )
               }
-              className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+              className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
             >
               <option value="single">Ogift</option>
               <option value="married">Gift</option>
@@ -271,7 +271,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 className="rounded"
               />
               {/* https://www.skatteverket.se/privat/skatter/arbeteochinkomst/internationellt/obegraensatochbegraensatskattskyldig.4.18e1b10334ebe8bc80004102.html */}
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har du bott utomlands under året
               </span>
             </label>
@@ -281,7 +281,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Employment */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           💼 Arbetsliv och Inkomst
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -299,7 +299,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Haft inkomst från eget företag (t.ex. enskild firma)
               </span>
             </label>
@@ -318,7 +318,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Kommer din inkomst från pensionen
               </span>
             </label>
@@ -337,7 +337,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Tagit emot A-kassa eller sjukersättning
               </span>
             </label>
@@ -347,7 +347,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Commute */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🚗 Resor till och från arbetet
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
@@ -361,7 +361,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har du pendlat till jobbet minst 5 km enkel väg
               </span>
             </label>
@@ -373,14 +373,14 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   handleSectionChange("commute", "distance", e.target.value)
                 }
                 placeholder="Enkel resa i km"
-                className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
               />
             )}
           </div>
           {formData.commute.hasCommute && (
             <>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Färdmedel
                 </label>
                 <select
@@ -392,7 +392,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 >
                   <option value="">Välj färdmedel</option>
                   <option value="car">Bil</option>
@@ -416,7 +416,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Parkerar du vid jobbet
                   </span>
                 </label>
@@ -432,7 +432,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       )
                     }
                     placeholder="Kostnad per månad (kr)"
-                    className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                    className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
                   />
                 )}
               </div>
@@ -450,7 +450,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Sparar du 2 timmar per dag med ditt fordon
                   </span>
                 </label>
@@ -462,7 +462,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Work Equipment */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🧰 Arbetsutrustning och skyddsutrustning
         </h3>
         <div className="grid grid-cols-1 gap-4">
@@ -480,16 +480,16 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har du köpt arbetsutrustning eller skyddsutrustning som du
                 betalat själv
               </span>
             </label>
           </div>
           {formData.workEquipment.hasWorkEquipment && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 p-4 bg-bg-secondary rounded-lg border border-border-light">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 p-4 bg-gray-100 rounded-lg border border-gray-200">
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Dator/mjukvara (kr)
                 </label>
                 <input
@@ -502,11 +502,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Mobiltelefon/surfplatta (kr)
                 </label>
                 <input
@@ -519,11 +519,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Internetkostnad (kr)
                 </label>
                 <input
@@ -536,11 +536,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Skyddsskor/skyddskläder (kr)
                 </label>
                 <input
@@ -553,11 +553,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Verktyg (kr)
                 </label>
                 <input
@@ -570,11 +570,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Uniform/yrkesklädsel (kr)
                 </label>
                 <input
@@ -587,7 +587,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div className="md:col-span-2">
@@ -604,7 +604,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Har du bekostat detta själv utan ersättning från
                     arbetsgivaren
                   </span>
@@ -617,12 +617,12 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Housing */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🏡 Bostad och bolån
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-secondary mb-1">
+            <label className="block text-sm font-medium text-gray-600 mb-1">
               Bor du i
             </label>
             <select
@@ -630,7 +630,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
               onChange={(e) =>
                 handleSectionChange("housing", "propertyType", e.target.value)
               }
-              className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+              className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
             >
               <option value="">Välj bostadstyp</option>
               <option value="rental">Hyresrätt</option>
@@ -653,7 +653,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har bolån
               </span>
             </label>
@@ -669,7 +669,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   )
                 }
                 placeholder="Räntekostnader (kr)"
-                className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
               />
             )}
           </div>
@@ -687,7 +687,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har sålt bostad under året
               </span>
             </label>
@@ -704,7 +704,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Vinst/förlust (kr)"
-                  className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                  className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
                 />
                 <label className="flex items-center space-x-2 mt-2">
                   <input
@@ -719,7 +719,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Mäklare/styling/renovering
                   </span>
                 </label>
@@ -740,7 +740,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Haft dubbelt boende p.g.a. arbete
               </span>
             </label>
@@ -757,7 +757,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Hyra för andra bostaden (kr/mån)"
-                  className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                  className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
                 />
                 <input
                   type="number"
@@ -770,7 +770,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Resor mellan orterna (kr)"
-                  className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                  className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
                 />
               </>
             )}
@@ -780,7 +780,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Business Travel */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           ✈️ Tjänsteresor
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -798,7 +798,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Haft tjänsteresor under året
               </span>
             </label>
@@ -815,7 +815,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Antal dagar"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="number"
@@ -828,7 +828,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Resekostnader (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -849,7 +849,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Traktamente (290 kr/dag)
                   </span>
                 </label>
@@ -865,7 +865,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       )
                     }
                     placeholder="Belopp (kr)"
-                    className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                    className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                   />
                 )}
               </div>
@@ -883,7 +883,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Logikostnader
                   </span>
                 </label>
@@ -899,7 +899,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       )
                     }
                     placeholder="Kostnad (kr)"
-                    className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                    className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                   />
                 )}
               </div>
@@ -910,7 +910,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Temporary Work */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🏗️ Tillfälligt arbete på annan ort
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -928,7 +928,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Haft ett tillfälligt arbete mer än 50 km från hemorten
               </span>
             </label>
@@ -945,7 +945,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Arbetsort"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="number"
@@ -958,7 +958,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Avstånd från hemorten (km)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="text"
@@ -971,7 +971,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Tidsperiod (ex. 6 månader)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -979,7 +979,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
           {formData.temporaryWork.hasTemporaryWork && (
             <>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Boendekostnader (kr)
                 </label>
                 <input
@@ -992,11 +992,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Traktamente (kr)
                 </label>
                 <input
@@ -1010,7 +1010,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="145 kr/dag första månaden"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
             </>
@@ -1020,7 +1020,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Home Office */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🏠 Hemkontor/arbetsrum
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1038,7 +1038,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har arbetsrum hemma
               </span>
             </label>
@@ -1058,7 +1058,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       }
                       className="rounded"
                     />
-                    <span className="text-sm font-medium text-text-secondary">
+                    <span className="text-sm font-medium text-gray-600">
                       Din arbetsgivaren tillhandahåller ingen arbetsplats
                     </span>
                   </label>
@@ -1077,7 +1077,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       }
                       className="rounded"
                     />
-                    <span className="text-sm font-medium text-text-secondary">
+                    <span className="text-sm font-medium text-gray-600">
                       Rummet används endast för arbete
                     </span>
                   </label>
@@ -1088,7 +1088,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
           {formData.homeOffice.hasHomeOffice && (
             <>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Arbetsrummets yta (m²)
                 </label>
                 <input
@@ -1101,11 +1101,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Merkostnad uppvärmning (kr)
                 </label>
                 <input
@@ -1118,11 +1118,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Merkostnad el (kr)
                 </label>
                 <input
@@ -1135,7 +1135,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       e.target.value
                     )
                   }
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
             </>
@@ -1145,7 +1145,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Professional Services */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           ⚖️ Professionella tjänster
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1163,7 +1163,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Haft utgifter för Advokat eller rättegångskostnader
               </span>
             </label>
@@ -1180,7 +1180,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Belopp (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="text"
@@ -1193,7 +1193,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Beskrivning av tvist"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -1212,7 +1212,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Auktorisationsavgifter
               </span>
             </label>
@@ -1229,7 +1229,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Årsavgift (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="text"
@@ -1244,7 +1244,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Typ av certifiering"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -1263,7 +1263,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Betalt en agent eller manager (artister/idrottsutövare)
               </span>
             </label>
@@ -1279,7 +1279,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   )
                 }
                 placeholder="Kostnad (kr)"
-                className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
               />
             )}
           </div>
@@ -1288,7 +1288,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Professional Literature */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           📚 Facklitteratur och fortbildning
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1308,7 +1308,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Köpt nödvändig facklitteratur för arbetet
               </span>
             </label>
@@ -1325,7 +1325,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Kostnad (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="text"
@@ -1338,7 +1338,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Beskrivning"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -1357,7 +1357,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Bekostat arbetsrelaterad utbildning
               </span>
             </label>
@@ -1374,7 +1374,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Kostnad (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="text"
@@ -1387,7 +1387,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Beskrivning av utbildning"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -1397,7 +1397,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Specific Professions */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🎯 Specifika yrkesgrupper
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1415,7 +1415,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Jag arbetar som artist eller idrottsutövare
               </span>
             </label>
@@ -1434,7 +1434,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Utrustningskostnad (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <label className="flex items-center space-x-2 mt-2">
                   <input
@@ -1449,7 +1449,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Använd schablonbelopp 3 000 kr
                   </span>
                 </label>
@@ -1470,7 +1470,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Jag har en tjänstehund (polis/militär)
               </span>
             </label>
@@ -1486,7 +1486,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   )
                 }
                 placeholder="Antal månader"
-                className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
               />
             )}
           </div>
@@ -1504,7 +1504,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Jag arbetar som dagbarnvårdare
               </span>
             </label>
@@ -1520,7 +1520,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   )
                 }
                 placeholder="Antal barn"
-                className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
               />
             )}
           </div>
@@ -1529,7 +1529,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Capital Transactions */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           💰 Kapitaltransaktioner
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1547,7 +1547,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Kapitalförluster
               </span>
             </label>
@@ -1564,7 +1564,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Förlust (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="text"
@@ -1577,7 +1577,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Beskrivning (aktier, fastighet, etc.)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -1596,7 +1596,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Kursförluster
               </span>
             </label>
@@ -1612,7 +1612,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   )
                 }
                 placeholder="Förlust (kr)"
-                className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
               />
             )}
           </div>
@@ -1630,7 +1630,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Ränteavdrag för investeringslån
               </span>
             </label>
@@ -1647,7 +1647,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Räntekostnad (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <label className="flex items-center space-x-2 mt-2">
                   <input
@@ -1662,7 +1662,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Lånet har säkerhet (viktigt för 2025-2026 års regler)
                   </span>
                 </label>
@@ -1674,7 +1674,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Pension Contributions */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🏦 Pensionssparande
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1692,7 +1692,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Privat pensionssparande
               </span>
             </label>
@@ -1711,7 +1711,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Inbetalt belopp (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="number"
@@ -1724,7 +1724,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Anställningsinkomst (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -1743,7 +1743,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har tjänstepensionsrätter från arbetsgivare
               </span>
             </label>
@@ -1753,7 +1753,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Hobby Business */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🎨 Hobbyverksamhet
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1771,7 +1771,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Bedriver du hobbyverksamhet
               </span>
             </label>
@@ -1788,7 +1788,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Inkomster (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="number"
@@ -1801,7 +1801,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Utgifter (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
                 <input
                   type="number"
@@ -1814,7 +1814,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Tidigare års underskott (kr)"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                 />
               </>
             )}
@@ -1824,7 +1824,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Job Search Costs */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🔍 Arbetslöshetskostnader
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1842,7 +1842,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Kostnader för arbetssökande
               </span>
             </label>
@@ -1863,7 +1863,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Erhållit arbetslöshetsersättning
                   </span>
                 </label>
@@ -1873,7 +1873,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
           {formData.jobSearchCosts.hasJobSearchCosts && (
             <>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Resekostnader (kr)
                 </label>
                 <input
@@ -1887,11 +1887,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Arbetsförmedlingsresor"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Kommunikationskostnader (kr)
                 </label>
                 <input
@@ -1905,11 +1905,11 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Telefon, internet"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
+                <label className="block text-sm font-medium text-gray-600 mb-1">
                   Dokumentavgifter (kr)
                 </label>
                 <input
@@ -1923,7 +1923,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Intyg, kopior"
-                  className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+                  className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
                 />
               </div>
             </>
@@ -1933,7 +1933,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* ROT/RUT */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🧾 ROT- och RUT-avdrag
         </h3>
         <div className="grid grid-cols-1 gap-4">
@@ -1951,13 +1951,13 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har du anlitat företag för ROT- eller RUT-arbete
               </span>
             </label>
           </div>
           {formData.rotRut.hasRotRutWork && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 p-4 bg-bg-secondary rounded-lg border border-border-light">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 p-4 bg-gray-100 rounded-lg border border-gray-200">
               <div>
                 <label className="flex items-center space-x-2">
                   <input
@@ -1972,7 +1972,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     ROT (renovering/ombyggnad)
                   </span>
                 </label>
@@ -1989,7 +1989,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                         )
                       }
                       placeholder="Typ av arbete (ex. renovering av badrum)"
-                      className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                      className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                     />
                     <input
                       type="number"
@@ -2002,7 +2002,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                         )
                       }
                       placeholder="Belopp (kr)"
-                      className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                      className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                     />
                   </>
                 )}
@@ -2021,7 +2021,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     RUT (städning/barnpassning)
                   </span>
                 </label>
@@ -2038,7 +2038,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                         )
                       }
                       placeholder="Typ av tjänst (ex. städning)"
-                      className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                      className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                     />
                     <input
                       type="number"
@@ -2051,7 +2051,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                         )
                       }
                       placeholder="Belopp (kr)"
-                      className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                      className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                     />
                   </>
                 )}
@@ -2063,7 +2063,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Donations and Memberships */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           🎁 Gåvor och bidrag
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -2081,7 +2081,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Gåvor till välgörenhet (minst 2000 kr)
               </span>
             </label>
@@ -2098,7 +2098,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Total gåvosumma (kr)"
-                  className="w-full p-2 border border-gray-600 rounded bg-bg-primary text-white focus:ring-2 focus:ring-green-500 mt-2"
+                  className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
                 />
                 <input
                   type="text"
@@ -2111,7 +2111,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Mottagare"
-                  className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                  className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
                 />
               </>
             )}
@@ -2130,7 +2130,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Medlem i A-kassa
               </span>
             </label>
@@ -2146,7 +2146,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   )
                 }
                 placeholder="Årsavgift (kr)"
-                className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
               />
             )}
           </div>
@@ -2164,7 +2164,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Medlem i Fackförening
               </span>
             </label>
@@ -2176,7 +2176,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                   handleSectionChange("donations", "unionFee", e.target.value)
                 }
                 placeholder="Årsavgift (kr)"
-                className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
               />
             )}
           </div>
@@ -2185,7 +2185,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Education */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           📚 Studier och utbildning
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -2203,7 +2203,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Påbörjat ny utbildning
               </span>
             </label>
@@ -2222,7 +2222,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Köpt kurslitteratur eller betalt studieavgifter
               </span>
             </label>
@@ -2241,7 +2241,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Utbildning relevant för nuvarande/framtida yrke
               </span>
             </label>
@@ -2251,7 +2251,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Rental Income */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           📦 Uthyrning och sidoinkomster
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -2269,7 +2269,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Hyrt ut bostad, bil, förråd eller liknande
               </span>
             </label>
@@ -2286,7 +2286,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     )
                   }
                   placeholder="Intäkter (kr)"
-                  className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
+                  className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
                 />
                 <label className="flex items-center space-x-2 mt-2">
                   <input
@@ -2301,7 +2301,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Kostnader för uthyrning
                   </span>
                 </label>
@@ -2317,7 +2317,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       )
                     }
                     placeholder="Kostnader (kr)"
-                    className="w-full p-2 border border-gray-600 rounded bg-bg-primary text-white focus:ring-2 focus:ring-green-500 mt-2"
+                    className="w-full p-2 border border-gray-600 rounded bg-slate-50 text-gray-800 focus:ring-2 focus:ring-green-500 mt-2"
                   />
                 )}
               </>
@@ -2328,7 +2328,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Green Technology */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           ♻️ Grön teknik och energiinvesteringar
         </h3>
         <div className="grid grid-cols-1 gap-4">
@@ -2346,14 +2346,14 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
-              <span className="text-sm font-medium text-text-secondary">
+              <span className="text-sm font-medium text-gray-600">
                 Har du installerat grön teknik (solceller, laddbox,
                 batterilagring)
               </span>
             </label>
           </div>
           {formData.greenTech.hasGreenTech && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 p-4 bg-bg-secondary rounded-lg border border-border-light">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 p-4 bg-gray-100 rounded-lg border border-gray-200">
               <div>
                 <label className="flex items-center space-x-2">
                   <input
@@ -2368,7 +2368,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Solceller
                   </span>
                 </label>
@@ -2384,7 +2384,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       )
                     }
                     placeholder="Kostnad (kr)"
-                    className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                    className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                   />
                 )}
               </div>
@@ -2402,7 +2402,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Laddbox till elbil
                   </span>
                 </label>
@@ -2418,7 +2418,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       )
                     }
                     placeholder="Kostnad (kr)"
-                    className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                    className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                   />
                 )}
               </div>
@@ -2436,7 +2436,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                     }
                     className="rounded"
                   />
-                  <span className="text-sm font-medium text-text-secondary">
+                  <span className="text-sm font-medium text-gray-600">
                     Batterilagring
                   </span>
                 </label>
@@ -2452,7 +2452,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                       )
                     }
                     placeholder="Kostnad (kr)"
-                    className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent mt-2"
+                    className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600 mt-2"
                   />
                 )}
               </div>
@@ -2463,12 +2463,12 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
 
       {/* Other */}
       <div className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-text-primary">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">
           📍 Övrigt att ta upp
         </h3>
         <div className="grid grid-cols-1 gap-4">
           <div>
-            <label className="block text-sm font-medium text-text-secondary mb-1">
+            <label className="block text-sm font-medium text-gray-600 mb-1">
               Andra utgifter eller livssituationer
             </label>
             <textarea
@@ -2478,7 +2478,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
               }
               placeholder="Beskriv kortfattat andra utgifter som kan påverka din deklaration (flytt, vårdkostnader, juridiska tvister, handikapp, arbetslöshet)... Max 250 tecken!"
               rows={3}
-              className="w-full p-2 border border-border-default rounded bg-bg-white text-text-primary focus:ring-2 focus:ring-accent focus:border-accent"
+              className="w-full p-2 border border-gray-300 rounded bg-white text-gray-800 focus:ring-2 focus:ring-green-600 focus:border-green-600"
               maxLength={250}
             />
           </div>
@@ -2488,7 +2488,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
       <button
         type="submit"
         disabled={createDeclaration.isPending}
-        className="w-full bg-accent text-text-inverse py-3 px-6 rounded-lg hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors flex items-center justify-center gap-2"
+        className="w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors flex items-center justify-center gap-2"
       >
         {createDeclaration.isPending ? (
           <>
@@ -2501,7 +2501,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
       </button>
 
       {createDeclaration.error && (
-        <div className="mt-4 p-3 bg-danger-light border border-danger text-danger rounded">
+        <div className="mt-4 p-3 bg-red-50 border border-red-600 text-red-600 rounded">
           Fel: {createDeclaration.error.message}
         </div>
       )}

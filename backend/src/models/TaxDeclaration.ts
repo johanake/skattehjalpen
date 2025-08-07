@@ -1,16 +1,14 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface ITaxDeclaration extends Document {
   userId: mongoose.Types.ObjectId | null;
   year: number;
   personalInfo: {
     name: string;
-    maritalStatus: 'single' | 'married' | 'cohabiting' | 'divorced' | 'widowed';
+    maritalStatus: "single" | "married" | "cohabiting" | "divorced" | "widowed";
     livedAbroad?: boolean;
   };
   employment: {
-    hasEmployment: boolean;
-    employerCount?: string;
     hasSelfEmployment: boolean;
     hasPension: boolean;
     hasUnemploymentBenefit: boolean;
@@ -82,7 +80,7 @@ export interface ITaxDeclaration extends Document {
   other: {
     description?: string;
   };
-  status: 'draft' | 'submitted' | 'processing' | 'completed';
+  status: "draft" | "submitted" | "processing" | "completed";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -91,7 +89,7 @@ const taxDeclarationSchema = new Schema<ITaxDeclaration>(
   {
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: false,
       default: null,
     },
@@ -103,14 +101,12 @@ const taxDeclarationSchema = new Schema<ITaxDeclaration>(
       name: { type: String, required: true },
       maritalStatus: {
         type: String,
-        enum: ['single', 'married', 'cohabiting', 'divorced', 'widowed'],
+        enum: ["single", "married", "cohabiting", "divorced", "widowed"],
         required: true,
       },
       livedAbroad: Boolean,
     },
     employment: {
-      hasEmployment: { type: Boolean, required: true },
-      employerCount: String,
       hasSelfEmployment: { type: Boolean, required: true },
       hasPension: { type: Boolean, required: true },
       hasUnemploymentBenefit: { type: Boolean, required: true },
@@ -184,8 +180,8 @@ const taxDeclarationSchema = new Schema<ITaxDeclaration>(
     },
     status: {
       type: String,
-      enum: ['draft', 'submitted', 'processing', 'completed'],
-      default: 'draft',
+      enum: ["draft", "submitted", "processing", "completed"],
+      default: "draft",
     },
   },
   {
@@ -199,4 +195,7 @@ taxDeclarationSchema.index({ userId: 1, year: 1 });
 taxDeclarationSchema.index({ status: 1 });
 taxDeclarationSchema.index({ createdAt: -1 });
 
-export const TaxDeclaration = mongoose.model<ITaxDeclaration>('TaxDeclaration', taxDeclarationSchema);
+export const TaxDeclaration = mongoose.model<ITaxDeclaration>(
+  "TaxDeclaration",
+  taxDeclarationSchema
+);

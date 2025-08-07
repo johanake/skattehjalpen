@@ -112,6 +112,13 @@ The frontend uses a centralized color configuration system located in `src/confi
 - **Text**: Primary (dark), secondary, muted, inverse (white), accent (blue)
 - **Border**: Default, light, accent, error
 
+### Current Background Colors in Use:
+
+- **Light Background**: `bg-slate-100` - Used for light theme backgrounds
+  - **Recommended text**: `text-gray-900` or `text-slate-900` for high contrast
+- **Dark Background**: `bg-blue-800` - Used for dark theme backgrounds  
+  - **Recommended text**: `text-white` or `text-slate-100` for optimal readability
+
 ### To Change Colors:
 
 Edit `/frontend/src/config/colors.ts` to instantly update the entire color scheme across the application.

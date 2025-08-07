@@ -8,8 +8,6 @@ export interface TaxDeclaration {
     livedAbroad?: boolean;
   };
   employment: {
-    hasEmployment: boolean;
-    employerCount?: string;
     hasSelfEmployment: boolean;
     hasPension: boolean;
     hasUnemploymentBenefit: boolean;

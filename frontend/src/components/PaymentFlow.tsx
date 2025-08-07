@@ -148,24 +148,24 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
   };
 
   return (
-    <div className="bg-bg-white p-6 rounded-lg shadow-lg border border-border-light">
-      <h3 className="text-lg font-semibold mb-4 text-text-primary">
+    <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+      <h3 className="text-lg font-semibold mb-4 text-gray-800">
         {requireRegistration && !user
           ? "Registrering & Betalning"
           : "Betalning"}
       </h3>
 
       {/* Plan Summary */}
-      <div className="border border-border-default rounded-lg p-4 mb-6 bg-bg-secondary">
+      <div className="border border-gray-300 rounded-lg p-4 mb-6 bg-gray-100">
         <div className="text-center">
-          <h4 className="font-semibold text-text-primary mb-2">{plan.name}</h4>
-          <div className="text-3xl font-bold text-text-primary mb-4">
+          <h4 className="font-semibold text-gray-800 mb-2">{plan.name}</h4>
+          <div className="text-3xl font-bold text-gray-800 mb-4">
             {plan.price} kr
           </div>
-          <ul className="text-left text-sm text-text-secondary space-y-1">
+          <ul className="text-left text-sm text-gray-600 space-y-1">
             {plan.features.map((feature, index) => (
               <li key={index} className="flex items-start">
-                <span className="text-text-primary mr-2">•</span>
+                <span className="text-gray-800 mr-2">•</span>
                 {feature}
               </li>
             ))}
@@ -175,13 +175,13 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
 
       {/* Registration Form (if needed) */}
       {requireRegistration && !user && (
-        <div className="bg-bg-secondary p-4 rounded-lg mb-6 border border-border-light">
-          <h4 className="font-medium text-text-primary mb-3">
+        <div className="bg-gray-100 p-4 rounded-lg mb-6 border border-gray-200">
+          <h4 className="font-medium text-gray-800 mb-3">
             Skapa konto för att fortsätta
           </h4>
           <div className="space-y-3">
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">
+              <label className="block text-sm font-medium text-gray-600 mb-1">
                 E-postadress
               </label>
               <input
@@ -193,12 +193,12 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
                     email: e.target.value,
                   }))
                 }
-                className="w-full p-3 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-text-primary focus:border-transparent"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent"
                 placeholder="din@email.com"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1">
+              <label className="block text-sm font-medium text-gray-600 mb-1">
                 Lösenord
               </label>
               <input
@@ -210,7 +210,7 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
                     password: e.target.value,
                   }))
                 }
-                className="w-full p-3 border border-border-default rounded-lg focus:outline-none focus:ring-2 focus:ring-text-primary focus:border-transparent"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-800 focus:border-transparent"
                 placeholder="Välj ett säkert lösenord"
               />
             </div>
@@ -220,18 +220,18 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
 
       {/* Payment Method Selection */}
       <div className="mb-6">
-        <h4 className="font-medium text-text-primary mb-3">Välj betalningsmetod</h4>
+        <h4 className="font-medium text-gray-800 mb-3">Välj betalningsmetod</h4>
         <div className="space-y-2">
           <button
             onClick={() => setShowMockPayment(true)}
             className={`w-full p-4 border rounded-lg text-left transition-colors ${
               showMockPayment
-                ? "border-text-primary bg-bg-secondary"
-                : "border-border-default hover:border-text-secondary"
+                ? "border-gray-800 bg-gray-100"
+                : "border-gray-300 hover:border-gray-600"
             }`}
           >
             <div className="font-medium">Mock Payment (För utveckling)</div>
-            <div className="text-sm text-text-muted">
+            <div className="text-sm text-gray-400">
               Simulerad betalning utan riktigt kort
             </div>
           </button>
@@ -239,12 +239,12 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
             onClick={() => setShowMockPayment(false)}
             className={`w-full p-4 border rounded-lg text-left transition-colors ${
               !showMockPayment
-                ? "border-text-primary bg-bg-secondary"
-                : "border-border-default hover:border-text-secondary"
+                ? "border-gray-800 bg-gray-100"
+                : "border-gray-300 hover:border-gray-600"
             }`}
           >
             <div className="font-medium">Stripe Payment</div>
-            <div className="text-sm text-text-muted">
+            <div className="text-sm text-gray-400">
               Riktig betalning med kreditkort
             </div>
           </button>
@@ -255,10 +255,10 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
       <div className="space-y-4">
         {!showMockPayment && (
           <div>
-            <label className="block text-sm font-medium text-text-secondary mb-2">
+            <label className="block text-sm font-medium text-gray-600 mb-2">
               Kortinformation
             </label>
-            <div className="bg-bg-white p-3 rounded-lg border border-border-default">
+            <div className="bg-white p-3 rounded-lg border border-gray-300">
               <CardElement options={cardElementOptions} />
             </div>
           </div>
@@ -267,7 +267,7 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
         <button
           onClick={showMockPayment ? handleMockPayment : handleRealPayment}
           disabled={processing || (!showMockPayment && (!stripe || !elements))}
-          className="w-full bg-text-primary text-white py-3 px-6 rounded-lg hover:bg-text-secondary disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+          className="w-full bg-gray-800 text-white py-3 px-6 rounded-lg hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
         >
           {processing
             ? requireRegistration && !user
@@ -279,19 +279,19 @@ export const PaymentFlow: React.FC<PaymentFlowProps> = ({
         </button>
 
         {paymentError && (
-          <div className="mt-4 p-3 bg-danger-light border border-danger text-danger rounded">
+          <div className="mt-4 p-3 bg-red-100 border border-red-600 text-red-600 rounded">
             {paymentError}
           </div>
         )}
 
         {createPaymentIntent.error && (
-          <div className="mt-4 p-3 bg-danger-light border border-danger text-danger rounded">
+          <div className="mt-4 p-3 bg-red-100 border border-red-600 text-red-600 rounded">
             Kunde inte skapa betalning. Försök igen.
           </div>
         )}
       </div>
 
-      <div className="mt-4 text-xs text-text-secondary text-center">
+      <div className="mt-4 text-xs text-gray-600 text-center">
         <p>
           Säker betalning via Stripe. Dina kortuppgifter är krypterade och
           skyddade.

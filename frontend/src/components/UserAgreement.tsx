@@ -2,18 +2,18 @@ import React from "react";
 
 export const UserAgreement: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-bg-white to-bg-secondary">
+    <div className="min-h-screen bg-gradient-to-br from-white to-gray-100">
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-bg-white rounded-lg shadow-lg p-8 border border-border-light">
-          <h1 className="text-3xl font-bold text-text-primary mb-8">
+        <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+          <h1 className="text-3xl font-bold text-gray-800 mb-8">
             📄 Användarvillkor för Skattehjälpen
           </h1>
-          <p className="text-text-muted mb-8">
+          <p className="text-gray-400 mb-8">
             Senast uppdaterad: 16 juli 2025
           </p>
 
-          <div className="prose prose-lg text-text-secondary max-w-none">
+          <div className="prose prose-lg text-gray-600 max-w-none">
             <p className="mb-8 text-lg">
               Välkommen till Skattehjälpen ("tjänsten"). Dessa användarvillkor
               reglerar din användning av vår AI-baserade plattform som ger

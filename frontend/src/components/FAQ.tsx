@@ -68,14 +68,14 @@ export const FAQ: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-bg-white to-bg-secondary">
+    <div className="min-h-screen bg-gradient-to-br from-white to-gray-100">
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-bg-white rounded-lg shadow-lg p-8 border border-border-light">
-          <h1 className="text-3xl font-bold text-text-primary mb-8">
+        <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+          <h1 className="text-3xl font-bold text-gray-800 mb-8">
             ❓ Vanliga frågor
           </h1>
-          <p className="text-text-primary mb-8">
+          <p className="text-gray-800 mb-8">
             Här hittar du svar på de vanligaste frågorna om Skattehjälpen
           </p>
 
@@ -83,17 +83,17 @@ export const FAQ: React.FC = () => {
             {faqData.map((item, index) => (
               <div
                 key={index}
-                className="border border-border-light rounded-lg overflow-hidden"
+                className="border border-gray-200 rounded-lg overflow-hidden"
               >
                 <button
                   onClick={() => toggleItem(index)}
-                  className="w-full px-6 py-4 text-left bg-bg-white hover:bg-bg-secondary transition-colors flex justify-between items-center"
+                  className="w-full px-6 py-4 text-left bg-white hover:bg-gray-100 transition-colors flex justify-between items-center"
                 >
-                  <span className="font-semibold text-text-primary">
+                  <span className="font-semibold text-gray-800">
                     {item.question}
                   </span>
                   <svg
-                    className={`w-5 h-5 text-text-secondary transition-transform ${
+                    className={`w-5 h-5 text-gray-600 transition-transform ${
                       openItems.includes(index) ? "rotate-180" : ""
                     }`}
                     fill="none"
@@ -109,8 +109,8 @@ export const FAQ: React.FC = () => {
                   </svg>
                 </button>
                 {openItems.includes(index) && (
-                  <div className="px-6 py-4 bg-bg-secondary border-t border-border-light">
-                    <p className="text-text-secondary leading-relaxed">
+                  <div className="px-6 py-4 bg-gray-100 border-t border-gray-200">
+                    <p className="text-gray-600 leading-relaxed">
                       {item.answer}
                     </p>
                   </div>
@@ -119,24 +119,24 @@ export const FAQ: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-12 p-6 bg-accent-light rounded-lg border border-accent">
-            <h3 className="text-xl font-semibold text-text-inverse mb-4">
+          <div className="mt-12 p-6 bg-green-500 rounded-lg border border-green-600">
+            <h3 className="text-xl font-semibold text-white mb-4">
               Har du fler frågor?
             </h3>
-            <p className="text-text-inverse mb-4">
+            <p className="text-white mb-4">
               Om du inte hittar svar på din fråga här, tveka inte att kontakta
               oss.
             </p>
             <div className="space-y-2">
               <div className="flex items-center">
-                <span className="text-accent mr-2">📧</span>
-                <span className="text-text-inverse">
+                <span className="text-green-600 mr-2">📧</span>
+                <span className="text-white">
                   support@skattehjalpen.se
                 </span>
               </div>
               <div className="flex items-center">
-                <span className="text-accent mr-2">📍</span>
-                <span className="text-text-inverse">
+                <span className="text-green-600 mr-2">📍</span>
+                <span className="text-white">
                   Skattehjälpen AB, Box 123, 111 22 Stockholm
                 </span>
               </div>

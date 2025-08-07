@@ -97,7 +97,7 @@ function App() {
           path="/blogg"
           element={
             <Layout>
-              <Suspense fallback={<div className="flex justify-center items-center min-h-64"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div></div>}>
+              <Suspense fallback={<div className="flex justify-center items-center min-h-64"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>}>
                 <BlogList />
               </Suspense>
             </Layout>
@@ -107,7 +107,7 @@ function App() {
           path="/blogg/:slug"
           element={
             <Layout>
-              <Suspense fallback={<div className="flex justify-center items-center min-h-64"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div></div>}>
+              <Suspense fallback={<div className="flex justify-center items-center min-h-64"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>}>
                 <BlogPost />
               </Suspense>
             </Layout>
