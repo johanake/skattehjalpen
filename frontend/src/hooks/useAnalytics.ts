@@ -39,7 +39,7 @@ export const useAnalytics = () => {
         console.error('Failed to log visit:', error);
       }
     });
-  }, [logVisitMutation]);
+  }, []); // Remove logVisitMutation dependency to prevent infinite loop
 
   const trackEvent = (event: AnalyticsEvent) => {
     const sessionId = getSessionId();
