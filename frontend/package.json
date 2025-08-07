@@ -15,6 +15,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^7.5.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "^5.83.0",
     "@trpc/client": "^11.4.3",
     "@trpc/react-query": "^11.4.3",

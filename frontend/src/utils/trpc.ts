@@ -7,7 +7,7 @@ export const trpc = createTRPCReact<AppRouter>();
 export const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: "https://skattehjalpen-production.up.railway.app/trpc",
+      url: import.meta.env.API_URL || "http://localhost:3001/trpc",
       headers() {
         const token = localStorage.getItem("auth_token");
         return token

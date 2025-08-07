@@ -21,6 +21,7 @@ const envSchema = z.object({
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_PUBLISHABLE_KEY: z.string().optional(),
   STRIPE_WEBHOOK_SECRET: z.string().optional(),
+  API_URL: z.string().default("http://localhost:3001/trpc"),
   MONGODB_URI: z
     .string()
     .default(
@@ -28,8 +29,6 @@ const envSchema = z.object({
     ),
 });
 
-console.log('Loading environment variables...');
-console.log('NODE_ENV:', process.env.NODE_ENV);
-console.log('MONGODB_URI set:', !!process.env.MONGODB_URI);
+console.log("Loading environment variables...");
 export const env = envSchema.parse(process.env);
 export type Env = z.infer<typeof envSchema>;

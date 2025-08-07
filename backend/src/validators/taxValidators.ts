@@ -8,8 +8,6 @@ export const createTaxDeclarationSchema = z.object({
     livedAbroad: z.boolean().optional(),
   }),
   employment: z.object({
-    hasEmployment: z.boolean(),
-    employerCount: z.string().optional(),
     hasSelfEmployment: z.boolean(),
     hasPension: z.boolean(),
     hasUnemploymentBenefit: z.boolean(),

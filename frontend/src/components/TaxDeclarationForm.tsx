@@ -17,8 +17,6 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
       livedAbroad: false,
     },
     employment: {
-      hasEmployment: false,
-      employerCount: "",
       hasSelfEmployment: false,
       hasPension: false,
       hasUnemploymentBenefit: false,
@@ -272,6 +270,7 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
                 }
                 className="rounded"
               />
+              {/* https://www.skatteverket.se/privat/skatter/arbeteochinkomst/internationellt/obegraensatochbegraensatskattskyldig.4.18e1b10334ebe8bc80004102.html */}
               <span className="text-sm font-medium text-text-secondary">
                 Har du bott utomlands under året
               </span>
@@ -286,40 +285,6 @@ export const TaxDeclarationForm: React.FC<TaxDeclarationFormProps> = ({
           💼 Arbetsliv och Inkomst
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="md:col-span-1">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={formData.employment.hasEmployment}
-                onChange={(e) =>
-                  handleSectionChange(
-                    "employment",
-                    "hasEmployment",
-                    e.target.checked
-                  )
-                }
-                className="rounded"
-              />
-              <span className="text-sm font-medium text-text-secondary">
-                Har du haft en eller flera anställningar under året
-              </span>
-            </label>
-            {formData.employment.hasEmployment && (
-              <input
-                type="number"
-                value={formData.employment.employerCount}
-                onChange={(e) =>
-                  handleSectionChange(
-                    "employment",
-                    "employerCount",
-                    e.target.value
-                  )
-                }
-                placeholder="Antal arbetsgivare"
-                className="w-full p-2 border border-gray-600 rounded bg-bg-primarytext-white focus:ring-2 focus:ring-green-500 mt-2"
-              />
-            )}
-          </div>
           <div>
             <label className="flex items-center space-x-2">
               <input

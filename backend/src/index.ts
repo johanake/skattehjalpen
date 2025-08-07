@@ -57,7 +57,7 @@ async function startServer() {
     app.listen(PORT, () => {
       logger.info('Server started successfully', {
         port: PORT,
-        environment: process.env.NODE_ENV || 'development',
+        environment: env.NODE_ENV,
         endpoints: {
           server: `http://localhost:${PORT}`,
           health: `http://localhost:${PORT}/health`,

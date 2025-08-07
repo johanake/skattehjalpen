@@ -1,19 +1,25 @@
 import winston from 'winston';
+import { env } from '../config/env.js';
 
-const isProduction = process.env.NODE_ENV === 'production';
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isProduction = env.NODE_ENV === 'production';
+const isDevelopment = env.NODE_ENV === 'development';
 
 const logger = winston.createLogger({
   level: isDevelopment ? 'debug' : 'info',
   format: winston.format.combine(
     winston.format.timestamp(),
     winston.format.errors({ stack: true }),
-    winston.format.colorize({ all: true }),
-    winston.format.printf(({ timestamp, level, message, stack, ...meta }) => {
-      const metaStr = Object.keys(meta).length ? JSON.stringify(meta, null, 2) : '';
-      const stackStr = stack ? `\n${stack}` : '';
-      return `${timestamp} [${level}]: ${message}${stackStr}${metaStr ? `\n${metaStr}` : ''}`;
-    })
+    // Only colorize in development, use JSON in production for better Railway log parsing
+    isProduction 
+      ? winston.format.json()
+      : winston.format.combine(
+          winston.format.colorize({ all: true }),
+          winston.format.printf(({ timestamp, level, message, stack, ...meta }) => {
+            const metaStr = Object.keys(meta).length ? JSON.stringify(meta, null, 2) : '';
+            const stackStr = stack ? `\n${stack}` : '';
+            return `${timestamp} [${level}]: ${message}${stackStr}${metaStr ? `\n${metaStr}` : ''}`;
+          })
+        )
   ),
   transports: [
     new winston.transports.Console({
@@ -22,23 +28,6 @@ const logger = winston.createLogger({
   ],
 });
 
-if (isProduction) {
-  logger.add(new winston.transports.File({
-    filename: 'logs/error.log',
-    level: 'error',
-    format: winston.format.combine(
-      winston.format.timestamp(),
-      winston.format.json()
-    )
-  }));
-  
-  logger.add(new winston.transports.File({
-    filename: 'logs/combined.log',
-    format: winston.format.combine(
-      winston.format.timestamp(),
-      winston.format.json()
-    )
-  }));
-}
+// Railway captures stdout/stderr automatically - no need for file logging
 
 export { logger };
