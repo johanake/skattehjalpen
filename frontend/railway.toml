@@ -1,0 +1,9 @@
+[build]
+command = "npm run build"
+publishDir = "dist"
+
+[deploy]
+startCommand = "npx serve -s dist -p $PORT"
+
+[env]
+NODE_ENV = "production"
