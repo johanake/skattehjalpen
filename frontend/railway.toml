@@ -1,6 +1,5 @@
 [build]
-command = "npm run build"
-publishDir = "dist"
+command = "npm install && npm run build"
 
 [deploy]
 startCommand = "npx serve -s dist -p $PORT"
