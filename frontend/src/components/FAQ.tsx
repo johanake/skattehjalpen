@@ -130,14 +130,12 @@ export const FAQ: React.FC = () => {
             <div className="space-y-2">
               <div className="flex items-center">
                 <span className="text-green-600 mr-2">📧</span>
-                <span className="text-white">
-                  support@skattehjalpen.se
-                </span>
+                <span className="text-white">support@skattehjalpen.se</span>
               </div>
               <div className="flex items-center">
                 <span className="text-green-600 mr-2">📍</span>
                 <span className="text-white">
-                  Skattehjälpen AB, Box 123, 111 22 Stockholm
+                  Axomo AB, Carlsgatan 7F, 211 20, Malmö
                 </span>
               </div>
             </div>

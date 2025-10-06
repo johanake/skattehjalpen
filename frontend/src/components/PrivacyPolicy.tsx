@@ -9,14 +9,12 @@ export const PrivacyPolicy: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-800 mb-8">
             🔒 Integritetspolicy för Skattehjälpen
           </h1>
-          <p className="text-gray-800 mb-8">
-            Senast uppdaterad: 30 juli 2025
-          </p>
+          <p className="text-gray-800 mb-8">Senast uppdaterad: 30 juli 2025</p>
 
           <div className="prose prose-lg text-gray-600 max-w-none">
             <p className="mb-8 text-lg">
-              Skattehjälpen AB ("vi", "oss", "vårt") respekterar din integritet
-              och är engagerade i att skydda dina personuppgifter. Denna
+              Axomo AB ("vi", "oss", "vårt") respekterar din integritet och är
+              engagerade i att skydda dina personuppgifter. Denna
               integritetspolicy förklarar hur vi samlar in, använder, lagrar och
               skyddar dina uppgifter när du använder vår tjänst.
             </p>
@@ -31,11 +29,10 @@ export const PrivacyPolicy: React.FC = () => {
               </p>
               <div className="bg-gray-100 p-4 rounded-lg mb-4">
                 <p className="mb-2">
-                  <strong>Skattehjälpen AB</strong>
+                  <strong>Axomo AB</strong>
                 </p>
-                <p className="mb-2">Box 123, 111 22 Stockholm</p>
-                <p className="mb-2">E-post: privacy@skattehjalpen.se</p>
-                <p>Organisationsnummer: 559XXX-XXXX</p>
+                <p className="mb-2">Carlsgatan 7F, 211 20, Malmö</p>
+                <p>Organisationsnummer: 559541-3088</p>
               </div>
             </section>
 
@@ -198,17 +195,13 @@ export const PrivacyPolicy: React.FC = () => {
                   </p>
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
-                  <h4 className="font-semibold text-gray-800 mb-2">
-                    Ändring
-                  </h4>
+                  <h4 className="font-semibold text-gray-800 mb-2">Ändring</h4>
                   <p className="text-sm">
                     Rätta felaktiga eller ofullständiga uppgifter
                   </p>
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
-                  <h4 className="font-semibold text-gray-800 mb-2">
-                    Radering
-                  </h4>
+                  <h4 className="font-semibold text-gray-800 mb-2">Radering</h4>
                   <p className="text-sm">Begära att dina uppgifter raderas</p>
                 </div>
                 <div className="bg-gray-100 p-4 rounded-lg">
@@ -359,14 +352,14 @@ export const PrivacyPolicy: React.FC = () => {
                 <div className="flex items-center">
                   <span className="text-green-600 mr-2">📞</span>
                   <span>
-                    <strong>Telefon:</strong> 08-XXX XX XX
+                    <strong>Telefon:</strong> 0738-222797
                   </span>
                 </div>
                 <div className="flex items-center">
                   <span className="text-green-600 mr-2">📍</span>
                   <span>
-                    <strong>Postadress:</strong> Skattehjälpen AB, Box 123, 111
-                    22 Stockholm
+                    <strong>Postadress:</strong> Axomo AB, Carlsgatan 7F, 211 20
+                    Malmö
                   </span>
                 </div>
               </div>

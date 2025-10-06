@@ -9,9 +9,7 @@ export const UserAgreement: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-800 mb-8">
             📄 Användarvillkor för Skattehjälpen
           </h1>
-          <p className="text-gray-400 mb-8">
-            Senast uppdaterad: 16 juli 2025
-          </p>
+          <p className="text-gray-400 mb-8">Senast uppdaterad: 16 juli 2025</p>
 
           <div className="prose prose-lg text-gray-600 max-w-none">
             <p className="mb-8 text-lg">
@@ -123,8 +121,8 @@ export const UserAgreement: React.FC = () => {
               </h2>
               <p className="mb-4">
                 Allt innehåll i tjänsten, inklusive texter, kod och AI-modeller,
-                tillhör Skattehjälpen AB och får inte kopieras, distribueras
-                eller återanvändas utan skriftligt tillstånd.
+                tillhör Axomo AB och får inte kopieras, distribueras eller
+                återanvändas utan skriftligt tillstånd.
               </p>
             </section>
 
@@ -178,7 +176,7 @@ export const UserAgreement: React.FC = () => {
               </p>
               <ul className="list-none mb-4 space-y-2">
                 <li>📧 support@skattehjalpen.se</li>
-                <li>📍 Skattehjälpen AB, Box 123, 111 22 Stockholm</li>
+                <li>📍 Axomo AB, Carlsgatan 7F, 211 20 Malmö</li>
               </ul>
             </section>
           </div>
