@@ -7,6 +7,7 @@ import { database } from './config/database.js';
 import { createAuthMiddleware } from './middleware/auth.js';
 import { requestLoggingMiddleware, errorLoggingMiddleware } from './middleware/logging.js';
 import { logger } from './utils/logger.js';
+import { WebhookController } from './controllers/webhookController.js';
 
 const app = express();
 
@@ -18,6 +19,9 @@ app.use(cors({
   origin: env.CORS_ORIGINS,
   credentials: true,
 }));
+
+// Stripe webhook endpoint (must be before express.json() to get raw body)
+app.post('/webhook/stripe', express.raw({ type: 'application/json' }), WebhookController.handleStripeWebhook);
 
 // Parse JSON bodies
 app.use(express.json());

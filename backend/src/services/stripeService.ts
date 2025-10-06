@@ -6,7 +6,7 @@ export class StripeService {
   private isMockMode: boolean;
 
   constructor() {
-    this.isMockMode = true;
+    this.isMockMode = false;
 
     if (!this.isMockMode) {
       this.stripe = new Stripe(env.STRIPE_SECRET_KEY!, {

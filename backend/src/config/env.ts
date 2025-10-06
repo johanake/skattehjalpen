@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+// Ensure dotenv is loaded before parsing environment
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '../../.env') });
+
 const envSchema = z.object({
   NODE_ENV: z
     .enum(["development", "production", "test"])
@@ -18,9 +27,9 @@ const envSchema = z.object({
       "http://localhost:5173,https://skattehjalpen-frontend.vercel.app,https://skattehjalpen.se,https://www.skattehjalpen.se"
     )
     .transform((origins) => origins.split(",")),
-  STRIPE_SECRET_KEY: z.string().optional(),
-  STRIPE_PUBLISHABLE_KEY: z.string().optional(),
-  STRIPE_WEBHOOK_SECRET: z.string().optional(),
+  STRIPE_SECRET_KEY: z.string(),
+  STRIPE_PUBLISHABLE_KEY: z.string(),
+  STRIPE_WEBHOOK_SECRET: z.string(),
   API_URL: z.string().default("http://localhost:3001/trpc"),
   MONGODB_URI: z
     .string()
