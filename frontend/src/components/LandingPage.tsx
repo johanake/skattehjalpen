@@ -10,13 +10,13 @@ export const LandingPage: React.FC = () => {
   const { trackButtonClick, trackTaxFormStart } = useAnalytics();
 
   const handleStartWizard = () => {
-    trackButtonClick('start_tax_declaration', { location: 'hero_section' });
+    trackButtonClick("start_tax_declaration", { location: "hero_section" });
     trackTaxFormStart();
     navigate("/skatt/inkomstdeklaration");
   };
 
   const handleStartWizardPricing = () => {
-    trackButtonClick('start_tax_declaration', { location: 'pricing_section' });
+    trackButtonClick("start_tax_declaration", { location: "pricing_section" });
     trackTaxFormStart();
     navigate("/skatt/inkomstdeklaration");
   };
@@ -43,7 +43,7 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h2 className="text-5xl font-bold text-white mb-6">
-              AI-driven skatterådgivning för{" "}
+              AI-driven skatteanalys för{" "}
               <span className="text-green-600">svenska</span> skattebetalare
             </h2>
             <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
