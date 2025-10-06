@@ -9,9 +9,7 @@ export class StripeService {
     this.isMockMode = false;
 
     if (!this.isMockMode) {
-      this.stripe = new Stripe(env.STRIPE_SECRET_KEY!, {
-        apiVersion: "2025-07-30.basil",
-      });
+      this.stripe = new Stripe(env.STRIPE_SECRET_KEY!);
     }
   }
 

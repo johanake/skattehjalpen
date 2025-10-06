@@ -172,7 +172,7 @@ export class TaxService {
     return advice ? this.formatTaxAdvice(advice) : null;
   }
 
-  private static formatTaxAdvice(doc: ITaxAdvice): TaxAdvice {
+  private static formatTaxAdvice(doc: any): TaxAdvice {
     return {
       id: (doc._id as any).toString(),
       declarationId: doc.declarationId.toString(),

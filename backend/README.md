@@ -2,9 +2,20 @@
 
 This document explains how to manage controllers and add endpoints in the Skattehjalpen backend.
 
+## Testing Stripe
+
+Test With Stripe Test Cards
+
+Use these test card numbers in your payment form:
+
+- Success: 4242424242424242
+- Decline: 4000000000000002
+- 3D Secure: 4000002500003155
+
 ## Architecture Overview
 
 The backend uses a layered architecture with:
+
 - **Express.js** for HTTP server
 - **tRPC** for type-safe API communication
 - **Controllers** for business logic
@@ -33,8 +44,8 @@ Controllers contain the business logic for your endpoints. Create a new file in 
 
 ```typescript
 // src/controllers/exampleController.ts
-import { publicProcedure, protectedProcedure } from '../trpc.js';
-import { z } from 'zod';
+import { publicProcedure, protectedProcedure } from "../trpc.js";
+import { z } from "zod";
 
 export const exampleController = {
   // GET-like operation (query)
@@ -42,27 +53,31 @@ export const exampleController = {
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
       // Your logic here
-      return { id: input.id, message: 'Example data' };
+      return { id: input.id, message: "Example data" };
     }),
 
   // POST-like operation (mutation)
   createExample: protectedProcedure
-    .input(z.object({ 
-      name: z.string().min(1).max(100),
-      description: z.string().optional() 
-    }))
+    .input(
+      z.object({
+        name: z.string().min(1).max(100),
+        description: z.string().optional(),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // ctx contains auth info for protected procedures
       // Your logic here
-      return { success: true, id: 'new-id' };
+      return { success: true, id: "new-id" };
     }),
 
   // Update operation
   updateExample: protectedProcedure
-    .input(z.object({ 
-      id: z.string(),
-      name: z.string().min(1).max(100) 
-    }))
+    .input(
+      z.object({
+        id: z.string(),
+        name: z.string().min(1).max(100),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       // Your logic here
       return { success: true, updated: true };
@@ -75,11 +90,11 @@ export const exampleController = {
 Import and add your controller to the main router in `src/router.ts`:
 
 ```typescript
-import { exampleController } from './controllers/exampleController.js';
+import { exampleController } from "./controllers/exampleController.js";
 
 export const appRouter = router({
   // Existing endpoints...
-  
+
   // Add your new endpoint group
   example: router({
     getExample: exampleController.getExample,
@@ -95,12 +110,12 @@ For complex inputs, create separate validation schemas in `src/validators/`:
 
 ```typescript
 // src/validators/exampleValidators.ts
-import { z } from 'zod';
+import { z } from "zod";
 
 export const createExampleSchema = z.object({
   name: z.string().min(1).max(100),
   description: z.string().optional(),
-  category: z.enum(['type1', 'type2', 'type3']),
+  category: z.enum(["type1", "type2", "type3"]),
   isActive: z.boolean().default(true),
 });
 
@@ -108,7 +123,7 @@ export const updateExampleSchema = z.object({
   id: z.string(),
   name: z.string().min(1).max(100).optional(),
   description: z.string().optional(),
-  category: z.enum(['type1', 'type2', 'type3']).optional(),
+  category: z.enum(["type1", "type2", "type3"]).optional(),
   isActive: z.boolean().optional(),
 });
 
@@ -119,7 +134,10 @@ export type UpdateExampleInput = z.infer<typeof updateExampleSchema>;
 Then use in your controller:
 
 ```typescript
-import { createExampleSchema, updateExampleSchema } from '../validators/exampleValidators.js';
+import {
+  createExampleSchema,
+  updateExampleSchema,
+} from "../validators/exampleValidators.js";
 
 export const exampleController = {
   createExample: protectedProcedure
@@ -133,6 +151,7 @@ export const exampleController = {
 ## Procedure Types
 
 ### Public Procedures
+
 Use `publicProcedure` for endpoints that don't require authentication:
 
 ```typescript
@@ -144,6 +163,7 @@ getPublicData: publicProcedure
 ```
 
 ### Protected Procedures
+
 Use `protectedProcedure` for endpoints that require authentication:
 
 ```typescript
@@ -156,12 +176,14 @@ getPrivateData: protectedProcedure
 ```
 
 ### Query vs Mutation
+
 - **Query**: Use for GET-like operations that don't change data
 - **Mutation**: Use for POST/PUT/DELETE-like operations that modify data
 
 ## Example API Calls
 
 ### Using cURL
+
 ```bash
 # Query example
 curl -X POST http://localhost:3001/trpc/example.getExample \
@@ -175,31 +197,37 @@ curl -X POST http://localhost:3001/trpc/example.createExample \
 ```
 
 ### Using Frontend (React)
+
 ```typescript
 // Query
-const { data, isLoading, error } = trpc.example.getExample.useQuery({ id: '123' });
+const { data, isLoading, error } = trpc.example.getExample.useQuery({
+  id: "123",
+});
 
 // Mutation
 const mutation = trpc.example.createExample.useMutation({
   onSuccess: (data) => {
-    console.log('Created:', data);
+    console.log("Created:", data);
   },
 });
 
-mutation.mutate({ name: 'Test Example', description: 'This is a test' });
+mutation.mutate({ name: "Test Example", description: "This is a test" });
 ```
 
 ## Existing Endpoints
 
 ### Health Check
+
 - `trpc.health` - Basic health check
 
 ### User Management
+
 - `trpc.user.getAll` - Get all users
 - `trpc.user.getById` - Get user by ID
 - `trpc.user.create` - Create new user (protected)
 
 ### Tax Services
+
 - `trpc.tax.createDeclaration` - Create tax declaration
 - `trpc.tax.getDeclaration` - Get tax declaration by ID
 - `trpc.tax.getUserDeclarations` - Get user's declarations
@@ -210,16 +238,19 @@ mutation.mutate({ name: 'Test Example', description: 'This is a test' });
 - `trpc.tax.getPayment` - Get payment status
 
 ### Payment Processing
+
 - `trpc.payment.createPaymentIntent` - Create Stripe payment intent
 - `trpc.payment.confirmPayment` - Confirm payment
 - `trpc.payment.getPaymentStatus` - Get payment status
 
 ### File Upload (Express endpoint)
+
 - `POST /api/upload-receipt` - Upload receipt files
 
 ## Development
 
 ### Running the Server
+
 ```bash
 # Development mode with auto-reload
 npm run dev
@@ -235,20 +266,22 @@ npm run start
 ```
 
 ### Debugging
+
 1. Use `npm run dev:debug` to enable debugging
 2. Set breakpoints in VS Code
 3. Use the Debug panel to attach to the process
 4. Or use console.log for quick debugging
 
 ### Error Handling
+
 tRPC automatically handles errors. For custom errors:
 
 ```typescript
-import { TRPCError } from '@trpc/server';
+import { TRPCError } from "@trpc/server";
 
 throw new TRPCError({
-  code: 'BAD_REQUEST',
-  message: 'Invalid input data',
+  code: "BAD_REQUEST",
+  message: "Invalid input data",
 });
 ```
 
@@ -265,6 +298,7 @@ throw new TRPCError({
 ## Type Safety
 
 The entire stack is type-safe from frontend to backend:
+
 - Input validation with Zod
 - Automatic TypeScript type inference
 - End-to-end type safety with tRPC
